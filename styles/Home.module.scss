@@ -1,0 +1,11 @@
+@import "/styles/variables.scss";
+
+
+.main {
+  
+  background-color: $primary-color;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
