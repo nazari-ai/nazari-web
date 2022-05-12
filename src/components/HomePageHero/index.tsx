@@ -31,11 +31,10 @@ export function HomePageHero() {
                     }}
                     className={styles.heroHeading}
                 >
-                    Discover Algorand Standard Assets🤞🏾.
+                    Explore Algorand Standard Assets🤞🏾
                 </animated.h1>
                 <p className={styles.heroParagraph}>
-                    Analyze over 3,000+ Algorand Standard Assets over multiple social platforms based on stakeholder’s
-                    opionions and discussions for free.
+                Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform.
                 </p>
                 <button className={styles.activeButton}>COMING SOON 🔥</button>
             </div>
