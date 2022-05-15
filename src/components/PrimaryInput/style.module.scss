@@ -1,0 +1,19 @@
+.primaryInput {
+    border: 1px solid rgb(98, 103, 114, .3);
+    width: 100%;
+    padding: 1.5em 1em;
+   margin-bottom: 3em;
+    border-radius: 5px;
+ 
+}
+
+.primaryInput::placeholder {
+    font-size: .9em;
+    font-weight: 300;
+}
+
+.label {
+    font-size: .8em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+}

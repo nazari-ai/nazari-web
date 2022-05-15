@@ -9,6 +9,11 @@
     border: none;
 }
 
+.secondaryButton {
+    background-color: $primary-green;
+    color: $primary-black;
+}
+
 
 .disabledButton {
     background-color: $primary-disabled-color;
