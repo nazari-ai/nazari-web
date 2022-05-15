@@ -1,23 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import { PrimaryButton } from "../../components/PrimaryButton";
+import { PrimaryLogo } from "../../components/PrimaryLogo";
 import styles from "./style.module.scss";
 
 export function HomePageHeader() {
     return (
         <div className={styles.headerContainer}>
             <div className={styles.headerLogoContainer}>
-                <Image
-                    className={styles.headerLogo}
-                    src="/images/logo.svg"
-                    alt="Asalytics Logo"
-                    width={133}
-                    height={62}
-                    priority={true}
-                />
+             <PrimaryLogo/>
             </div>
 
             <div className={styles.headerButtonContainer}>
-                <button className={styles.disabledButton}>COMING SOON</button>
+               <PrimaryButton text="Coming Soon" styleClass="disabledButton"/>
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./style.module.scss";
 import { useTransition, animated, useSpring } from "react-spring";
+import { PrimaryButton } from "../../components/PrimaryButton";
 
 export function HomePageHero() {
     const opacityAnimation: any = useSpring({
@@ -36,7 +37,7 @@ export function HomePageHero() {
                 <p className={styles.heroParagraph}>
                 Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform.
                 </p>
-                <button className={styles.activeButton}>COMING SOON 🔥</button>
+               <PrimaryButton text="Coming Soon🔥"/>
             </div>
         </animated.div>
     );
