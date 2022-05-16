@@ -86,7 +86,8 @@ export function WaitlistModal(props: Props) {
                     />
                 </div>
 
-                <form ref={form} className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist" netlify>
+                <form ref={form} className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist" data-netlify="true">
+                <input type="hidden" name="form-name" value="waitlist" />
                     <PrimaryInput
                         placeholder="John Doe"
                         type="name"
