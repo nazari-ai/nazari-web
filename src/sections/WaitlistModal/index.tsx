@@ -102,7 +102,6 @@ export function WaitlistModal(props: Props) {
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
                 >
-                    <input type="hidden" name="form-name" value="Waitlist" />
                     <PrimaryInput
                         placeholder="John Doe"
                         type="name"
