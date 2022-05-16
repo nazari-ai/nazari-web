@@ -11,24 +11,28 @@ type Props = {
     name?: string;
     id?: string;
     label?: string;
+    error?: string;
 };
 
 export function PrimaryInput(props: Props) {
     return (
         <>
-            <label className={styles.label} htmlFor={props.type}>
-                {props.label}
-            </label>
-            <input
-                className={`${styles.primaryInput} ${styles[props.className]}`}
-                type={props.type}
-                placeholder={props.placeholder}
-                value={props.value}
-                disabled={props.disabled}
-                name={props.name}
-                id={props.id}
-                onChange={props.onChange}
-            />
+            <div className={styles.inputContainer}>
+                <label className={styles.label} htmlFor={props.type}>
+                    {props.label}
+                </label>
+                <input
+                    className={`${styles.primaryInput} ${styles[props.className]}`}
+                    type={props.type}
+                    placeholder={props.placeholder}
+                    value={props.value}
+                    disabled={props.disabled}
+                    name={props.name}
+                    id={props.id}
+                    onChange={props.onChange}
+                />
+                {props.error ? <p className={styles.errorMessage}>{props.error}</p> : null}
+            </div>
         </>
     );
 }

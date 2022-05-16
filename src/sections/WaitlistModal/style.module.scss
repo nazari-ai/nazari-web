@@ -10,7 +10,7 @@
     z-index: 9999;
     display: flex;
     justify-content: center;
-   align-items: center;
+   padding-top: 4em;
 
 }
 
@@ -27,7 +27,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2em 2em 1em 2em;
+    margin: 1em 2em 1em 2em;
     
 }
 
@@ -41,4 +41,18 @@
     padding: 2em;
    
 }
+
+@media only screen and (max-width: 600px) {
+  .formContainer {
+      max-width: 90%;
+  }
+
+  .modalHeader {
+      margin: 1em 1em 1em 1em;
+  }
+  .form {
+      padding: 2em 1em;
+  }
+  
+  }
 
