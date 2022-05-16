@@ -49,7 +49,7 @@ export function WaitlistModal(props: Props) {
     });
 
 
-    
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -96,12 +96,13 @@ export function WaitlistModal(props: Props) {
 
                 <form
                     className={styles.form}
-                    onSubmit={formik.handleSubmit}
                     name="Waitlist"
+                    method="POST"
+                    action="/"
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
                 >
-                    <input type="hidden" name="Waitlist" value="waitlist" />
+                    <input type="hidden" name="form-name" value="Waitlist" />
                     <PrimaryInput
                         placeholder="John Doe"
                         type="name"
