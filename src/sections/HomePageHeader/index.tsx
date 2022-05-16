@@ -12,7 +12,7 @@ export function HomePageHeader() {
             </div>
 
             <div className={styles.headerButtonContainer}>
-               <PrimaryButton text="Coming Soon" className="disabledButton"/>
+               <PrimaryButton type="button" text="Coming Soon" className="disabledButton"/>
             </div>
         </div>
     );
