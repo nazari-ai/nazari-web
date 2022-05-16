@@ -40,7 +40,6 @@ export function WaitlistModal(props: Props) {
     });
 
     const form = useRef(null);
-    console.log(form);
 
     const formik = useFormik({
         initialValues: {
@@ -61,8 +60,6 @@ export function WaitlistModal(props: Props) {
                 .catch((error) => console.log("Error", error));
         },
     });
-
-    console.log(formik);
     return (
         <animated.div
             className={styles.modalContainer}
@@ -89,7 +86,7 @@ export function WaitlistModal(props: Props) {
                     />
                 </div>
 
-                <form ref={form} className={styles.form} onSubmit={formik.handleSubmit} data-netlify="true">
+                <form ref={form} className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist" netlify>
                     <PrimaryInput
                         placeholder="John Doe"
                         type="name"
