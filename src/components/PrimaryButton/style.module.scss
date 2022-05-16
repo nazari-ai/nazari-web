@@ -1,0 +1,36 @@
+@import "/styles/variables.scss";
+
+.primaryButton {
+    background-color: $primary-black;
+    color: $primary-white;
+    font-weight: 500;
+    padding: 1.5em;
+    border-radius: 0.8em;
+    border: none;
+
+    &:disabled {
+        opacity: .5;
+    }
+}
+
+.secondaryButton {
+    background-color: $primary-green;
+    color: $primary-black;
+}
+
+
+.disabledButton {
+    background-color: $primary-disabled-color;
+    color: $primary-black;
+    cursor: not-allowed;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .primaryButton{
+        font-size: .8em; 
+    }
+
+       
+     
+  }

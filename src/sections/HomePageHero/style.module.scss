@@ -36,26 +36,7 @@
     margin-bottom: 1.5em;
 }
 
-.activeButton {
-    background-color: $primary-black;
-    color: $primary-white;
-    font-weight: 500;
-    padding: 1.5em;
-    border-radius: 0.8em;
-    cursor: not-allowed;
-    border: none;
-}
 
-
-.disabledButton {
-    background-color: $primary-disabled-color;
-    color: $primary-black;
-    font-weight: 500;
-    padding: 1.5em;
-    border-radius: .8em;
-    cursor: not-allowed;
-    border: none;
-}
 
 @media only screen and (min-width: 1440px) and (min-height: 900px) {
     .heroLeftContainer {
@@ -80,14 +61,7 @@
         line-height: 1.4em;
     }
 
-    .disabledButton {   
-        font-size: .8em;
-         
-      }
-      
-      .activeButton {
-          font-size: .8em; 
-      }
+  
   }
 
 

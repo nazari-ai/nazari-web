@@ -1,23 +1,21 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { HomePageHeader } from '../src/components/HomePageHeader'
-import { HomePageHero } from '../src/components/HomePageHero'
-import styles from '../styles/Home.module.scss'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { HomePageHeader } from "../src/sections/HomePageHeader";
+import { HomePageHero } from "../src/sections/HomePageHero";
+import styles from "../styles/Home.module.scss";
+import { WaitlistLayout } from "../src/layouts/WaitlistLayout";
+import { WaitlistModal } from "../src/sections/WaitlistModal";
+import { useState } from "react";
 
 const Home: NextPage = () => {
-  return (
-    <div className={styles.container}>
+    const [close, setClose] = useState(false);
+    return (
+        <WaitlistLayout>
+            <HomePageHero openPopup={setClose} />
+            {close ? <WaitlistModal closePopup={setClose} /> : null}
+        </WaitlistLayout>
+    );
+};
 
-      <main className={styles.main}>    
-      <HomePageHeader/>  
-      <HomePageHero/>
-      </main>
-
-      <footer className={styles.footer}>     
-      </footer>
-    </div>
-  )
-}
-
-export default Home
+export default Home;
