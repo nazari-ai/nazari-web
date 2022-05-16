@@ -25,7 +25,7 @@ export function WaitlistModal() {
                 <form className={styles.form}>
                     <PrimaryInput placeholder="John Doe" type="name" label="Your First Name" />
                     <PrimaryInput placeholder="hello@asalytics.ai" type="email" label="Your Email Address" />
-                    <PrimaryButton text="Join Our Wailist" className="secondaryButton" />
+                    <PrimaryButton text="Join Our Waitlist" className="secondaryButton" />
                 </form>
             </div>
         </div>
