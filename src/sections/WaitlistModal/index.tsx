@@ -27,6 +27,15 @@ const validate = (values: any) => {
 };
 
 export function WaitlistModal(props: Props) {
+
+    //This is used to encode the formData for Netlify Form Submission
+    const encode = (data: any) => {
+        return Object.keys(data)
+            .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    };
+
+
     const opacityAnimation: any = useSpring({
         config: { duration: 300 },
         from: { opacity: 0 },
@@ -39,8 +48,8 @@ export function WaitlistModal(props: Props) {
         config: { duration: 300 },
     });
 
-    const form = useRef(null);
 
+    
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -48,11 +57,10 @@ export function WaitlistModal(props: Props) {
         },
         validate,
         onSubmit: (values) => {
-            const formData = new FormData(form?.current as any);
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData as any).toString(),
+                body: encode({ "form-name": "Waitlist", ...values }),
             })
                 .then(() => {
                     props.closePopup();
@@ -86,8 +94,14 @@ export function WaitlistModal(props: Props) {
                     />
                 </div>
 
-                <form ref={form} className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist" data-netlify="true">
-                <input type="hidden" name="form-name" value="waitlist" />
+                <form
+                    className={styles.form}
+                    onSubmit={formik.handleSubmit}
+                    name="Waitlist"
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                >
+                    <input type="hidden" name="Waitlist" value="waitlist" />
                     <PrimaryInput
                         placeholder="John Doe"
                         type="name"
