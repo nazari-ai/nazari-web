@@ -14,10 +14,8 @@
     margin-top: 8em;
     display: flex;
     flex-direction: column;
-   align-items: center;
+    align-items: center;
 }
-
-
 
 .heroHeading {
     font-size: 3.5em;
@@ -36,15 +34,13 @@
     margin-bottom: 1.5em;
 }
 
-
-
 @media only screen and (min-width: 1440px) and (min-height: 900px) {
     .heroLeftContainer {
         margin-top: 20em;
     }
-  }
+}
 
-  @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     .heroLeftContainer {
         margin-top: 8em;
     }
@@ -52,17 +48,11 @@
     .heroHeading {
         font-size: 2em;
         width: 90%;
-      
     }
-    
+
     .heroParagraph {
-        font-size: .7em;
+        font-size: 0.7em;
         width: 80%;
         line-height: 1.4em;
     }
-
-  
-  }
-
-
- 
+}

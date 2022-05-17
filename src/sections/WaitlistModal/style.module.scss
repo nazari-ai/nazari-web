@@ -10,8 +10,7 @@
     z-index: 9999;
     display: flex;
     justify-content: center;
-   padding-top: 4em;
-
+    padding-top: 4em;
 }
 
 .formContainer {
@@ -20,7 +19,6 @@
     max-width: 500px;
     background-color: $primary-white;
     height: fit-content;
-   
 }
 
 .modalHeader {
@@ -28,7 +26,6 @@
     justify-content: space-between;
     align-items: center;
     margin: 1em 2em 1em 2em;
-    
 }
 
 .headerLogoContainer {
@@ -39,20 +36,17 @@
     display: flex;
     flex-direction: column;
     padding: 2em;
-   
 }
 
 @media only screen and (max-width: 600px) {
-  .formContainer {
-      max-width: 90%;
-  }
+    .formContainer {
+        max-width: 90%;
+    }
 
-  .modalHeader {
-      margin: 1em 1em 1em 1em;
-  }
-  .form {
-      padding: 2em 1em;
-  }
-  
-  }
-
+    .modalHeader {
+        margin: 1em 1em 1em 1em;
+    }
+    .form {
+        padding: 2em 1em;
+    }
+}

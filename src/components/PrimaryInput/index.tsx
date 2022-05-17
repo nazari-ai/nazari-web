@@ -17,7 +17,7 @@ type Props = {
 export function PrimaryInput(props: Props) {
     return (
         <>
-            <div className={styles.inputContainer}>
+            <div className={styles.inputContainer} data-testid="primary-input">
                 <label className={styles.label} htmlFor={props.type}>
                     {props.label}
                 </label>

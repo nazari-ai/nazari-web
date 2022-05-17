@@ -45,7 +45,6 @@ export function WaitlistModal(props: Props) {
         config: { duration: 300 },
     });
 
-
     //Form validator and handler
     const formik = useFormik({
         initialValues: {
@@ -54,7 +53,7 @@ export function WaitlistModal(props: Props) {
         },
         validate,
         onSubmit: (values) => {
-            setIsLoading(true)
+            setIsLoading(true);
             axios
                 .post("https://api.getwaitlist.com/api/v1/waiter", {
                     api_key: process.env.NEXT_PUBLIC_GET_WAITLIST_API_KEY,
@@ -63,9 +62,9 @@ export function WaitlistModal(props: Props) {
                 .then(
                     (response: any) => {
                         props.closePopup();
-                        setIsLoading(false)
+                        setIsLoading(false);
                         toast("You've been added to our waitlist", {
-                            id:"waitlist-toast",
+                            id: "waitlist-toast",
                             icon: "👏",
                             style: {
                                 borderRadius: "10px",
@@ -75,9 +74,9 @@ export function WaitlistModal(props: Props) {
                         });
                     },
                     (error: any) => {
-                        setIsLoading(false)
+                        setIsLoading(false);
                         props.closePopup();
-                        toast.error("Error Occurred")
+                        toast.error("Error Occurred");
                         console.log(error);
                     },
                 );
@@ -131,7 +130,7 @@ export function WaitlistModal(props: Props) {
                         error={formik.errors.email}
                     />
                     <PrimaryButton
-                    isLoading={isLoading}
+                        isLoading={isLoading}
                         type="submit"
                         disabled={!formik.isValid}
                         text="Join Our Waitlist"

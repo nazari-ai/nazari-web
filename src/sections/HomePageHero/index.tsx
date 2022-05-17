@@ -4,10 +4,9 @@ import styles from "./style.module.scss";
 import { useTransition, animated, useSpring } from "react-spring";
 import { PrimaryButton } from "../../components/PrimaryButton";
 
-
 type Props = {
     openPopup: Function;
-}
+};
 export function HomePageHero(props: Props) {
     const opacityAnimation: any = useSpring({
         config: { duration: 1500 },
@@ -19,7 +18,6 @@ export function HomePageHero(props: Props) {
         from: { opacity: 0 },
         to: { opacity: 1 },
         config: { duration: 3000 },
-     
     });
 
     return (
@@ -39,9 +37,10 @@ export function HomePageHero(props: Props) {
                     Explore Algorand Standard Assets🤞🏾
                 </animated.h1>
                 <p className={styles.heroParagraph}>
-                Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform.
+                    Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one
+                    platform.
                 </p>
-               <PrimaryButton type="button" text="Coming Soon🔥"  onClick={() => props.openPopup(true)}/>
+                <PrimaryButton type="button" text="Coming Soon🔥" onClick={() => props.openPopup(true)} />
             </div>
         </animated.div>
     );
