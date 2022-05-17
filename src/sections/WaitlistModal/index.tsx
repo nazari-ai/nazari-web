@@ -6,6 +6,7 @@ import styles from "./style.module.scss";
 import { useFormik } from "formik";
 import { useSpring, animated } from "react-spring";
 import { useRef } from "react";
+import axios from "axios";
 
 type Props = {
     closePopup: Function;
@@ -27,15 +28,6 @@ const validate = (values: any) => {
 };
 
 export function WaitlistModal(props: Props) {
-
-    //This is used to encode the formData for Netlify Form Submission
-    const encode = (data: any) => {
-        return Object.keys(data)
-            .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-            .join("&");
-    };
-
-
     const opacityAnimation: any = useSpring({
         config: { duration: 300 },
         from: { opacity: 0 },
@@ -48,8 +40,6 @@ export function WaitlistModal(props: Props) {
         config: { duration: 300 },
     });
 
-
-
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -57,15 +47,19 @@ export function WaitlistModal(props: Props) {
         },
         validate,
         onSubmit: (values) => {
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: encode({ "form-name": "Waitlist", ...values }),
-            })
-                .then(() => {
-                    props.closePopup();
+            axios
+                .post("https://api.getwaitlist.com/api/v1/waiter", {
+                    api_key: process.env.NEXT_PUBLIC_GET_WAITLIST_API_KEY,
+                    ...values,
                 })
-                .catch((error) => console.log("Error", error));
+                .then(
+                    (response: any) => {
+                        props.closePopup();
+                    },
+                    (error: any) => {
+                        console.log(error);
+                    },
+                );
         },
     });
     return (
@@ -94,14 +88,7 @@ export function WaitlistModal(props: Props) {
                     />
                 </div>
 
-                <form
-                    className={styles.form}
-                    name="Waitlist"
-                    method="POST"
-                    action="/"
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
-                >
+                <form className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist">
                     <PrimaryInput
                         placeholder="John Doe"
                         type="name"
