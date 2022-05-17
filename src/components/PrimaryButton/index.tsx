@@ -1,4 +1,5 @@
 import React from "react";
+import { PrimaryLoader } from "../PrimaryLoader";
 import styles from "./style.module.scss";
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     type: any;
     disabled?: boolean;
+    isLoading?: boolean;
 };
 
 export function PrimaryButton(props: Props) {
@@ -16,9 +18,9 @@ export function PrimaryButton(props: Props) {
                 className={`${styles.primaryButton} ${styles[props.className]}`}
                 onClick={props.onClick}
                 type={props.type}
-                disabled={props.disabled}
+                disabled={props.disabled || props.isLoading}
             >
-                {props.text}
+              { props.isLoading ? <PrimaryLoader/> : props.text}
             </button>
         </>
     );
