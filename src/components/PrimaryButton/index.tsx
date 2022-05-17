@@ -1,7 +1,6 @@
 import React from "react";
 import { PrimaryLoader } from "../PrimaryLoader";
 
-
 import styles from "./style.module.scss";
 
 type Props = {

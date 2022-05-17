@@ -19,19 +19,13 @@
     cursor: not-allowed;
 }
 
-
 .disabledButton {
     background-color: $primary-disabled-color;
     color: $primary-black;
-    
 }
 
 @media only screen and (max-width: 600px) {
-
-    .primaryButton{
-        font-size: .8em; 
+    .primaryButton {
+        font-size: 0.8em;
     }
-
-       
-     
-  }
+}

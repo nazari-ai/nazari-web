@@ -8,11 +8,11 @@ export function HomePageHeader() {
     return (
         <div className={styles.headerContainer}>
             <div className={styles.headerLogoContainer}>
-             <PrimaryLogo/>
+                <PrimaryLogo />
             </div>
 
             <div className={styles.headerButtonContainer}>
-               <PrimaryButton type="button" text="Coming Soon" className="disabledButton"/>
+                <PrimaryButton type="button" text="Coming Soon" className="disabledButton" />
             </div>
         </div>
     );
