@@ -14,8 +14,8 @@ type Props = {
 
 const validate = (values: any) => {
     const errors = {} as any;
-    if (!values.name) {
-        errors.name = "Required";
+    if (!values.first_name) {
+        errors.first_name = "Required";
     }
 
     if (!values.email) {
@@ -42,7 +42,7 @@ export function WaitlistModal(props: Props) {
 
     const formik = useFormik({
         initialValues: {
-            name: "",
+            first_name: "",
             email: "",
         },
         validate,
@@ -91,13 +91,13 @@ export function WaitlistModal(props: Props) {
                 <form className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist">
                     <PrimaryInput
                         placeholder="John Doe"
-                        type="name"
-                        name="name"
-                        id="name"
+                        type="first_name"
+                        name="first_name"
+                        id="first_name"
                         label="Your First Name"
                         onChange={formik.handleChange}
-                        value={formik.values.name}
-                        error={formik.errors.name}
+                        value={formik.values.first_name}
+                        error={formik.errors.first_name}
                     />
                     <PrimaryInput
                         placeholder="hello@asalytics.ai"
