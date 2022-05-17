@@ -6,7 +6,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "prettier --check .",
+        "lint": "eslint --ext .ts,.tsx",
         "format": "prettier --write ."
     },
     "dependencies": {
@@ -25,11 +25,11 @@
     },
     "husky": {
         "hooks": {
-          "pre-commit": "lint-staged"
+            "pre-commit": "yarn run lint && yarn run format && yarn test && yarn git add A."
         }
     },
     "lint-staged": {
-      "*": "prettier --write"
+        "*": "prettier --write"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^5.16.4",
