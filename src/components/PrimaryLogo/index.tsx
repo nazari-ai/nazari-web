@@ -9,14 +9,14 @@ type Props = {
 export function PrimaryLogo(props: Props) {
     return (
         <>
-              <Image
-                    className={styles.headerLogo}
-                    src="/images/logo.svg"
-                    alt="Asalytics Logo"
-                    width={133}
-                    height={62}
-                    priority={true}
-                />
+            <Image
+                className={styles.headerLogo}
+                src="/images/logo.svg"
+                alt="Asalytics Logo"
+                width={133}
+                height={62}
+                priority={true}
+            />
         </>
     );
 }
