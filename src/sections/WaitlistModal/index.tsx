@@ -5,8 +5,9 @@ import { PrimaryInput } from "../../components/PrimaryInput";
 import styles from "./style.module.scss";
 import { useFormik } from "formik";
 import { useSpring, animated } from "react-spring";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 type Props = {
     closePopup: Function;
@@ -14,8 +15,8 @@ type Props = {
 
 const validate = (values: any) => {
     const errors = {} as any;
-    if (!values.name) {
-        errors.name = "Required";
+    if (!values.first_name) {
+        errors.first_name = "Required";
     }
 
     if (!values.email) {
@@ -28,6 +29,10 @@ const validate = (values: any) => {
 };
 
 export function WaitlistModal(props: Props) {
+    //Data
+    const [isLoading, setIsLoading] = useState(false);
+
+    //Animation and Transitions
     const opacityAnimation: any = useSpring({
         config: { duration: 300 },
         from: { opacity: 0 },
@@ -40,13 +45,16 @@ export function WaitlistModal(props: Props) {
         config: { duration: 300 },
     });
 
+
+    //Form validator and handler
     const formik = useFormik({
         initialValues: {
-            name: "",
+            first_name: "",
             email: "",
         },
         validate,
         onSubmit: (values) => {
+            setIsLoading(true)
             axios
                 .post("https://api.getwaitlist.com/api/v1/waiter", {
                     api_key: process.env.NEXT_PUBLIC_GET_WAITLIST_API_KEY,
@@ -55,8 +63,21 @@ export function WaitlistModal(props: Props) {
                 .then(
                     (response: any) => {
                         props.closePopup();
+                        setIsLoading(false)
+                        toast("You've been added to our waitlist", {
+                            id:"waitlist-toast",
+                            icon: "👏",
+                            style: {
+                                borderRadius: "10px",
+                                background: "#333",
+                                color: "#fff",
+                            },
+                        });
                     },
                     (error: any) => {
+                        setIsLoading(false)
+                        props.closePopup();
+                        toast.error("Error Occurred")
                         console.log(error);
                     },
                 );
@@ -90,14 +111,14 @@ export function WaitlistModal(props: Props) {
 
                 <form className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist">
                     <PrimaryInput
-                        placeholder="John Doe"
-                        type="name"
-                        name="name"
-                        id="name"
+                        placeholder="Ernest"
+                        type="first_name"
+                        name="first_name"
+                        id="first_name"
                         label="Your First Name"
                         onChange={formik.handleChange}
-                        value={formik.values.name}
-                        error={formik.errors.name}
+                        value={formik.values.first_name}
+                        error={formik.errors.first_name}
                     />
                     <PrimaryInput
                         placeholder="hello@asalytics.ai"
@@ -110,6 +131,7 @@ export function WaitlistModal(props: Props) {
                         error={formik.errors.email}
                     />
                     <PrimaryButton
+                    isLoading={isLoading}
                         type="submit"
                         disabled={!formik.isValid}
                         text="Join Our Waitlist"

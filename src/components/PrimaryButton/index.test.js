@@ -1,19 +1,8 @@
-// test/pages/index.test.js
-/**
- * @jest-environment jsdom
- */
-import { render, screen } from '@testing-library/react'
-import Home from '@pages/index'
-import '@testing-library/jest-dom'
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import {PrimaryButton} from "../PrimaryButton";
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+test("Can search for a post using its ID", async () => {
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
-
-    expect(heading).toBeInTheDocument()
-  })
-})
+  render(<PrimaryButton />);
+});
