@@ -8,12 +8,10 @@ type Props = {
 
 export function PrimaryLoader(props: Props) {
     return (
-        <>
-          <div className={styles.loader}>
-          <svg viewBox="0 0 86 80">
-        <polygon points="43 8 79 72 7 72"></polygon>
-    </svg>
-</div>
-        </>
+        <div data-testid="loader" className={styles.loader}>
+            <svg viewBox="0 0 86 80">
+                <polygon points="43 8 79 72 7 72"></polygon>
+            </svg>
+        </div>
     );
 }
