@@ -90,7 +90,7 @@ export function WaitlistModal(props: Props) {
 
                 <form className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist">
                     <PrimaryInput
-                        placeholder="John Doe"
+                        placeholder="Ernest"
                         type="first_name"
                         name="first_name"
                         id="first_name"
