@@ -10,6 +10,7 @@ export function PrimaryLogo(props: Props) {
     return (
         <>
             <Image
+                data-testid="primary-logo"
                 className={styles.headerLogo}
                 src="/images/logo.svg"
                 alt="Asalytics Logo"
