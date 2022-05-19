@@ -40,7 +40,7 @@ export function HomePageHero(props: Props) {
                     Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one
                     platform.
                 </p>
-                <PrimaryButton type="button" text="Coming Soon🔥" onClick={() => props.openPopup(true)} />
+                <PrimaryButton type="button" text="Join Waitlist 🔥" onClick={() => props.openPopup(true)} />
             </div>
         </animated.div>
     );
