@@ -1,11 +1,11 @@
-  query Posts {
+query Posts {
     posts {
-      id
-      title
-      author {
         id
-        firstName
-        lastName
-      }
+        title
+        author {
+            id
+            firstName
+            lastName
+        }
     }
-  }
+}

@@ -8,10 +8,12 @@ import { WaitlistLayout } from "../src/layouts/WaitlistLayout";
 import { WaitlistModal } from "../src/sections/WaitlistModal";
 import { useState } from "react";
 
+
 const Home: NextPage = () => {
     const [close, setClose] = useState(false);
     return (
         <WaitlistLayout>
+            
             <HomePageHero openPopup={setClose} />
             {close ? <WaitlistModal closePopup={setClose} /> : null}
         </WaitlistLayout>
