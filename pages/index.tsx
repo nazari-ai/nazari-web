@@ -7,7 +7,6 @@ import styles from "../styles/Home.module.scss";
 import { WaitlistLayout } from "../src/layouts/WaitlistLayout";
 import { WaitlistModal } from "../src/sections/WaitlistModal";
 import { useState } from "react";
-import MemoHome from "src/components/Icons/HomeIcon";
 
 const Home: NextPage = () => {
     const [close, setClose] = useState(false);
@@ -15,8 +14,6 @@ const Home: NextPage = () => {
         <WaitlistLayout>
             <HomePageHero openPopup={setClose} />
             {close ? <WaitlistModal closePopup={setClose} /> : null}
-
-            <MemoHome />
         </WaitlistLayout>
     );
 };
