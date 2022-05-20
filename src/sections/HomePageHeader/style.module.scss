@@ -8,6 +8,20 @@
     background-color: $primary-color;
 }
 
+.headerInfoContainer {
+    position: relative;
+}
+
+.headerInfo {
+    font-weight: 500;
+}
+.headerInfoUnderline {
+    position: absolute;
+    bottom: -10px;
+    width: 120px;
+    height: 12px;
+    left: 0;
+}
 .disabledButton {
     background-color: $primary-disabled-color;
     color: $primary-black;

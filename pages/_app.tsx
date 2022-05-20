@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <link rel="icon" href="favicon.svg" />
                 </Head>
                 <Toaster position="top-center" reverseOrder={false} />
-               
+
                 <Component {...pageProps} />
                 <ReactQueryDevtools />
             </QueryClientProvider>
