@@ -8,7 +8,7 @@ type Type = {
 export function DashboardLayout({ children }: Type) {
     return (
         <div>
-           <DashboardSidebar/>
+            <DashboardSidebar />
             {children}
         </div>
     );

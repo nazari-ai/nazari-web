@@ -12,8 +12,10 @@ export function HomePageHeader() {
             </div>
 
             <div className={styles.headerInfoContainer}>
-                <div className={styles.headerInfoUnderline}><Image  height={12} width={110} src="/images/underline.svg"/></div>
-             <p className={styles.headerInfo}>Coming Soon</p>
+                <div className={styles.headerInfoUnderline}>
+                    <Image height={12} width={110} src="/images/underline.svg" />
+                </div>
+                <p className={styles.headerInfo}>Coming Soon</p>
             </div>
         </div>
     );

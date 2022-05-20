@@ -13,16 +13,15 @@ export function DashboardSidebar() {
             <div className={styles.logoContainer}>
                 <PrimaryLogo />
             </div>
-        
+
             <div className={styles.linkContainer}>
                 <DashboardLink href="/" title="Home" icon={<MemoHomeIcon />} />
                 <DashboardLink href="/dashboard/twitter" title="Twitter" icon={<MemoTwitterIcon />} />
                 <DashboardLink href="/dashboard/reddit" title="Reddit" icon={<MemoRedditIcon />} />
                 <DashboardLink href="/dashboard/github" title="Github" icon={<MemoGithubIcon />} />
-                
             </div>
             <div className={styles.settingsContainer}>
-            <DashboardLink href="/dashboard/settings" title="Settings" icon={<MemoSettingIcon />} disabled={true}/>
+                <DashboardLink href="/dashboard/settings" title="Settings" icon={<MemoSettingIcon />} disabled={true} />
             </div>
         </div>
     );

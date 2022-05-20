@@ -15,11 +15,12 @@ type Props = {
 export function DashboardLink(props: Props) {
     return (
         <>
-        <div className={styles.linkContainer}>
-        {props.icon}
-           <Link className={`${styles.dashboardLink} ${styles[props.className]}`} href={props.href}>{props.title}</Link>
-        </div>
-       
+            <div className={styles.linkContainer}>
+                {props.icon}
+                <Link className={`${styles.dashboardLink} ${styles[props.className]}`} href={props.href}>
+                    {props.title}
+                </Link>
+            </div>
         </>
     );
 }
