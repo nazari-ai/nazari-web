@@ -16,7 +16,7 @@ const Home: NextPage = () => {
             <HomePageHero openPopup={setClose} />
             {close ? <WaitlistModal closePopup={setClose} /> : null}
 
-            <MemoHome/>
+            <MemoHome />
         </WaitlistLayout>
     );
 };
