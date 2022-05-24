@@ -1,5 +1,6 @@
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import styles from "./style.module.scss";
 
@@ -13,11 +14,12 @@ type Props = {
 };
 
 export function DashboardLink(props: Props) {
+    console.log(props.className);
     return (
         <>
-            <div className={styles.linkContainer}>
+            <div className={`${styles.linkContainer} ${styles[props.className]}`}>
                 {props.icon}
-                <Link className={`${styles.dashboardLink} ${styles[props.className]}`} href={props.href}>
+                <Link className={`${styles.dashboardLink}`} href={props.href}>
                     {props.title}
                 </Link>
             </div>

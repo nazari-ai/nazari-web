@@ -1,0 +1,21 @@
+@import "../../../styles/variables.scss";
+
+.sidebarContainer {
+    width: 250px;
+    padding: 2em 0 2em 1.5em;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $primary-color;
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.settingsContainer {
+    margin-bottom: 3em;
+}
