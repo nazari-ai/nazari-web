@@ -1,0 +1,14 @@
+@import "/styles/variables.scss";
+
+.infoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    border-bottom: 1px solid $primary-disabled-color;
+}
+
+.assetDetailsContainer {
+    display: flex;
+    gap: 1.5em;
+}
