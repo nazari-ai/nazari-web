@@ -1,0 +1,12 @@
+@import "/styles/variables.scss";
+
+.headerContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1em 2em;
+    border-bottom: 1px solid $primary-disabled-color;
+}
+
+@media only screen and (max-width: 600px) {
+}

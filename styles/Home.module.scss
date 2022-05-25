@@ -7,3 +7,11 @@
     display: flex;
     flex-direction: column;
 }
+
+.dashboardContainer {
+    display: flex;
+}
+
+.dashboardSection {
+    width: calc(100% - 250px);
+}
