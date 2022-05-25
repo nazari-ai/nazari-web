@@ -19,7 +19,7 @@ export function DashboardLink(props: Props) {
         <>
             <div className={`${styles.linkContainer} ${styles[props.className]}`}>
                 {props.icon}
-                <Link className={`${styles.dashboardLink}`} href={props.href}>
+                <Link className={styles.dashboardLink} href={props.href}>
                     {props.title}
                 </Link>
             </div>
