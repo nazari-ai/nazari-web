@@ -5,7 +5,11 @@ import MemoHome from "src/components/Icons/HomeIcon";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 
 const Home: NextPage = () => {
-    return <DashboardLayout></DashboardLayout>;
+    return (
+        <DashboardLayout>
+            <div></div>
+        </DashboardLayout>
+    );
 };
 
 export default Home;
