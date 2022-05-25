@@ -1,0 +1,15 @@
+@import "/styles/variables.scss";
+
+.infoContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1em 2em;
+    border-bottom: 1px solid $primary-disabled-color;
+}
+
+.socialContainer {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+}
