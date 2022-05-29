@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
+import { GithubSummary } from "src/sections/GithubSummary";
+import { RedditSummary } from "src/sections/RedditSummary";
+import { TwitterSummary } from "src/sections/TwitterSummary";
 import styles from "../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
@@ -16,6 +17,9 @@ const Home: NextPage = () => {
                         <Link href="/dashboard/github">Github</Link> and <Link href="/dashboard/reddit">Reddit.</Link>
                     </p>
                 </div>
+                <TwitterSummary />
+                <RedditSummary />
+                <GithubSummary />
             </div>
         </DashboardLayout>
     );

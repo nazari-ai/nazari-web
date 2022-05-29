@@ -25,6 +25,7 @@
         "react-hot-toast": "^2.2.0",
         "react-query": "^3.39.0",
         "react-spring": "^9.4.5",
+        "recharts": "^2.1.10",
         "sass": "^1.51.0",
         "yarn": "^1.22.18"
     },
