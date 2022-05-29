@@ -1,0 +1,20 @@
+@import "/styles/variables.scss";
+
+.chartContainer {
+    border: 1px solid $primary-disabled-color;
+    border-radius: 0.8em;
+    width: 100%;
+    padding: 1em;
+}
+
+.chartHeaderContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chartTitle {
+    font-size: 0.8em;
+    color: $secondary-grey-text;
+    text-decoration: underline;
+    // margin: 1em;
+}
