@@ -17,9 +17,11 @@ const Home: NextPage = () => {
                         <Link href="/dashboard/github">Github</Link> and <Link href="/dashboard/reddit">Reddit.</Link>
                     </p>
                 </div>
-                <TwitterSummary />
-                <RedditSummary />
-                <GithubSummary />
+                <div>
+                    <TwitterSummary />
+                    <RedditSummary />
+                    <GithubSummary />
+                </div>
             </div>
         </DashboardLayout>
     );
