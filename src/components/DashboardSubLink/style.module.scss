@@ -1,0 +1,23 @@
+@import "../../../styles/variables.scss";
+
+.linkContainer {
+    padding-bottom: 1em;
+
+    color: $secondary-disabled-color;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    font-size: 13px;
+}
+
+.dashboardLink {
+    font-size: 0.8em;
+}
+
+.activeLink {
+    color: $primary-black;
+    font-weight: 600;
+    border-bottom: 3px solid $primary-black;
+}
