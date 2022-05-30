@@ -8,9 +8,11 @@
 }
 
 .chartContainer {
-    display: flex;
+    display: grid;
+    align-items: stretch;
     width: 100%;
-    gap: 1em;
+    gap: 3em;
+    grid-template-columns: auto auto auto;
 }
 
 .summaryHeader {

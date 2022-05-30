@@ -7,16 +7,13 @@ import MemoTwitterIcon from "src/components/Icons/TwitterIcon";
 import { PrimaryLogo } from "src/components/PrimaryLogo";
 import styles from "./style.module.scss";
 import { useRouter } from "next/router";
+import { PrimaryShortLogo } from "src/components/PrimaryShortLogo";
+import { useEffect, useState } from "react";
 
 export function DashboardSidebar() {
     const router = useRouter();
+    const [width, setWidth] = useState(1024);
     const dashboardLinks = [
-        {
-            id: 1,
-            path: "/dashboard",
-            icon: <MemoHomeIcon />,
-            title: "Home",
-        },
         {
             id: 2,
             path: "/dashboard/twitter",
@@ -37,26 +34,38 @@ export function DashboardSidebar() {
         },
     ];
 
-    console.log(router.pathname);
+    useEffect(() => {
+        setWidth(window.innerWidth);
+        // Client-side-only code
+    });
     return (
         <div className={styles.sidebarContainer}>
-            <div className={styles.logoContainer}>
-                <PrimaryLogo />
-            </div>
+            <div className={styles.logoContainer}>{width > 768 ? <PrimaryLogo /> : <PrimaryShortLogo />}</div>
 
             <div className={styles.linkContainer}>
-                {dashboardLinks.map((link) => {
-                    console.log(link.icon);
-                    return (
-                        <DashboardLink
-                            key={link.id}
-                            href={link.path}
-                            icon={link.icon}
-                            title={link.title}
-                            className={router.pathname === link.path ? "activeLink" : ""}
-                        />
-                    );
-                })}
+                <DashboardLink
+                    href="/dashboard"
+                    title="Home"
+                    icon={<MemoHomeIcon />}
+                    className={router.pathname === "/dashboard" ? "activeLink" : ""}
+                />
+
+                <div className={styles.channelLinkContainer}>
+                    <p>Channels</p>
+                    <div className={styles.channelLinks}>
+                        {dashboardLinks.map((link) => {
+                            return (
+                                <DashboardLink
+                                    key={link.id}
+                                    href={link.path}
+                                    icon={link.icon}
+                                    title={link.title}
+                                    className={router.pathname === link.path ? "activeLink" : ""}
+                                />
+                            );
+                        })}
+                    </div>
+                </div>
             </div>
             <div className={styles.settingsContainer}>
                 <DashboardLink href="/dashboard/settings" title="Settings" icon={<MemoSettingIcon />} disabled={true} />

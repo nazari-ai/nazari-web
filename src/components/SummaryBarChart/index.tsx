@@ -46,8 +46,8 @@ export function SummaryBarChart(props: Props) {
                 <p className={styles.chartHeader}>{props.header}</p>
                 <h1 className={styles.chartTitle}>{props.title}</h1>
             </div>
-            <ResponsiveContainer height={200}>
-                <BarChart width={150} height={40} data={data}>
+            <ResponsiveContainer height={300}>
+                <BarChart width={150} height={40} barCategoryGap="3%" data={data}>
                     <Bar dataKey="data" fill="#6FD791" radius={[10, 10, 0, 0]} />
                     <XAxis
                         dataKey="name"
@@ -55,6 +55,7 @@ export function SummaryBarChart(props: Props) {
                         axisLine={false}
                         tick={{ color: "#333333", strokeWidth: 0.1, fontWeight: 300, fontSize: ".6em" }}
                     />
+                    <Tooltip />
                 </BarChart>
             </ResponsiveContainer>
         </div>
