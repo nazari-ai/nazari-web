@@ -1,0 +1,16 @@
+.infoContainer {
+    display: flex;
+    gap: 1em;
+    align-items: flex-start;
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.assetId {
+    font-size: 0.7em;
+    font-weight: 300;
+}

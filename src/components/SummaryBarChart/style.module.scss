@@ -1,0 +1,21 @@
+@import "/styles/variables.scss";
+
+.chartContainer {
+    border: 1px solid $primary-disabled-color;
+    border-radius: 0.8em;
+    width: 100%;
+    padding: 1em;
+    padding-bottom: 0;
+}
+
+.chartHeader {
+    font-size: 0.6em;
+    font-weight: 100;
+}
+
+.chartTitle {
+    font-size: 2em;
+    text-transform: capitalize;
+    margin: 0.5em 0;
+    font-weight: 500;
+}

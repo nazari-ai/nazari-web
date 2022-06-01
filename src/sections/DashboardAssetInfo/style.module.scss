@@ -1,0 +1,47 @@
+@import "/styles/variables.scss";
+
+.infoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    border-bottom: 1px solid $primary-disabled-color;
+}
+
+.assetDetailsContainer {
+    display: flex;
+    gap: 1.5em;
+}
+
+@media only screen and (max-width: 1024px) {
+    .infoContainer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2em;
+    }
+    .assetDetailsContainer {
+        align-self: flex-end;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .infoContainer {
+        padding: 1em 1em;
+    }
+
+    .assetDetailsSection {
+        width: 100%;
+        overflow-y: scroll;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .assetDetailsContainer {
+        width: fit-content;
+        align-self: flex-start;
+    }
+}
