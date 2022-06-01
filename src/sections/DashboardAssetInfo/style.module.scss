@@ -23,3 +23,25 @@
         align-self: flex-end;
     }
 }
+
+@media only screen and (max-width: 640px) {
+    .infoContainer {
+        padding: 1em 1em;
+    }
+
+    .assetDetailsSection {
+        width: 100%;
+        overflow-y: scroll;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .assetDetailsContainer {
+        width: fit-content;
+        align-self: flex-start;
+    }
+}

@@ -10,12 +10,14 @@ export function DashboardAssetInfo() {
             <div className={styles.assetInfoContainer}>
                 <AssetInformation />
             </div>
-            <div className={styles.assetDetailsContainer}>
-                <AssetFinancial header="Volatility" info="Exteremely Low" />
-                <AssetFinancial header="Liquidity" info="$14.732 M" />
-                <AssetFinancial header="Total Cap" info="$9.537 B" />
-                <AssetFinancial header="Total Supply" info="10.000 B" />
-                <AssetFinancial header="Circ. Supply" info="6.633 B" />
+            <div className={styles.assetDetailsSection}>
+                <div className={styles.assetDetailsContainer}>
+                    <AssetFinancial header="Volatility" info="Exteremely Low" />
+                    <AssetFinancial header="Liquidity" info="$14.732 M" />
+                    <AssetFinancial header="Total Cap" info="$9.537 B" />
+                    <AssetFinancial header="Total Supply" info="10.000 B" />
+                    <AssetFinancial header="Circ. Supply" info="6.633 B" />
+                </div>
             </div>
         </div>
     );
