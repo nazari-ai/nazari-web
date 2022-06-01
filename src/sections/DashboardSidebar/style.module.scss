@@ -62,9 +62,52 @@
     .settingsContainer {
         padding: 0;
     }
+}
 
-    // .logoContainer {
-    //     padding: 1em;
-    //     border: none;
-    // }
+@media only screen and (max-width: 640px) {
+    .sidebarContainer {
+        z-index: 999;
+        bottom: 0;
+        height: 100px;
+        width: 100vw;
+        flex-direction: row;
+        justify-content: normal;
+    }
+
+    .logoContainer {
+        display: none;
+    }
+
+    .channelLinkContainer {
+        flex-direction: row;
+        gap: 0;
+        width: 75%;
+
+        p {
+            display: none;
+        }
+    }
+
+    .channelLinks {
+        flex-direction: row;
+        gap: 0;
+        width: 100%;
+    }
+
+    .linkContainer {
+        flex-direction: row;
+        gap: 0;
+        width: 80%;
+    }
+
+    .homeLinkContainer {
+        display: flex;
+        width: 25%;
+    }
+
+    .settingsContainer {
+        display: flex;
+        width: 20%;
+        margin-bottom: 0;
+    }
 }

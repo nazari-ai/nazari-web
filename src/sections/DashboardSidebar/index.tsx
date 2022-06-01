@@ -43,12 +43,14 @@ export function DashboardSidebar() {
             <div className={styles.logoContainer}>{width > 768 ? <PrimaryLogo /> : <PrimaryShortLogo />}</div>
 
             <div className={styles.linkContainer}>
-                <DashboardLink
-                    href="/dashboard"
-                    title="Home"
-                    icon={<MemoHomeIcon />}
-                    className={router.pathname === "/dashboard" ? "activeLink" : ""}
-                />
+                <div className={styles.homeLinkContainer}>
+                    <DashboardLink
+                        href="/dashboard"
+                        title="Home"
+                        icon={<MemoHomeIcon />}
+                        className={router.pathname === "/dashboard" ? "activeLink" : ""}
+                    />
+                </div>
 
                 <div className={styles.channelLinkContainer}>
                     <p>Channels</p>

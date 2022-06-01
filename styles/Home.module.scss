@@ -23,3 +23,10 @@
         margin-left: 100px;
     }
 }
+
+@media only screen and (max-width: 640px) {
+    .dashboardSection {
+        width: 100%;
+        margin-left: 0;
+    }
+}

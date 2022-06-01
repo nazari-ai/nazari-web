@@ -23,3 +23,16 @@
         align-items: center;
     }
 }
+
+@media only screen and (max-width: 640px) {
+    .linkContainer {
+        justify-content: center;
+        align-items: center;
+    }
+    .activeLink {
+        color: $primary-black;
+        font-weight: 600;
+        border-right: none;
+        border-top: 3px solid $primary-black;
+    }
+}
