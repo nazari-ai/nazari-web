@@ -60,7 +60,7 @@ export function DashboardSidebar() {
                                     href={link.path}
                                     icon={link.icon}
                                     title={link.title}
-                                    className={router.pathname === link.path ? "activeLink" : ""}
+                                    className={router.pathname.includes(link.path) ? "activeLink" : ""}
                                 />
                             );
                         })}
