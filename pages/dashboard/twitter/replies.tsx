@@ -1,10 +1,6 @@
 import type { NextPage } from "next";
-import Link from "next/link";
-import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
-import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
-import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import styles from "../../../styles/dashboard.module.scss";
 
