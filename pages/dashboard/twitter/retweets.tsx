@@ -14,7 +14,7 @@ const Home: NextPage = () => {
             <div className={styles.dashboardContainer}>
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
-                    <SentimentBarChart title="Retweets (Past 15 days)" />
+                    <SentimentLineChart title="Retweets (Past 15 days)" />
                 </div>
             </div>
         </DashboardLayout>
