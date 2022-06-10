@@ -38,17 +38,19 @@ export function GithubSubLinks() {
     ];
 
     return (
-        <div className={styles.linkContainer}>
-            {dashboardLinks.map((link) => {
-                return (
-                    <DashboardSubLink
-                        key={link.id}
-                        href={link.path}
-                        title={link.title}
-                        className={router.pathname === link.path ? "activeLink" : ""}
-                    />
-                );
-            })}
+        <div className={styles.linkSection}>
+            <div className={styles.linkContainer}>
+                {dashboardLinks.map((link) => {
+                    return (
+                        <DashboardSubLink
+                            key={link.id}
+                            href={link.path}
+                            title={link.title}
+                            className={router.pathname === link.path ? "activeLink" : ""}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 }

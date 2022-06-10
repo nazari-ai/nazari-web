@@ -2,7 +2,6 @@
 
 .linkContainer {
     padding-bottom: 1em;
-
     color: $secondary-disabled-color;
     font-weight: 300;
     display: flex;
@@ -20,4 +19,10 @@
     color: $primary-black;
     font-weight: 600;
     border-bottom: 3px solid $primary-black;
+}
+
+@media only screen and (max-width: 640px) {
+    .linkContainer {
+        min-width: 100px;
+    }
 }

@@ -5,3 +5,14 @@
     gap: 1em;
     align-items: center;
 }
+
+@media only screen and (max-width: 640px) {
+    .linkSection {
+        overflow-y: scroll;
+        width: 100%;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
