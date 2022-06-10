@@ -15,7 +15,6 @@ export function DashboardLayout({ children }: Type) {
             <div className={styles.dashboardSection}>
                 <DashboardHeader />
                 <DashboardAssetInfo />
-                <DashboardAssetSocial />
                 {children}
             </div>
         </div>

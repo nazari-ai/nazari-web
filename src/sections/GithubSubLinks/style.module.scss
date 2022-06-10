@@ -4,4 +4,16 @@
     display: flex;
     gap: 1em;
     align-items: center;
+    width: fit-content;
+}
+
+@media only screen and (max-width: 640px) {
+    .linkSection {
+        overflow-y: scroll;
+        width: 100%;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 }
