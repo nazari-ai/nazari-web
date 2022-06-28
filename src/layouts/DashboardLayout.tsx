@@ -21,7 +21,7 @@ export function DashboardLayout({ children }: Type) {
             initial="hidden" // Set the initial state to variants.hidden
             animate="enter" // Animated state to variants.enter
             exit="exit" // Exit state (used later) to variants.exit
-            transition={{ type: "linear", duration: 1 }}
+            transition={{ type: "linear", duration: 2 }}
             className={styles.dashboardContainer}
         >
             <DashboardSidebar />
