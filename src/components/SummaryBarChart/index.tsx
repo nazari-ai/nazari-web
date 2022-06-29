@@ -1,7 +1,6 @@
-import Image from "next/image";
 import React from "react";
 import styles from "./style.module.scss";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, Cell, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 type Props = {
     title?: string;

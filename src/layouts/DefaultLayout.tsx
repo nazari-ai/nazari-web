@@ -6,7 +6,7 @@ type Type = {
 };
 export function DefaultLayout({ children }: Type) {
     return (
-        <div className={styles.main}>
+        <div>
             <HomePageHeader />
             {children}
         </div>

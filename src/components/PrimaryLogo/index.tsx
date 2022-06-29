@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./style.module.scss";
 
 type Props = {
-    disabled?: any;
+    disabled?: boolean;
 };
 
 export function PrimaryLogo(props: Props) {

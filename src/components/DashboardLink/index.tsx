@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 
 import styles from "./style.module.scss";
 
 type Props = {
     href: string;
-    title: any;
+    title: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     disabled?: boolean;
     className?: any;

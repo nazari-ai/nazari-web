@@ -1,10 +1,9 @@
-import Image from "next/image";
 import React from "react";
 import styles from "./style.module.scss";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
+import { XAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 
 type Props = {
-    title?: any;
+    title?: string;
 };
 
 export function SentimentBarChart(props: Props) {

@@ -7,7 +7,7 @@ type Props = {
     text: string;
     className?: any;
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-    type: any;
+    type: "button" | "submit" | "reset";
     disabled?: boolean;
     isLoading?: boolean;
 };

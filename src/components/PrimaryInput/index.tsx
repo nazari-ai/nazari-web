@@ -6,7 +6,7 @@ type Props = {
     placeholder: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
-    type?: string;
+    type?: React.HTMLInputTypeAttribute;
     disabled?: boolean;
     name?: string;
     id?: string;
