@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AboutPageHero } from "src/sections/AboutPageHero";
 import { DefaultLayout } from "src/layouts/DefaultLayout";
 import { AboutPageMission } from "src/sections/AboutPageMission";
+import { AboutPageTeam } from "src/sections/AboutPageTeam";
 
 const About: NextPage = () => {
     const [close, setClose] = useState(false);
@@ -12,6 +13,7 @@ const About: NextPage = () => {
         <DefaultLayout>
             <AboutPageHero />
             <AboutPageMission />
+            <AboutPageTeam />
         </DefaultLayout>
     );
 };

@@ -38,24 +38,34 @@
 }
 
 @media only screen and (min-width: 1440px) and (min-height: 900px) {
-    .heroLeftContainer {
-        margin-top: 20em;
+    .heroContainer {
+        flex-direction: column;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .heroLeftContainer {
-        margin-top: 8em;
+    .heroContainer {
+        flex-direction: column-reverse;
+        padding: 1em 2em;
+        margin-top: 3em;
     }
 
     .heroHeading {
         font-size: 2em;
-        width: 90%;
     }
 
     .heroParagraph {
         font-size: 0.7em;
-        width: 80%;
+
         line-height: 1.4em;
+    }
+
+    .heroLeftContainer {
+        width: 100%;
+        text-align: center;
+    }
+
+    .heroRightContainer {
+        width: 100%;
     }
 }
