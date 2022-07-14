@@ -10,6 +10,7 @@
 
 @media only screen and (max-width: 900px) {
     .teamContainer {
+        padding: 2em;
         grid-template-columns: repeat(2, 1fr);
     }
 }
