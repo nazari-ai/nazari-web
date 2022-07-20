@@ -1,0 +1,29 @@
+@import "/styles/variables.scss";
+
+.getStartedContainer {
+    display: flex;
+    padding: 4em;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.heading {
+    font-size: 1.5em;
+    line-height: 1.2em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+
+.paragraph {
+    font-size: 1em;
+    line-height: 1.6em;
+    color: $secondary-grey-text;
+    font-weight: 300;
+    margin-bottom: 1.5em;
+}

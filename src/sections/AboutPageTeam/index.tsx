@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./style.module.scss";
 import { useTransition, animated, useSpring } from "react-spring";
 import { TeamMemberProfile } from "src/components/TeamMemberProfile";
-import StevenMemoji from "../../../public/images/steven-profile.svg";
+import StevenMemoji from "../../../public/images/steven.svg";
 import ErnestMemoji from "../../../public/images/ernest-profile.svg";
 import BusayoMemoji from "../../../public/images/busayo-profile.svg";
 import PreciousMemoji from "../../../public/images/precious-profile.svg";

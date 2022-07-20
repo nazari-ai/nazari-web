@@ -15,12 +15,19 @@
 .headerInfo {
     font-weight: 500;
 }
+
+.rightContainer {
+    display: flex;
+    gap: 4em;
+    justify-content: space-between;
+    align-items: center;
+}
 .headerInfoUnderline {
     position: absolute;
     bottom: -10px;
     width: 120px;
     height: 12px;
-    left: 0;
+    left: -20px;
 }
 .disabledButton {
     background-color: $primary-disabled-color;

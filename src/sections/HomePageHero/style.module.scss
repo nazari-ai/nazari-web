@@ -5,13 +5,19 @@
     background-color: $primary-color;
     flex-grow: 1;
     display: flex;
-    margin-top: 2em;
     justify-content: center;
     text-align: center;
+    position: relative;
+}
+
+.heroBackgroundImage {
+    position: absolute;
+    top: 0;
+    bottom: 0;
 }
 
 .heroLeftContainer {
-    margin-top: 8em;
+    margin: 8em 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,8 +33,8 @@
 
 .heroParagraph {
     font-size: 1em;
-    width: 60%;
-    line-height: 1.4em;
+    width: 450px;
+    line-height: 1.6em;
     color: $secondary-grey-text;
     font-weight: 300;
     margin-bottom: 1.5em;

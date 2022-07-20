@@ -1,0 +1,28 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+
+    table {
+        width: 100%;
+    }
+
+    th {
+        font-weight: 500;
+        font-size: 0.8em;
+        text-align: left;
+        padding: 20px;
+        color: #808080;
+    }
+
+    td {
+        font-weight: 300;
+        font-size: 0.8em;
+        text-align: left;
+        padding: 20px;
+        color: #808080;
+    }
+
+    tr {
+        border: 1px solid #dddddd;
+    }
+}
