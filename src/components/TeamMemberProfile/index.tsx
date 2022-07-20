@@ -10,13 +10,13 @@ import styles from "./style.module.scss";
 type Props = {
     name: string;
     role: string;
-    image: string;
+    image: any;
 };
 
 export function TeamMemberProfile(props: Props) {
     return (
         <div className={styles.profileContainer}>
-            <Image src={props.image} width={400} height={300} />
+            <Image src={props.image} width={500} height={500} />
             <div className={styles.profileHeaderContainer}>
                 <p className={styles.profileName}>{props.name}</p>
                 <p className={styles.profileRole}>{props.role}</p>
