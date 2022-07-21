@@ -6,7 +6,7 @@ type Props = {
     placeholder: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
-    type?: string;
+    type?: React.HTMLInputTypeAttribute;
     disabled?: boolean;
     name?: string;
     id?: string;
@@ -17,7 +17,7 @@ type Props = {
 export function PrimaryInput(props: Props) {
     return (
         <>
-            <div className={styles.inputContainer} data-testid="">
+            <div className={styles.inputContainer}>
                 <label className={styles.label} htmlFor={props.type}>
                     {props.label}
                 </label>

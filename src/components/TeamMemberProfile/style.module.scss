@@ -1,0 +1,34 @@
+@import "/styles/variables.scss";
+
+.profileContainer {
+    padding: 2em 3em;
+    border: 1px solid $secondary-grey-border;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.profileName {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-top: 1em;
+}
+
+.profileRole {
+    margin: 1em 0;
+}
+
+.profileSocial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+
+    svg {
+        width: 1.2em;
+    }
+}

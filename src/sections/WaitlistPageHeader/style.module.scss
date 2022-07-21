@@ -1,0 +1,61 @@
+@import "/styles/variables.scss";
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em 4em;
+    background-color: $primary-color;
+}
+
+.headerInfoContainer {
+    position: relative;
+}
+
+.headerInfo {
+    font-weight: 500;
+}
+.headerInfoUnderline {
+    position: absolute;
+    bottom: -10px;
+    width: 120px;
+    height: 12px;
+    left: 0;
+}
+.disabledButton {
+    background-color: $primary-disabled-color;
+    color: $primary-black;
+    font-weight: 500;
+    padding: 1.5em;
+    border-radius: 0.8em;
+    cursor: not-allowed;
+    border: none;
+}
+
+.activeButton {
+    background-color: $primary-black;
+    color: $primary-white;
+    font-weight: 500;
+    padding: 1.5em;
+    border-radius: 0.8em;
+    cursor: not-allowed;
+    border: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .headerContainer {
+        padding: 1em 2em;
+    }
+
+    .headerLogoContainer {
+        width: 5em;
+    }
+
+    .disabledButton {
+        font-size: 0.8em;
+    }
+
+    .activeButton {
+        font-size: 0.8em;
+    }
+}

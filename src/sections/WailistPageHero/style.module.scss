@@ -1,0 +1,58 @@
+@import "/styles/variables.scss";
+
+.heroContainer {
+    height: fit-container;
+    background-color: $primary-color;
+    flex-grow: 1;
+    display: flex;
+    margin-top: 2em;
+    justify-content: center;
+    text-align: center;
+}
+
+.heroLeftContainer {
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heroHeading {
+    font-size: 3.5em;
+    line-height: 1.2em;
+    width: 60%;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+
+.heroParagraph {
+    font-size: 1em;
+    width: 60%;
+    line-height: 1.4em;
+    color: $secondary-grey-text;
+    font-weight: 300;
+    margin-bottom: 1.5em;
+}
+
+@media only screen and (min-width: 1440px) and (min-height: 900px) {
+    .heroLeftContainer {
+        margin-top: 20em;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .heroLeftContainer {
+        margin-top: 8em;
+    }
+
+    .heroHeading {
+        font-size: 2em;
+        width: 90%;
+    }
+
+    .heroParagraph {
+        font-size: 0.7em;
+        width: 80%;
+        line-height: 1.4em;
+    }
+}

@@ -10,12 +10,14 @@ export function HomePageHeader() {
             <div className={styles.headerLogoContainer}>
                 <PrimaryLogo />
             </div>
-
-            <div className={styles.headerInfoContainer}>
-                <div className={styles.headerInfoUnderline}>
-                    <Image height={12} width={110} src="/images/underline.svg" />
+            <div className={styles.rightContainer}>
+                <div className={styles.headerInfoContainer}>
+                    <div className={styles.headerInfoUnderline}>
+                        <Image height={12} width={110} src="/images/underline.svg" />
+                    </div>
+                    <p className={styles.headerInfo}>About Us</p>
                 </div>
-                <p className={styles.headerInfo}>Coming Soon</p>
+                <PrimaryButton type="button" text="Analyze ASAs" />
             </div>
         </div>
     );
