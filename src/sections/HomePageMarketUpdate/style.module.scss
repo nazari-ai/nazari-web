@@ -17,3 +17,22 @@
     color: #4d625f;
     font-weight: 500;
 }
+
+@media only screen and (max-width: 1024px) {
+    .tableContainer {
+        overflow: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .marketContainer {
+        padding: 3em 2em;
+    }
+    .marketHeader {
+        font-size: 1em;
+    }
+
+    .marketParagraph {
+        font-size: 0.7em;
+    }
+}

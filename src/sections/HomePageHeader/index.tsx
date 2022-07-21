@@ -17,7 +17,7 @@ export function HomePageHeader() {
                     </div>
                     <p className={styles.headerInfo}>About Us</p>
                 </div>
-                <PrimaryButton type="button" text="Analyze ASAs" />
+                {/* <PrimaryButton type="button" text="Analyze ASAs" /> */}
             </div>
         </div>
     );
