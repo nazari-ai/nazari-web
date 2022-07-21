@@ -16,7 +16,7 @@ type Props = {
 export function TeamMemberProfile(props: Props) {
     return (
         <div className={styles.profileContainer}>
-            <Image src={props.image} width={500} height={500} />
+            <Image src={props.image} width={200} height={200} />
             <div className={styles.profileHeaderContainer}>
                 <p className={styles.profileName}>{props.name}</p>
                 <p className={styles.profileRole}>{props.role}</p>

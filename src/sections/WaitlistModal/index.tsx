@@ -15,8 +15,8 @@ type Props = {
 
 const validate = (values: any) => {
     const errors = {} as any;
-    if (!values.first_name) {
-        errors.first_name = "Required";
+    if (!values.username) {
+        errors.username = "Required";
     }
 
     if (!values.email) {
@@ -48,15 +48,14 @@ export function WaitlistModal(props: Props) {
     //Form validator and handler
     const formik = useFormik({
         initialValues: {
-            first_name: "",
             email: "",
+            username: "",
         },
         validate,
         onSubmit: (values) => {
             setIsLoading(true);
             axios
-                .post("https://api.getwaitlist.com/api/v1/waiter", {
-                    api_key: process.env.NEXT_PUBLIC_GET_WAITLIST_API_KEY,
+                .post("https://asalytics-waitlist.herokuapp.com/", {
                     ...values,
                 })
                 .then(
@@ -110,14 +109,14 @@ export function WaitlistModal(props: Props) {
 
                 <form className={styles.form} onSubmit={formik.handleSubmit} name="Waitlist">
                     <PrimaryInput
-                        placeholder="Ernest"
-                        type="first_name"
-                        name="first_name"
-                        id="first_name"
+                        placeholder="Steven"
+                        type="text"
+                        id="name"
+                        name="username"
                         label="Your First Name"
                         onChange={formik.handleChange}
-                        value={formik.values.first_name}
-                        error={formik.errors.first_name}
+                        value={formik.values.username}
+                        error={formik.errors.username}
                     />
                     <PrimaryInput
                         placeholder="hello@asalytics.ai"
@@ -129,6 +128,7 @@ export function WaitlistModal(props: Props) {
                         value={formik.values.email}
                         error={formik.errors.email}
                     />
+
                     <PrimaryButton
                         isLoading={isLoading}
                         type="submit"

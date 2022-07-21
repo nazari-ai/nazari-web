@@ -83,8 +83,9 @@ export function HomePageMarketUpdate() {
         <div className={styles.marketContainer}>
             <h1 className={styles.marketHeader}>Market Update</h1>
             <p className={styles.marketParagraph}>Algorand Standard Assets (ASAs) Categories</p>
-
-            <PrimaryTable columns={columns} data={data} />
+            <div className={styles.tableContainer}>
+                <PrimaryTable columns={columns} data={data} />
+            </div>
         </div>
     );
 }

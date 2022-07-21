@@ -27,3 +27,20 @@
     font-weight: 300;
     margin-bottom: 1.5em;
 }
+
+@media only screen and (max-width: 1024px) {
+    .getStartedContainer {
+        flex-direction: column;
+        gap: 3em;
+    }
+
+    .leftContainer {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .getStartedContainer {
+        padding: 3em 2em;
+    }
+}
