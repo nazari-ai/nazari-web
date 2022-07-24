@@ -75,8 +75,7 @@ export function WaitlistModal(props: Props) {
                     (error: any) => {
                         setIsLoading(false);
                         props.closePopup();
-                        toast.error("Error Occurred");
-                        console.log(error);
+                        toast.error(error?.response?.data?.detail || "Something went wrong");
                     },
                 );
         },
