@@ -68,7 +68,7 @@ Approach:
 
 ## Credits
 
-List of contriubutors:
+List of contributors:
 
 -   [Oladetoun Temitayo](https://temi.vercel.app/)
 
