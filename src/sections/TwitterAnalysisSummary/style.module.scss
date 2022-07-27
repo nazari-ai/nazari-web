@@ -5,6 +5,10 @@
     padding: 1.5em 1.5em 2em 1.5em;
     border: 1px solid $primary-disabled-color;
     border-radius: 0.8em;
+
+    br {
+        display: none;
+    }
 }
 
 .chartContainer {

@@ -5,6 +5,7 @@ import { DashboardHeader } from "src/sections/DashboardHeader";
 import { DashboardAssetInfo } from "src/sections/DashboardAssetInfo";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { motion } from "framer-motion";
+import { DefaultLayout } from "./DefaultLayout";
 
 type Type = {
     children: any;
@@ -16,20 +17,21 @@ export function DashboardLayout({ children }: Type) {
         exit: { opacity: 0, x: 0, y: 0 },
     };
     return (
-        <motion.div
+        <DefaultLayout>
+            {/* <motion.div
             variants={variants} // Pass the variant object into Framer Motion
             initial="hidden" // Set the initial state to variants.hidden
             animate="enter" // Animated state to variants.enter
             exit="exit" // Exit state (used later) to variants.exit
             transition={{ type: "linear", duration: 2 }}
             className={styles.dashboardContainer}
-        >
+        ></motion.div> */}
             <DashboardSidebar />
             <div className={styles.dashboardSection}>
                 <DashboardHeader />
                 <DashboardAssetInfo />
                 {children}
             </div>
-        </motion.div>
+        </DefaultLayout>
     );
 }

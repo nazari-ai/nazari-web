@@ -8,13 +8,13 @@ export const queryClient = new QueryClient({
             refetchOnMount: true,
             retry: 3,
             retryOnMount: false,
-            staleTime: 1000 * 60,
+            // staleTime: 1000 * 60,
         },
     },
 });
 
 export const GATEWAY_API = process.env.NEXT_PUBLIC_APOLLO_GATEWAY_URL;
 
-export const Gateway = new GraphQLClient("/api/gateway");
+export const Gateway = new GraphQLClient("/graphql");
 
 export default Gateway;
