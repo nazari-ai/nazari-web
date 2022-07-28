@@ -9,7 +9,6 @@ type Props = {
 };
 
 export function SummaryBarChart(props: Props) {
-    console.log(props.data);
     const [data, setData] = useState([] as Array<any>);
 
     useEffect(() => {

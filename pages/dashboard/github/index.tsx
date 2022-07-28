@@ -45,7 +45,7 @@ const Home: NextPage = () => {
                 <GithubAnalysisSummary />
                 <div className={styles.summaryBarChartContainer}>
                     <SummaryBarChart header="COMMITS ARE MOSTLY MADE ON" title="Wednesday" data={commitAnalytics} />
-                    <SummaryBarChart header="COMMITS ARE MOSTLY GOTTEN ON" title="Friday" data={issueAnalytics} />
+                    <SummaryBarChart header="ISSUES ARE MOSTLY GOTTEN ON" title="Friday" data={issueAnalytics} />
                 </div>
             </div>
         </DashboardLayout>
