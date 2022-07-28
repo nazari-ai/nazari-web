@@ -1,16 +1,20 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
+import { AnalyzeAsaModal } from "src/sections/AnalyzeAsaModal";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { GithubSummary } from "src/sections/GithubSummary";
 import { RedditSummary } from "src/sections/RedditSummary";
 import { TwitterSummary } from "src/sections/TwitterSummary";
+import { useStore } from "src/store";
 import styles from "../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
+    const { analyzeModal } = useStore();
     return (
         <DashboardLayout>
             <DashboardAssetSocial />
+            {/* {analyzeModal ? <AnalyzeAsaModal  /> : null} */}
             <div className={styles.dashboardContainer}>
                 <div className={styles.dashboardHeader}>
                     <h1 className={styles.dashboardGreeting}>Good Evening!</h1>

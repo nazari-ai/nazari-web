@@ -8,10 +8,10 @@ type Type = {
     children: any;
 };
 export function DefaultLayout({ children }: Type) {
-    const { analyzeModal, openAnalyzeModal } = useStore();
+    const { analyzeModal } = useStore();
     return (
         <div>
-            {analyzeModal ? <AnalyzeAsaModal closePopup={openAnalyzeModal} /> : null}
+            {analyzeModal ? <AnalyzeAsaModal /> : null}
             {children}
         </div>
     );

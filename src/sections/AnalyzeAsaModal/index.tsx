@@ -123,6 +123,7 @@ export function AnalyzeAsaModal() {
                         placeholder="Twitter Keyword"
                         type="twitter_keyword"
                         id="twitter_keyword"
+                        disabled={true}
                         name="twitter_keyword"
                         label="Twitter"
                         onChange={formik.handleChange}
@@ -134,6 +135,7 @@ export function AnalyzeAsaModal() {
                         type="github_keyword"
                         id="github_keyword"
                         name="github_keyword"
+                        disabled={true}
                         label="Github"
                         onChange={formik.handleChange}
                         value={formik.values.github_keyword}
@@ -144,6 +146,7 @@ export function AnalyzeAsaModal() {
                         type="reddit_keyword"
                         id="reddit_keyword"
                         name="reddit_keyword"
+                        disabled={true}
                         label="Reddit"
                         onChange={formik.handleChange}
                         value={formik.values.reddit_keyword}

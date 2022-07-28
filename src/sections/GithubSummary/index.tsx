@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { SummaryLineChart } from "src/components/SummaryLineChart";
 import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
 import { useStore } from "src/store";
@@ -36,11 +38,24 @@ export function GithubSummary() {
     return (
         <div className={styles.summaryContainer}>
             <h1 className={styles.summaryHeader}>Github Summary</h1>
-            <div className={styles.chartContainer}>
-                <SummaryLineChart title="Commits" data={commitAnalytics} />
-                <SummaryLineChart title="Stars" data={starAnalytics} />
-                <SummaryLineChart title="Watches" data={watchAnalytics} />
-            </div>
+
+            {isFetching ? (
+                <Skeleton
+                    count={3}
+                    containerClassName={styles.chartContainer}
+                    className={styles.detailContainer}
+                    baseColor="#ebebeb"
+                    highlightColor="#f5f5f5"
+                    height="150px"
+                    width="100%"
+                />
+            ) : (
+                <div className={styles.chartContainer}>
+                    <SummaryLineChart title="Commits" data={commitAnalytics} />
+                    <SummaryLineChart title="Stars" data={starAnalytics} />
+                    <SummaryLineChart title="Watches" data={watchAnalytics} />
+                </div>
+            )}
         </div>
     );
 }
