@@ -22,11 +22,6 @@ export function TwitterSubLinks() {
         },
         {
             id: 4,
-            path: "/dashboard/twitter/replies",
-            title: "Replies",
-        },
-        {
-            id: 4,
             path: "/dashboard/twitter/sentiments",
             title: "Sentiments",
         },

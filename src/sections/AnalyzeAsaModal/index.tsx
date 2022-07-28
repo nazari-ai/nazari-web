@@ -8,10 +8,7 @@ import { useSpring, animated } from "react-spring";
 import { useRef, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-
-type Props = {
-    closePopup: Function;
-};
+import { useStore } from "src/store";
 
 const validate = (values: any) => {
     const errors = {} as any;
@@ -28,7 +25,8 @@ const validate = (values: any) => {
     return errors;
 };
 
-export function AnalyzeAsaModal(props: Props) {
+export function AnalyzeAsaModal() {
+    const { openAnalyzeModal } = useStore();
     //Data
     const [isLoading, setIsLoading] = useState(false);
 
@@ -63,7 +61,7 @@ export function AnalyzeAsaModal(props: Props) {
                 })
                 .then(
                     (response: any) => {
-                        props.closePopup();
+                        openAnalyzeModal();
                         setIsLoading(false);
                         toast("You've been added to our waitlist", {
                             id: "waitlist-toast",
@@ -77,7 +75,7 @@ export function AnalyzeAsaModal(props: Props) {
                     },
                     (error: any) => {
                         setIsLoading(false);
-                        props.closePopup();
+                        openAnalyzeModal();
                         toast.error("Error Occurred");
                         console.log(error);
                     },
@@ -101,7 +99,7 @@ export function AnalyzeAsaModal(props: Props) {
                     <div className={styles.headerLogoContainer}></div>
                     <Image
                         className={styles.headerCloseIcon}
-                        onClick={() => props.closePopup(false)}
+                        onClick={openAnalyzeModal}
                         src="/images/close.svg"
                         alt="Close Icon"
                         width={50}

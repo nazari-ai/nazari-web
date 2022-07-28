@@ -1,0 +1,17 @@
+query redditAnalytics($asaID: String!, $endDate: String, $startDate: String) {
+    redditAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate) {
+        asaID
+        more {
+            commentId
+            commentScore
+            commentSentimentScore
+            postId
+        }
+        numOfComments
+        postId
+        postText
+        postTitle
+        score
+        sentimentScore
+    }
+}

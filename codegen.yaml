@@ -1,4 +1,5 @@
-schema: http://my-graphql-api.com/graphql
+overwrite: true
+schema: http://analytics-api.herokuapp.com/analytics
 documents: "src/graphql/*.graphql"
 generates:
     src/generated/graphql.ts:
@@ -7,4 +8,7 @@ generates:
             - "typescript-operations"
             - "typescript-react-query"
         config:
-            fetcher: fetch
+            fetcher:
+                func: "../services/fetcher#fetchData"
+            exposeQueryKeys: true
+            exposeFetcher: true

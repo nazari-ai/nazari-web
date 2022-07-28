@@ -3,11 +3,9 @@ import Link from "next/link";
 import styles from "./style.module.scss";
 import { useTransition, animated, useSpring } from "react-spring";
 import { PrimaryButton } from "../../components/PrimaryButton";
+import { useStore } from "src/store";
 
-type Props = {
-    openPopup: Function;
-};
-export function HomePageHero(props: Props) {
+export function HomePageHero() {
     const opacityAnimation: any = useSpring({
         config: { duration: 1500 },
         from: { opacity: 0 },
@@ -19,7 +17,7 @@ export function HomePageHero(props: Props) {
         to: { opacity: 1 },
         config: { duration: 3000 },
     });
-
+    const { openAnalyzeModal } = useStore();
     return (
         <animated.div
             className={styles.heroContainer}
@@ -44,7 +42,7 @@ export function HomePageHero(props: Props) {
                     Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one
                     platform.
                 </p>
-                <PrimaryButton type="button" text="ANALYZE ASAs" onClick={() => props.openPopup(true)} />
+                <PrimaryButton type="button" text="ANALYZE ASAs" onClick={openAnalyzeModal} />
             </div>
         </animated.div>
     );

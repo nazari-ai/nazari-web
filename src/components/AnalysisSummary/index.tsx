@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 
 type Props = {
     header: string;
-    info: string;
+    info?: number | string;
 };
 
 export function AnalysisSummary(props: Props) {
@@ -12,7 +12,7 @@ export function AnalysisSummary(props: Props) {
             <div className={`${styles.detailContainer}`}>
                 <p className={styles.detailHeader}>{props.header}</p>
                 <div>
-                    <p className={styles.detail}>{props.info}</p>
+                    <p className={styles.detail}>{props.info || "-"}</p>
                 </div>
             </div>
         </>
