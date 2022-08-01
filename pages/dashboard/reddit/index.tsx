@@ -14,33 +14,31 @@ import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
     const { selectedAsa } = useStore();
-    const { data, isFetching, error, status } = useRedditAnalyticsQuery({ asaID: selectedAsa.assetId });
+    const { data, isFetching, error, status } = useRedditAnalyticsQuery({
+        asaID: selectedAsa.assetId,
+        startDate: "2020-01-01",
+    });
 
     const columns = [
         {
-            title: "NAME",
-            dataIndex: "name",
-            key: "name",
+            title: "POST",
+            dataIndex: "postTitle",
+            key: "postTitle",
         },
         {
-            title: "PRICE",
-            dataIndex: "price",
-            key: "price",
+            title: "SCORE",
+            dataIndex: "score",
+            key: "score",
         },
         {
-            title: "GITHUB",
-            dataIndex: "github",
+            title: "COMMENTS",
+            dataIndex: "numOfComments",
             key: "github",
         },
         {
-            title: "REDDIT",
-            dataIndex: "reddit",
-            key: "reddit",
-        },
-        {
-            title: "TWITTER",
-            dataIndex: "twitter",
-            key: "twitter",
+            title: "SENTIMENT SCORE",
+            dataIndex: "sentimentScore",
+            key: "sentimentScore",
         },
     ];
 
@@ -48,8 +46,8 @@ const Home: NextPage = () => {
         <DashboardLayout>
             <DashboardAssetSocial />
             <div className={styles.dashboardContainer}>
-                <div className={styles.summaryBarChartContainer}>
-                    <PrimaryTable columns={columns} data={data?.redditAnalytics} />
+                <div className={styles.tableContainer}>
+                    <PrimaryTable columns={columns} data={data?.redditAnalytics.slice(0, 10)} />
                 </div>
             </div>
         </DashboardLayout>

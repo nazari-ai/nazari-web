@@ -41,7 +41,7 @@ export function DashboardSidebar() {
     });
     return (
         <div className={styles.sidebarContainer}>
-            <Link href="/landing">
+            <Link href="/">
                 <div className={styles.logoContainer}>{width > 768 ? <PrimaryLogo /> : <PrimaryShortLogo />}</div>
             </Link>
 

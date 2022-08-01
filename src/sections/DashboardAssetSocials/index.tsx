@@ -16,14 +16,14 @@ export function DashboardAssetSocial() {
     return (
         <div className={styles.infoContainer}>
             <div className={styles.socialContainer}>
-                {data?.asaData.result[0].URL ? (
+                {data?.asaData?.result[0]?.URL ? (
                     <a href={data?.asaData?.result[0]?.URL || ""} target="_blank">
                         <MemoHomeIcon fill="#626772" />
                     </a>
                 ) : (
                     ""
                 )}
-                {data?.asaData.result[0].twitter ? (
+                {data?.asaData?.result[0]?.twitter ? (
                     <a href={data?.asaData?.result[0]?.twitter || ""} target="_blank">
                         {" "}
                         <MemoTwitterIcon fill="#626772" />
@@ -31,7 +31,7 @@ export function DashboardAssetSocial() {
                 ) : (
                     ""
                 )}
-                {data?.asaData.result[0].github ? (
+                {data?.asaData?.result[0]?.github ? (
                     <a href={data?.asaData?.result[0]?.github || ""} target="_blank">
                         {" "}
                         <MemoGithubIcon fill="#626772" />
@@ -39,7 +39,7 @@ export function DashboardAssetSocial() {
                 ) : (
                     ""
                 )}
-                {data?.asaData.result[0].reddit ? (
+                {data?.asaData?.result[0]?.reddit ? (
                     <a href={data?.asaData?.result[0]?.reddit || ""} target="_blank">
                         {" "}
                         <MemoRedditIcon fill="#626772" />
@@ -47,7 +47,7 @@ export function DashboardAssetSocial() {
                 ) : (
                     ""
                 )}
-                {data?.asaData.result[0].discord ? (
+                {data?.asaData?.result[0]?.discord ? (
                     <a href={data?.asaData?.result[0]?.discord || ""} target="_blank">
                         {" "}
                         <MemoDiscordIcon fill="#626772" />
@@ -55,7 +55,7 @@ export function DashboardAssetSocial() {
                 ) : (
                     ""
                 )}
-                {data?.asaData.result[0].telegram ? (
+                {data?.asaData?.result[0]?.telegram ? (
                     <a href={data?.asaData?.result[0]?.telegram || ""} target="_blank">
                         {" "}
                         <MemoTelegramIcon fill="#626772" />
