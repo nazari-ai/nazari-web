@@ -27,8 +27,8 @@ export function AssetInfo(props: Props) {
                 {!props.asset.available && <p className={styles.unavailableSign}>Unavailable</p>}
             </div>
             <div className={styles.assetLogo}>
-                {props.asset.logo ? (
-                    <Image src={props.asset.logo} alt="Asset Logo" height={40} width={40} />
+                {props?.asset?.logo ? (
+                    <Image src={props.asset?.logo} alt="Asset Logo" height={40} width={40} />
                 ) : (
                     <div className={styles.assetLogoPlaceholder}>
                         <p>{props.asset.name.substring(1, 3).toUpperCase()}</p>

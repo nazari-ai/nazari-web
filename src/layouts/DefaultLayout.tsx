@@ -9,7 +9,8 @@ type Type = {
     children: any;
 };
 export function DefaultLayout({ children }: Type) {
-    const { analyzeModal } = useStore();
+    const { analyzeModal, selectedAsa, openAnalyzeModal } = useStore();
+
     const { data, isError, isFetched } = useAsaListQuery();
     return (
         <div>

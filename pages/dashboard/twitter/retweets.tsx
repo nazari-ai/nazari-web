@@ -16,6 +16,7 @@ const Home: NextPage = () => {
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
+        weekday: true,
     });
     let retweetAnalytics = [] as Array<any>;
 
@@ -24,7 +25,7 @@ const Home: NextPage = () => {
             data.twitterAnalytics?.results?.forEach((item) => {
                 retweetAnalytics.push({
                     data: item.likes,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: item.weekday,
                 });
             });
         }
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
             <div className={styles.dashboardContainer}>
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
-                    <SentimentLineChart title="Retweets (Past 15 days)" data={retweetAnalytics} />
+                    <SentimentBarChart title="Retweets (Past 15 days)" data={retweetAnalytics} />
                 </div>
             </div>
         </DashboardLayout>

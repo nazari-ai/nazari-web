@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useEffect } from "react";
+import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { useTwitterAnalyticsQuery } from "src/generated/graphql";
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
+        weekday: true,
     });
     let likeAnalytics = [] as Array<any>;
 
@@ -23,7 +25,7 @@ const Home: NextPage = () => {
             data.twitterAnalytics?.results?.forEach((item) => {
                 likeAnalytics.push({
                     data: item.likes,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: item.weekday,
                 });
             });
         }
@@ -33,7 +35,7 @@ const Home: NextPage = () => {
             <div className={styles.dashboardContainer}>
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
-                    <SentimentLineChart title="Likes (Past 15 days)" data={likeAnalytics} />
+                    <SentimentBarChart title="Likes (Past 15 days)" data={likeAnalytics} />
                 </div>
             </div>
         </DashboardLayout>

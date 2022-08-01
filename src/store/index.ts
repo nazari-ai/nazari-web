@@ -8,12 +8,12 @@ interface State {
     selectedAsa: asset;
 }
 
-const defaultAsa = {
-    assetId: "312769",
+export const defaultAsa = {
+    assetId: "",
     available: false,
     logo: null,
-    unitname1: "USDt",
-    name: "Tether USDt",
+    unitname1: "",
+    name: "",
 };
 
 export const useStore = create<State>((set) => ({

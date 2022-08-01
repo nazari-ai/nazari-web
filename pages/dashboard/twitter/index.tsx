@@ -16,6 +16,7 @@ const Home: NextPage = () => {
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
+        weekday: true,
     });
     let retweetAnalytics = [] as Array<any>;
     let likeAnalytics = [] as Array<any>;
@@ -25,11 +26,11 @@ const Home: NextPage = () => {
             data.twitterAnalytics?.results?.forEach((item) => {
                 retweetAnalytics.push({
                     data: item.retweets,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: item.weekday,
                 });
                 likeAnalytics.push({
                     data: item.likes,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: item.weekday,
                 });
             });
         }

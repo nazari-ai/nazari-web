@@ -8,7 +8,7 @@ import { useSpring, animated } from "react-spring";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useStore } from "src/store";
+import { defaultAsa, useStore } from "src/store";
 import { useAsaListQuery } from "src/generated/graphql";
 import { AssetInfo } from "src/components/AssetInfo";
 import { SearchInput } from "src/components/SearchInput";
@@ -27,7 +27,7 @@ const validate = (values: any) => {
 export function AnalyzeAsaModal() {
     const router = useRouter();
     const { id } = router.query;
-    const { openAnalyzeModal, selectedAsa } = useStore();
+    const { openAnalyzeModal, selectedAsa, setSelectedAsa } = useStore();
     const { status, data, error, isFetching } = useAsaListQuery();
     const [filteredResults, setFilteredResults] = useState([] as asset[]);
     const [searchInput, setSearchInput] = useState("");
@@ -46,6 +46,7 @@ export function AnalyzeAsaModal() {
                 return Object.values(item).join("").toLowerCase().includes(searchInput?.toLowerCase());
             });
             setFilteredResults(filteredData as any);
+            setSelectedAsa(defaultAsa);
             setRemoveAsaList(true);
         } else {
             setFilteredResults([]);

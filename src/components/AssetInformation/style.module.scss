@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .infoContainer {
     display: flex;
     gap: 1em;
@@ -13,4 +15,20 @@
 .assetId {
     font-size: 0.7em;
     font-weight: 300;
+}
+
+.assetLogoPlaceholder {
+    height: 40px;
+    width: 40px;
+    background-color: $primary-black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        font-size: 1em;
+        font-weight: 500;
+        color: $secondary-disabled-color;
+    }
 }

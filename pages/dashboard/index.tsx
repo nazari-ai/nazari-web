@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useAsaDataQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { AnalyzeAsaModal } from "src/sections/AnalyzeAsaModal";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
@@ -13,6 +14,8 @@ const Home: NextPage = () => {
     const { analyzeModal } = useStore();
     const presentHour = new Date().getHours();
     const salutation = presentHour < 12 ? "Good Morning!" : presentHour < 18 ? "Good Afternoon!" : "Good Evening!";
+    const { selectedAsa } = useStore();
+    const { data, isFetching, error, status } = useAsaDataQuery({ asaID: selectedAsa.assetId });
     return (
         <DashboardLayout>
             <DashboardAssetSocial />
@@ -21,8 +24,9 @@ const Home: NextPage = () => {
                 <div className={styles.dashboardHeader}>
                     <h1 className={styles.dashboardGreeting}>{salutation}</h1>
                     <p className={styles.dashboardNote}>
-                        Get an idea of how Algorand is done on <Link href="/dashboard/twitter">Twitter</Link>,{" "}
-                        <Link href="/dashboard/github">Github</Link> and <Link href="/dashboard/reddit">Reddit.</Link>
+                        Get an idea of how {data?.asaData?.result[0]?.name} is done on{" "}
+                        <Link href="/dashboard/twitter">Twitter</Link>, <Link href="/dashboard/github">Github</Link> and{" "}
+                        <Link href="/dashboard/reddit">Reddit.</Link>
                     </p>
                 </div>
                 <div>

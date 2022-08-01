@@ -11,9 +11,11 @@ import { useStore } from "src/store";
 
 const Home: NextPage = () => {
     const { analyzeModal, openAnalyzeModal } = useStore();
+    console.log(analyzeModal);
     return (
         <HomeLayout>
             <HomePageHero />
+            {analyzeModal ? <AnalyzeAsaModal /> : null}
             {/* <HomePageMarketUpdate /> */}
             <HomePageGetStarted />
         </HomeLayout>
