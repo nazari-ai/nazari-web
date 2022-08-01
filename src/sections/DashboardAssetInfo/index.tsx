@@ -21,7 +21,11 @@ export function DashboardAssetInfo() {
                     <AssetFinancial header="Reputation" info={data?.asaData?.result[0]?.reputation_Pera} />
                     <AssetFinancial
                         header="Value"
-                        info={data?.asaData?.result[0]?.usdValue ? `USD${data?.asaData?.result[0]?.usdValue}` : "-"}
+                        info={
+                            data?.asaData?.result[0]?.usdValue
+                                ? `${approx(data?.asaData?.result[0]?.usdValue, { prefix: "$", capital: true })}`
+                                : "-"
+                        }
                     />
                     <AssetFinancial header="Total Cap" info="-" />
                     <AssetFinancial

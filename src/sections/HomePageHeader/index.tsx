@@ -15,7 +15,9 @@ export function HomePageHeader() {
                     <div className={styles.headerInfoUnderline}>
                         <Image height={12} width={110} src="/images/underline.svg" />
                     </div>
-                    <p className={styles.headerInfo}>About Us</p>
+                    <Link href="/about">
+                        <p className={styles.headerInfo}>About Us</p>
+                    </Link>
                 </div>
                 {/* <PrimaryButton type="button" text="Analyze ASAs" /> */}
             </div>
