@@ -30,6 +30,7 @@
         "react-spring": "^9.4.5",
         "recharts": "^2.1.10",
         "sass": "^1.51.0",
+        "suggestion-react-input-search": "^1.4.0",
         "valtio": "^1.6.3",
         "yarn": "^1.22.18",
         "zustand": "^4.0.0-rc.4"

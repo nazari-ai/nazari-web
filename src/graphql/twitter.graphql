@@ -12,7 +12,7 @@ query twitterAnalytics($asaID: String!, $endDate: String, $startDate: String, $w
     twitterAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate, weekday: $weekday, hour: $hour) {
         asaID
         results {
-            dayOfWeek
+            weekday
             hour
             likes
             postedAt

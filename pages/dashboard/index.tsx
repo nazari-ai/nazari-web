@@ -11,13 +11,15 @@ import styles from "../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
     const { analyzeModal } = useStore();
+    const presentHour = new Date().getHours();
+    const salutation = presentHour < 12 ? "Good Morning!" : presentHour < 18 ? "Good Afternoon!" : "Good Evening!";
     return (
         <DashboardLayout>
             <DashboardAssetSocial />
             {/* {analyzeModal ? <AnalyzeAsaModal  /> : null} */}
             <div className={styles.dashboardContainer}>
                 <div className={styles.dashboardHeader}>
-                    <h1 className={styles.dashboardGreeting}>Good Evening!</h1>
+                    <h1 className={styles.dashboardGreeting}>{salutation}</h1>
                     <p className={styles.dashboardNote}>
                         Get an idea of how Algorand is done on <Link href="/dashboard/twitter">Twitter</Link>,{" "}
                         <Link href="/dashboard/github">Github</Link> and <Link href="/dashboard/reddit">Reddit.</Link>

@@ -11,7 +11,6 @@ type Props = {
 };
 
 export function HowToGetStarted(props: Props) {
-    console.log(props);
     return (
         <div className={styles.getStartedContainer}>
             <div className={styles.getStartedIcon}>{props.icon}</div>

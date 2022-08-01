@@ -14,9 +14,9 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const { asaId } = useStore();
+    const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: asaId,
+        asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
     });
     let commitAnalytics = [] as Array<any>;
@@ -34,7 +34,6 @@ const Home: NextPage = () => {
                     name: new Date(item.lastPushDate)?.toLocaleDateString(),
                 });
             });
-            console.log(data);
         }
     }, [data]);
 

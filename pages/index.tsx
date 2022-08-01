@@ -1,19 +1,22 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import { HomePageHero } from "../src/sections/HomePageHero";
 import styles from "../styles/Home.module.scss";
-import { WaitlistLayout } from "../src/layouts/WaitlistLayout";
-import { WaitlistModal } from "../src/sections/WaitlistModal";
 import { useState } from "react";
-import { WaitlistPageHero } from "src/sections/WailistPageHero";
+import { AnalyzeAsaModal } from "src/sections/AnalyzeAsaModal";
+import { HomePageMarketUpdate } from "src/sections/HomePageMarketUpdate";
+import { HomePageGetStarted } from "src/sections/HomePageGetStarted";
+import { useGithubOverviewQuery } from "src/generated/graphql";
+import { HomeLayout } from "src/layouts/HomeLayout";
+import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const [close, setClose] = useState(false);
+    const { analyzeModal, openAnalyzeModal } = useStore();
     return (
-        <WaitlistLayout>
-            <WaitlistPageHero openPopup={setClose} />
-            {close ? <WaitlistModal closePopup={setClose} /> : null}
-        </WaitlistLayout>
+        <HomeLayout>
+            <HomePageHero />
+            {/* <HomePageMarketUpdate /> */}
+            <HomePageGetStarted />
+        </HomeLayout>
     );
 };
 

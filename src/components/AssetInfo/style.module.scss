@@ -1,0 +1,61 @@
+@import "../../../styles/variables.scss";
+
+.asset {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.assetInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+}
+
+.assetName {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.assetDetails {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.unavailable {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.unavailableSign {
+    color: red;
+    font-size: 0.6em;
+}
+
+.assetId {
+    font-size: 0.8em;
+    color: $secondary-disabled-color;
+}
+
+.assetUnitName {
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
+.assetLogoPlaceholder {
+    height: 40px;
+    width: 40px;
+    background-color: $primary-black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        font-size: 1em;
+        font-weight: 500;
+        color: $secondary-disabled-color;
+    }
+}

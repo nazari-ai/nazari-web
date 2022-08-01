@@ -7,9 +7,9 @@ import { useStore } from "src/store";
 import styles from "./style.module.scss";
 
 export function TwitterSummary() {
-    const { asaId } = useStore();
+    const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
-        asaID: asaId,
+        asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
     });
     const sentimentAnalytics = [] as Array<any>;
@@ -32,7 +32,6 @@ export function TwitterSummary() {
                     name: new Date(item.postedAt)?.toLocaleDateString(),
                 });
             });
-            console.log(data);
         }
     }, [data]);
     return (

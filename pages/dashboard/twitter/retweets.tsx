@@ -12,8 +12,11 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const { asaId } = useStore();
-    const { status, data, error, isFetching } = useTwitterAnalyticsQuery({ asaID: asaId, startDate: "2020-01-01" });
+    const { selectedAsa } = useStore();
+    const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
+        asaID: selectedAsa.assetId,
+        startDate: "2020-01-01",
+    });
     let retweetAnalytics = [] as Array<any>;
 
     useEffect(() => {
@@ -24,7 +27,6 @@ const Home: NextPage = () => {
                     name: new Date(item.postedAt)?.toLocaleDateString(),
                 });
             });
-            console.log(data);
         }
     }, [data]);
     return (

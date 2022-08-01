@@ -19,6 +19,7 @@
     max-width: 500px;
     background-color: $primary-white;
     height: fit-content;
+    position: relative;
 }
 
 .modalHeader {
@@ -36,6 +37,19 @@
     display: flex;
     flex-direction: column;
     padding: 2em;
+}
+
+.assetList {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0em 1em 0em;
+    gap: 1.5em;
+    background-color: $primary-color;
+    padding: 1em;
+    border-radius: 20px;
+    position: absolute;
+    top: 12em;
+    width: 400px;
 }
 
 @media only screen and (max-width: 600px) {

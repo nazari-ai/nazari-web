@@ -7,9 +7,9 @@ import { useStore } from "src/store";
 import styles from "./style.module.scss";
 
 export function GithubSummary() {
-    const { asaId } = useStore();
+    const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: asaId,
+        asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
     });
     const commitAnalytics = [] as Array<any>;
@@ -32,7 +32,6 @@ export function GithubSummary() {
                     name: new Date(item.lastPushDate)?.toLocaleDateString(),
                 });
             });
-            console.log(data);
         }
     }, [data]);
     return (
