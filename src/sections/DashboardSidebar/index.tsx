@@ -6,9 +6,10 @@ import MemoSettingIcon from "src/components/Icons/SettingIcon";
 import MemoTwitterIcon from "src/components/Icons/TwitterIcon";
 import { PrimaryLogo } from "src/components/PrimaryLogo";
 import styles from "./style.module.scss";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import { PrimaryShortLogo } from "src/components/PrimaryShortLogo";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export function DashboardSidebar() {
     const router = useRouter();
@@ -40,7 +41,9 @@ export function DashboardSidebar() {
     });
     return (
         <div className={styles.sidebarContainer}>
-            <div className={styles.logoContainer}>{width > 768 ? <PrimaryLogo /> : <PrimaryShortLogo />}</div>
+            <Link href="/landing">
+                <div className={styles.logoContainer}>{width > 768 ? <PrimaryLogo /> : <PrimaryShortLogo />}</div>
+            </Link>
 
             <div className={styles.linkContainer}>
                 <div className={styles.homeLinkContainer}>
@@ -70,7 +73,7 @@ export function DashboardSidebar() {
                 </div>
             </div>
             <div className={styles.settingsContainer}>
-                <DashboardLink href="/dashboard/settings" title="Settings" icon={<MemoSettingIcon />} disabled={true} />
+                {/* <DashboardLink href="/dashboard/settings" title="Settings" icon={<MemoSettingIcon />} disabled={true} /> */}
             </div>
         </div>
     );

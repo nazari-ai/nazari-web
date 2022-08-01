@@ -1,32 +1,24 @@
+import { asset } from "src/types";
 import create from "zustand";
-import { persist } from "zustand/middleware";
 
 interface State {
     analyzeModal: boolean;
     openAnalyzeModal: () => void;
-    asaId: string;
+    setSelectedAsa: (asa: asset) => void;
+    selectedAsa: asset;
 }
 
-interface AsaState {
-    asaId: string;
-}
+export const defaultAsa = {
+    assetId: "",
+    available: false,
+    logo: null,
+    unitname1: "",
+    name: "",
+};
 
 export const useStore = create<State>((set) => ({
     analyzeModal: false,
+    selectedAsa: defaultAsa,
+    setSelectedAsa: (asa: asset) => set((state) => ({ selectedAsa: asa })),
     openAnalyzeModal: () => set((state) => ({ analyzeModal: !state.analyzeModal })),
-    asaId: "ChoiceCoin",
 }));
-
-export const useAsaStore = create(
-    persist(
-        (set, get) =>
-            ({
-                asaId: "ChoiceCoin",
-                changeAsaId: (id: String) => set({ asaId: id }),
-            } as AsaState),
-        {
-            name: "asa", // unique name
-            getStorage: () => localStorage, // (optional) by default, 'localStorage' is used
-        },
-    ),
-);

@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useEffect } from "react";
+import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
 import { useTwitterAnalyticsQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
@@ -8,8 +9,12 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const { asaId } = useStore();
-    const { status, data, error, isFetching } = useTwitterAnalyticsQuery({ asaID: asaId, startDate: "2020-01-01" });
+    const { selectedAsa } = useStore();
+    const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
+        asaID: selectedAsa.assetId,
+        startDate: "2020-01-01",
+        weekday: true,
+    });
     let sentimentAnalytics = [] as Array<any>;
 
     useEffect(() => {
@@ -17,10 +22,9 @@ const Home: NextPage = () => {
             data.twitterAnalytics?.results?.forEach((item) => {
                 sentimentAnalytics.push({
                     data: item.sentiment,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: item.weekday,
                 });
             });
-            console.log(data);
         }
     }, [data]);
     return (
@@ -28,7 +32,7 @@ const Home: NextPage = () => {
             <div className={styles.dashboardContainer}>
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
-                    <SentimentLineChart title="Replies (Past 15 days)" data={sentimentAnalytics} />
+                    <SentimentBarChart title="Replies (Past 15 days)" data={sentimentAnalytics} />
                 </div>
             </div>
         </DashboardLayout>

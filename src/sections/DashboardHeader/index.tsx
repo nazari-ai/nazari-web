@@ -9,7 +9,11 @@ export function DashboardHeader() {
     return (
         <div className={styles.headerContainer}>
             <div className={styles.headerInfoContainer}>
-                <PrimaryButton text="Analyze ASAs" type="button" onClick={openAnalyzeModal} />
+                <Link href="/">
+                    <a>
+                        <PrimaryButton text="Homepage" type="button" />
+                    </a>
+                </Link>
             </div>
         </div>
     );

@@ -2,9 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { AssetFinancial } from "src/components/AssetFinancial";
 import { AssetInformation } from "src/components/AssetInformation";
+import { useAsaDataQuery } from "src/generated/graphql";
+import { useStore } from "src/store";
 import styles from "./style.module.scss";
+var approx = require("approximate-number");
 
 export function DashboardAssetInfo() {
+    const { analyzeModal, selectedAsa, openAnalyzeModal } = useStore();
+    const { data, isFetching, error, status } = useAsaDataQuery({ asaID: selectedAsa.assetId });
+
     return (
         <div className={styles.infoContainer}>
             <div className={styles.assetInfoContainer}>
@@ -12,11 +18,20 @@ export function DashboardAssetInfo() {
             </div>
             <div className={styles.assetDetailsSection}>
                 <div className={styles.assetDetailsContainer}>
-                    <AssetFinancial header="Volatility" info="Exteremely Low" />
-                    <AssetFinancial header="Liquidity" info="$14.732 M" />
-                    <AssetFinancial header="Total Cap" info="$9.537 B" />
-                    <AssetFinancial header="Total Supply" info="10.000 B" />
-                    <AssetFinancial header="Circ. Supply" info="6.633 B" />
+                    <AssetFinancial header="Reputation" info={data?.asaData?.result[0]?.reputation_Pera} />
+                    <AssetFinancial
+                        header="Value"
+                        info={data?.asaData?.result[0]?.usdValue ? `USD${data?.asaData?.result[0]?.usdValue}` : "-"}
+                    />
+                    <AssetFinancial header="Total Cap" info="-" />
+                    <AssetFinancial
+                        header="Total Supply"
+                        info={approx(data?.asaData?.result[0]?.totalSupply, { capital: true })}
+                    />
+                    <AssetFinancial
+                        header="Circ. Supply"
+                        info={approx(data?.asaData?.result[0]?.circSupply, { capital: true })}
+                    />
                 </div>
             </div>
         </div>

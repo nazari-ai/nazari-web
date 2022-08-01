@@ -5,10 +5,15 @@ import { PrimaryInput } from "../../components/PrimaryInput";
 import styles from "./style.module.scss";
 import { useFormik } from "formik";
 import { useSpring, animated } from "react-spring";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useStore } from "src/store";
+import { defaultAsa, useStore } from "src/store";
+import { useAsaListQuery } from "src/generated/graphql";
+import { AssetInfo } from "src/components/AssetInfo";
+import { SearchInput } from "src/components/SearchInput";
+import { asset } from "src/types";
+import { useRouter } from "next/router";
 
 const validate = (values: any) => {
     const errors = {} as any;
@@ -16,19 +21,43 @@ const validate = (values: any) => {
         errors.first_name = "Required";
     }
 
-    if (!values.email) {
-        errors.email = "Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = "Invalid email address";
-    }
-
     return errors;
 };
 
 export function AnalyzeAsaModal() {
-    const { openAnalyzeModal } = useStore();
-    //Data
+    const router = useRouter();
+    const { id } = router.query;
+    const { openAnalyzeModal, selectedAsa, setSelectedAsa } = useStore();
+    const { status, data, error, isFetching } = useAsaListQuery();
+    const [filteredResults, setFilteredResults] = useState([] as asset[]);
+    const [searchInput, setSearchInput] = useState("");
+    const [removeAsaList, setRemoveAsaList] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setSearchInput(selectedAsa?.name as any);
+        setRemoveAsaList(false);
+    }, [selectedAsa]);
+
+    const searchItems = (searchValue: string) => {
+        setSearchInput(searchValue);
+        if (searchInput !== "") {
+            const filteredData = data?.asalist?.results.filter((item) => {
+                return Object.values(item).join("").toLowerCase().includes(searchInput?.toLowerCase());
+            });
+            setFilteredResults(filteredData as any);
+            setSelectedAsa(defaultAsa);
+            setRemoveAsaList(true);
+        } else {
+            setFilteredResults([]);
+        }
+    };
+
+    const handleSubmit = (e: any) => {
+        openAnalyzeModal();
+        e.preventDefault();
+        router.push(`/dashboard`);
+    };
 
     //Animation and Transitions
     const opacityAnimation: any = useSpring({
@@ -43,45 +72,16 @@ export function AnalyzeAsaModal() {
         config: { duration: 300 },
     });
 
-    //Form validator and handler
-    const formik = useFormik({
-        initialValues: {
-            asa_id: "",
-            twitter_keyword: "",
-            github_keyword: "",
-            reddit_keyword: "",
-        },
-        validate,
-        onSubmit: (values) => {
-            setIsLoading(true);
-            axios
-                .post("https://api.getwaitlist.com/api/v1/waiter", {
-                    api_key: process.env.NEXT_PUBLIC_GET_WAITLIST_API_KEY,
-                    ...values,
-                })
-                .then(
-                    (response: any) => {
-                        openAnalyzeModal();
-                        setIsLoading(false);
-                        toast("You've been added to our waitlist", {
-                            id: "waitlist-toast",
-                            icon: "👏",
-                            style: {
-                                borderRadius: "10px",
-                                background: "#333",
-                                color: "#fff",
-                            },
-                        });
-                    },
-                    (error: any) => {
-                        setIsLoading(false);
-                        openAnalyzeModal();
-                        toast.error("Error Occurred");
-                        console.log(error);
-                    },
-                );
-        },
-    });
+    // //Form validator and handler
+    // const formik = useFormik({
+    //     initialValues: {
+    //         asa_id: "",
+    //     },
+    //     validate,
+    //     onSubmit: (values) => {
+    //         setIsLoading(true);
+    //     },
+    // });
     return (
         <animated.div
             className={styles.modalContainer}
@@ -108,54 +108,44 @@ export function AnalyzeAsaModal() {
                     />
                 </div>
 
-                <form className={styles.form} onSubmit={formik.handleSubmit} name="Analyze ASA">
-                    <PrimaryInput
+                <form className={styles.form} onSubmit={handleSubmit} name="Analyze ASA">
+                    <SearchInput
                         placeholder="Select your favorite ASA"
                         type="asa_id"
                         name="asa_id"
                         id="asa_id"
                         label="Algorand Standard Asset"
-                        onChange={formik.handleChange}
-                        value={formik.values.asa_id}
-                        error={formik.errors.asa_id}
+                        onChange={(e) => searchItems(e.target.value)}
+                        value={searchInput}
                     />
+
+                    {searchInput && removeAsaList && (
+                        <div>
+                            {filteredResults?.length > 0 ? (
+                                <div className={styles.assetList}>
+                                    {filteredResults?.slice(0, 3)?.map((asset) => (
+                                        <AssetInfo
+                                            asset={asset}
+                                            key={asset.assetId}
+                                            className={!asset.available ? "unavailable" : ""}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className={styles.assetList}>No result found</div>
+                            )}
+                        </div>
+                    )}
                     <PrimaryInput
                         placeholder="Twitter Keyword"
                         type="twitter_keyword"
                         id="twitter_keyword"
+                        disabled={true}
                         name="twitter_keyword"
                         label="Twitter"
-                        onChange={formik.handleChange}
-                        value={formik.values.twitter_keyword}
-                        error={formik.errors.twitter_keyword}
+                        value={searchInput}
                     />
-                    <PrimaryInput
-                        placeholder="Github Keyword"
-                        type="github_keyword"
-                        id="github_keyword"
-                        name="github_keyword"
-                        label="Github"
-                        onChange={formik.handleChange}
-                        value={formik.values.github_keyword}
-                        error={formik.errors.github_keyword}
-                    />
-                    <PrimaryInput
-                        placeholder="Reddit Keyword"
-                        type="reddit_keyword"
-                        id="reddit_keyword"
-                        name="reddit_keyword"
-                        label="Reddit"
-                        onChange={formik.handleChange}
-                        value={formik.values.reddit_keyword}
-                        error={formik.errors.reddit_keyword}
-                    />
-                    <PrimaryButton
-                        isLoading={isLoading}
-                        type="submit"
-                        disabled={!formik.isValid}
-                        text="Analyze Asset"
-                        className="primaryButton"
-                    />
+                    <PrimaryButton isLoading={isLoading} type="submit" text="Analyze Asset" className="primaryButton" />
                 </form>
             </animated.div>
         </animated.div>

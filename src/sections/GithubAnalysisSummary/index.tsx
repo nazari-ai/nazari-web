@@ -6,8 +6,8 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export function GithubAnalysisSummary() {
-    const { asaId } = useStore();
-    const { status, data, error, isFetching } = useGithubOverviewQuery({ asaID: asaId });
+    const { selectedAsa } = useStore();
+    const { status, data, error, isFetching } = useGithubOverviewQuery({ asaID: selectedAsa.assetId });
     return (
         <div className={styles.summaryContainer}>
             <h1 className={styles.summaryHeader}>Summary</h1>

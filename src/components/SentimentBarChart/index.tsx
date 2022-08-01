@@ -14,7 +14,6 @@ export function SentimentBarChart(props: Props) {
         if (props.data) {
             setData(props.data);
         }
-        console.log(data);
     }, [props.data]);
 
     return (
@@ -23,7 +22,7 @@ export function SentimentBarChart(props: Props) {
                 <h1 className={styles.chartTitle}>{props.title}</h1>
             </div>
             <ResponsiveContainer height={300}>
-                <BarChart width={150} height={40} barCategoryGap="3%" data={data}>
+                <BarChart width={150} height={40} barCategoryGap="1%" data={data}>
                     <Bar dataKey="data" fill="#6FD791" radius={[5, 5, 0, 0]} />
                     <XAxis
                         dataKey="name"

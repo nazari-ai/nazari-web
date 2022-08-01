@@ -15,11 +15,11 @@ query githubAnalyticsPerTime($asaID: String!, $day: Boolean, $endDate: String, $
     githubAnalyticsPertime(asaID: $asaID, day: $day, startDate: $startDate, endDate: $endDate, weekDay: $weekDay) {
         repo {
             commits
-            lastPushDate
             forks
             issues
-            lpDay
-            lpDayOfWeek
+            lastPushDate
+            lastPushDateDay
+            lastPushDateWeekday
             pullRequests
             watches
             stars

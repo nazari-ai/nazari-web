@@ -5,7 +5,7 @@ import Table from "rc-table";
 
 type Props = {
     columns: Array<any>;
-    data: Array<any>;
+    data: Array<any> | undefined;
 };
 
 export function PrimaryTable(props: Props) {

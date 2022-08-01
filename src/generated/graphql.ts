@@ -16,6 +16,52 @@ export type Scalars = {
     DateTime: any;
 };
 
+export type Asa = {
+    __typename?: "Asa";
+    assetId: Scalars["String"];
+    available: Scalars["Boolean"];
+    logo?: Maybe<Scalars["String"]>;
+    name: Scalars["String"];
+    unitname1: Scalars["String"];
+};
+
+export type AsaData = {
+    __typename?: "AsaData";
+    URL?: Maybe<Scalars["String"]>;
+    assetId: Scalars["String"];
+    available: Scalars["Boolean"];
+    category?: Maybe<Scalars["String"]>;
+    circSupply?: Maybe<Scalars["String"]>;
+    creator?: Maybe<Scalars["String"]>;
+    description?: Maybe<Scalars["String"]>;
+    discord?: Maybe<Scalars["String"]>;
+    fractionDecimals?: Maybe<Scalars["Int"]>;
+    github?: Maybe<Scalars["String"]>;
+    logo?: Maybe<Scalars["String"]>;
+    medium?: Maybe<Scalars["String"]>;
+    name: Scalars["String"];
+    reddit?: Maybe<Scalars["String"]>;
+    reputation_Algoexplorer: Scalars["String"];
+    reputation_Pera: Scalars["String"];
+    score_Algoexplorer: Scalars["Int"];
+    telegram?: Maybe<Scalars["String"]>;
+    totalSupply?: Maybe<Scalars["String"]>;
+    twitter?: Maybe<Scalars["String"]>;
+    unitname1?: Maybe<Scalars["String"]>;
+    unitname2?: Maybe<Scalars["String"]>;
+    usdValue?: Maybe<Scalars["String"]>;
+};
+
+export type AsaList = {
+    __typename?: "AsaList";
+    results: Array<Asa>;
+};
+
+export type AsaResponse = {
+    __typename?: "AsaResponse";
+    result: Array<AsaData>;
+};
+
 export type GithubAnalyticsPerRepo = {
     __typename?: "GithubAnalyticsPerRepo";
     commits: Scalars["Int"];
@@ -25,6 +71,7 @@ export type GithubAnalyticsPerRepo = {
     pullRequests: Scalars["Int"];
     repoName: Scalars["String"];
     stars: Scalars["Int"];
+    watches: Scalars["Int"];
 };
 
 export type GithubAnalyticsPerTime = {
@@ -33,8 +80,8 @@ export type GithubAnalyticsPerTime = {
     forks: Scalars["Int"];
     issues: Scalars["Int"];
     lastPushDate?: Maybe<Scalars["DateTime"]>;
-    lpDay?: Maybe<Scalars["Int"]>;
-    lpDayOfWeek?: Maybe<Scalars["String"]>;
+    lastPushDateDay?: Maybe<Scalars["Int"]>;
+    lastPushDateWeekday?: Maybe<Scalars["String"]>;
     pullRequests: Scalars["Int"];
     stars: Scalars["Int"];
     watches: Scalars["Int"];
@@ -46,7 +93,7 @@ export type GithubOverview = {
     contributors: Scalars["Int"];
     forks: Scalars["Int"];
     issues: Scalars["Int"];
-    languages: Array<Scalars["String"]>;
+    languages: Array<Maybe<Scalars["String"]>>;
     pullRequests: Scalars["Int"];
     stars: Scalars["Int"];
     watches: Scalars["Int"];
@@ -64,12 +111,18 @@ export type PerTime = {
 
 export type Query = {
     __typename?: "Query";
+    asaData: AsaResponse;
+    asalist: AsaList;
     githubAnalyticsPerepo: PerRepo;
     githubAnalyticsPertime: PerTime;
     githubOverview: GithubOverview;
     redditAnalytics: Array<RedditPostSchema>;
     twitterAnalytics: Response;
     twitterOverview: TwitterOverview;
+};
+
+export type QueryAsaDataArgs = {
+    asaID: Scalars["String"];
 };
 
 export type QueryGithubAnalyticsPerepoArgs = {
@@ -121,7 +174,7 @@ export type RedditPostSchema = {
     more: Array<RedditCommentSchema>;
     numOfComments: Scalars["Int"];
     postId: Scalars["String"];
-    postText: Scalars["String"];
+    postText?: Maybe<Scalars["String"]>;
     postTitle: Scalars["String"];
     score: Scalars["Int"];
     sentimentScore: Scalars["Float"];
@@ -135,12 +188,12 @@ export type Response = {
 
 export type TwitterAnalytics = {
     __typename?: "TwitterAnalytics";
-    dayOfWeek?: Maybe<Scalars["Int"]>;
     hour?: Maybe<Scalars["Int"]>;
     likes: Scalars["Int"];
     postedAt?: Maybe<Scalars["DateTime"]>;
     retweets: Scalars["Int"];
     sentiment: Scalars["Float"];
+    weekday?: Maybe<Scalars["String"]>;
 };
 
 export type TwitterOverview = {
@@ -164,7 +217,7 @@ export type GithubOverviewQuery = {
         contributors: number;
         forks: number;
         issues: number;
-        languages: Array<string>;
+        languages: Array<string | null>;
         pullRequests: number;
         watches: number;
         stars: number;
@@ -186,11 +239,11 @@ export type GithubAnalyticsPerTimeQuery = {
         repo: Array<{
             __typename?: "GithubAnalyticsPerTime";
             commits: number;
-            lastPushDate?: any | null;
             forks: number;
             issues: number;
-            lpDay?: number | null;
-            lpDayOfWeek?: string | null;
+            lastPushDate?: any | null;
+            lastPushDateDay?: number | null;
+            lastPushDateWeekday?: string | null;
             pullRequests: number;
             watches: number;
             stars: number;
@@ -220,6 +273,60 @@ export type GithubAnalyticsPerRepoQuery = {
     };
 };
 
+export type AsaDataQueryVariables = Exact<{
+    asaID: Scalars["String"];
+}>;
+
+export type AsaDataQuery = {
+    __typename?: "Query";
+    asaData: {
+        __typename?: "AsaResponse";
+        result: Array<{
+            __typename?: "AsaData";
+            URL?: string | null;
+            assetId: string;
+            available: boolean;
+            category?: string | null;
+            circSupply?: string | null;
+            creator?: string | null;
+            description?: string | null;
+            discord?: string | null;
+            fractionDecimals?: number | null;
+            github?: string | null;
+            logo?: string | null;
+            medium?: string | null;
+            name: string;
+            reddit?: string | null;
+            reputation_Algoexplorer: string;
+            reputation_Pera: string;
+            score_Algoexplorer: number;
+            telegram?: string | null;
+            totalSupply?: string | null;
+            twitter?: string | null;
+            unitname1?: string | null;
+            unitname2?: string | null;
+            usdValue?: string | null;
+        }>;
+    };
+};
+
+export type AsaListQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AsaListQuery = {
+    __typename?: "Query";
+    asalist: {
+        __typename?: "AsaList";
+        results: Array<{
+            __typename?: "Asa";
+            assetId: string;
+            available: boolean;
+            logo?: string | null;
+            name: string;
+            unitname1: string;
+        }>;
+    };
+};
+
 export type RedditAnalyticsQueryVariables = Exact<{
     asaID: Scalars["String"];
     endDate?: InputMaybe<Scalars["String"]>;
@@ -233,7 +340,7 @@ export type RedditAnalyticsQuery = {
         asaID: string;
         numOfComments: number;
         postId: string;
-        postText: string;
+        postText?: string | null;
         postTitle: string;
         score: number;
         sentimentScore: number;
@@ -278,7 +385,7 @@ export type TwitterAnalyticsQuery = {
         asaID?: string | null;
         results: Array<{
             __typename?: "TwitterAnalytics";
-            dayOfWeek?: number | null;
+            weekday?: string | null;
             hour?: number | null;
             likes: number;
             postedAt?: any | null;
@@ -326,11 +433,11 @@ export const GithubAnalyticsPerTimeDocument = `
   ) {
     repo {
       commits
-      lastPushDate
       forks
       issues
-      lpDay
-      lpDayOfWeek
+      lastPushDate
+      lastPushDateDay
+      lastPushDateWeekday
       pullRequests
       watches
       stars
@@ -405,6 +512,77 @@ useGithubAnalyticsPerRepoQuery.fetcher = (
         variables,
         options,
     );
+export const AsaDataDocument = `
+    query asaData($asaID: String!) {
+  asaData(asaID: $asaID) {
+    result {
+      URL
+      assetId
+      available
+      category
+      circSupply
+      creator
+      description
+      discord
+      fractionDecimals
+      github
+      logo
+      medium
+      name
+      reddit
+      reputation_Algoexplorer
+      reputation_Pera
+      score_Algoexplorer
+      telegram
+      totalSupply
+      twitter
+      unitname1
+      unitname2
+      usdValue
+    }
+  }
+}
+    `;
+export const useAsaDataQuery = <TData = AsaDataQuery, TError = unknown>(
+    variables: AsaDataQueryVariables,
+    options?: UseQueryOptions<AsaDataQuery, TError, TData>,
+) =>
+    useQuery<AsaDataQuery, TError, TData>(
+        ["asaData", variables],
+        fetchData<AsaDataQuery, AsaDataQueryVariables>(AsaDataDocument, variables),
+        options,
+    );
+
+useAsaDataQuery.getKey = (variables: AsaDataQueryVariables) => ["asaData", variables];
+useAsaDataQuery.fetcher = (variables: AsaDataQueryVariables, options?: RequestInit["headers"]) =>
+    fetchData<AsaDataQuery, AsaDataQueryVariables>(AsaDataDocument, variables, options);
+export const AsaListDocument = `
+    query asaList {
+  asalist {
+    results {
+      assetId
+      available
+      logo
+      name
+      unitname1
+    }
+  }
+}
+    `;
+export const useAsaListQuery = <TData = AsaListQuery, TError = unknown>(
+    variables?: AsaListQueryVariables,
+    options?: UseQueryOptions<AsaListQuery, TError, TData>,
+) =>
+    useQuery<AsaListQuery, TError, TData>(
+        variables === undefined ? ["asaList"] : ["asaList", variables],
+        fetchData<AsaListQuery, AsaListQueryVariables>(AsaListDocument, variables),
+        options,
+    );
+
+useAsaListQuery.getKey = (variables?: AsaListQueryVariables) =>
+    variables === undefined ? ["asaList"] : ["asaList", variables];
+useAsaListQuery.fetcher = (variables?: AsaListQueryVariables, options?: RequestInit["headers"]) =>
+    fetchData<AsaListQuery, AsaListQueryVariables>(AsaListDocument, variables, options);
 export const RedditAnalyticsDocument = `
     query redditAnalytics($asaID: String!, $endDate: String, $startDate: String) {
   redditAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate) {
@@ -472,7 +650,7 @@ export const TwitterAnalyticsDocument = `
   ) {
     asaID
     results {
-      dayOfWeek
+      weekday
       hour
       likes
       postedAt

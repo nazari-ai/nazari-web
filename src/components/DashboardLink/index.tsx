@@ -13,15 +13,13 @@ type Props = {
 };
 
 export function DashboardLink(props: Props) {
-    console.log(props.className);
     return (
-        <>
+        <Link className={styles.dashboardLink} href={props.href}>
             <div className={`${styles.linkContainer} ${styles[props.className]}`}>
                 {props.icon}
-                <Link className={styles.dashboardLink} href={props.href}>
-                    {props.title}
-                </Link>
+
+                {props.title}
             </div>
-        </>
+        </Link>
     );
 }

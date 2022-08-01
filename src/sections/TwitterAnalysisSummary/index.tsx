@@ -6,8 +6,8 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export function TwitterAnalysisSummary() {
-    const { asaId } = useStore();
-    const { status, data, error, isFetching } = useTwitterOverviewQuery({ asaID: asaId });
+    const { selectedAsa } = useStore();
+    const { status, data, error, isFetching } = useTwitterOverviewQuery({ asaID: selectedAsa.assetId });
 
     return (
         <div className={styles.summaryContainer}>

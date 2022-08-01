@@ -12,7 +12,6 @@ type Props = {
 };
 
 export function DashboardSubLink(props: Props) {
-    console.log(props.className);
     return (
         <>
             <div className={`${styles.linkContainer} ${styles[props.className]}`}>

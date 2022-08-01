@@ -15,7 +15,6 @@ export function SummaryLineChart(props: Props) {
         if (props.data) {
             setData(props.data);
         }
-        console.log(data);
     }, [props.data]);
 
     return (
