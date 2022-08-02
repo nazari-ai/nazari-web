@@ -24,7 +24,7 @@ const Home: NextPage = () => {
                 <div className={styles.dashboardHeader}>
                     <h1 className={styles.dashboardGreeting}>{salutation}</h1>
                     <p className={styles.dashboardNote}>
-                        Get an idea of how {data?.asaData?.result[0]?.name} is done on{" "}
+                        Get an idea of how {data?.asaData?.result[0]?.name} is doing on{" "}
                         <Link href="/dashboard/twitter">Twitter</Link>, <Link href="/dashboard/github">Github</Link> and{" "}
                         <Link href="/dashboard/reddit">Reddit.</Link>
                     </p>

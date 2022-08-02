@@ -7,9 +7,12 @@ import styles from "./style.module.scss";
 export function HomePageHeader() {
     return (
         <div className={styles.headerContainer}>
-            <div className={styles.headerLogoContainer}>
-                <PrimaryLogo />
-            </div>
+            <Link href="/">
+                <div className={styles.headerLogoContainer}>
+                    <PrimaryLogo />{" "}
+                </div>
+            </Link>
+
             <div className={styles.rightContainer}>
                 <div className={styles.headerInfoContainer}>
                     <div className={styles.headerInfoUnderline}>
