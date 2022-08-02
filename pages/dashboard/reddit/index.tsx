@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { PrimaryTable } from "src/components/PrimaryTable";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { useRedditAnalyticsQuery } from "src/generated/graphql";
@@ -47,7 +49,19 @@ const Home: NextPage = () => {
             <DashboardAssetSocial />
             <div className={styles.dashboardContainer}>
                 <div className={styles.tableContainer}>
-                    <PrimaryTable columns={columns} data={data?.redditAnalytics.slice(0, 10)} />
+                    {isFetching ? (
+                        <Skeleton
+                            count={1}
+                            containerClassName={styles.summaryBarChartContainer}
+                            className={styles.detailContainer}
+                            baseColor="#ebebeb"
+                            highlightColor="#f5f5f5"
+                            height="200px"
+                            width="100%"
+                        />
+                    ) : (
+                        <PrimaryTable columns={columns} data={data?.redditAnalytics.slice(0, 10)} />
+                    )}
                 </div>
             </div>
         </DashboardLayout>
