@@ -18,6 +18,11 @@
     border-right: 3px solid $primary-black;
 }
 
+.disabledLink {
+    pointer-events: none;
+    opacity: 0.3;
+}
+
 @media only screen and (max-width: 1024px) {
     .linkContainer {
         flex-direction: column;

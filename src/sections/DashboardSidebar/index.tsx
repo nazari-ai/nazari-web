@@ -73,7 +73,12 @@ export function DashboardSidebar() {
                 </div>
             </div>
             <div className={styles.settingsContainer}>
-                {/* <DashboardLink href="/dashboard/settings" title="Settings" icon={<MemoSettingIcon />} disabled={true} /> */}
+                <DashboardLink
+                    href="/dashboard/settings"
+                    title="Settings"
+                    icon={<MemoSettingIcon />}
+                    className="disabledLink"
+                />
             </div>
         </div>
     );
