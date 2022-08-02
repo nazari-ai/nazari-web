@@ -1,5 +1,5 @@
 overwrite: true
-schema: http://analytics-api.herokuapp.com/analytics
+schema: https://analytics-api.herokuapp.com/analytics
 documents: "src/graphql/*.graphql"
 generates:
     src/generated/graphql.ts:
