@@ -7,6 +7,7 @@ query asaData($asaID: String!) {
             category
             circSupply
             creator
+            fractionDecimals
             description
             discord
             fractionDecimals

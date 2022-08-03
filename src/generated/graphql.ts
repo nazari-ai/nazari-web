@@ -1,7 +1,3 @@
-// 👇️ ts-nocheck ignores all ts errors in the file
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { useQuery, UseQueryOptions } from "react-query";
 import { fetchData } from "../services/fetcher";
 export type Maybe<T> = T | null;
@@ -293,9 +289,9 @@ export type AsaDataQuery = {
             category?: string | null;
             circSupply?: string | null;
             creator?: string | null;
+            fractionDecimals?: number | null;
             description?: string | null;
             discord?: string | null;
-            fractionDecimals?: number | null;
             github?: string | null;
             logo?: string | null;
             medium?: string | null;
@@ -526,6 +522,7 @@ export const AsaDataDocument = `
       category
       circSupply
       creator
+      fractionDecimals
       description
       discord
       fractionDecimals

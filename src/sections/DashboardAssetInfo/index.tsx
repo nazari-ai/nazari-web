@@ -28,14 +28,30 @@ export function DashboardAssetInfo() {
                         }
                     />
                     <AssetFinancial header="Total Cap" info="-" />
-                    <AssetFinancial
-                        header="Total Supply"
-                        info={approx(data?.asaData?.result[0]?.totalSupply, { capital: true })}
-                    />
-                    <AssetFinancial
-                        header="Circ. Supply"
-                        info={approx(data?.asaData?.result[0]?.circSupply, { capital: true })}
-                    />
+                    {data?.asaData?.result[0]?.totalSupply ? (
+                        <AssetFinancial
+                            header="Total Supply"
+                            info={approx(
+                                Number(data?.asaData?.result[0]?.totalSupply) /
+                                    Math.pow(10, data?.asaData?.result[0].fractionDecimals as number),
+                                { capital: true },
+                            )}
+                        />
+                    ) : (
+                        ""
+                    )}
+                    {data?.asaData?.result[0]?.circSupply ? (
+                        <AssetFinancial
+                            header="Circ. Supply"
+                            info={approx(
+                                Number(data?.asaData?.result[0]?.circSupply) /
+                                    Math.pow(10, data?.asaData?.result[0].fractionDecimals as number),
+                                { capital: true },
+                            )}
+                        />
+                    ) : (
+                        ""
+                    )}
                 </div>
             </div>
         </div>
