@@ -293,9 +293,9 @@ export type AsaDataQuery = {
             category?: string | null;
             circSupply?: string | null;
             creator?: string | null;
+            fractionDecimals?: number | null;
             description?: string | null;
             discord?: string | null;
-            fractionDecimals?: number | null;
             github?: string | null;
             logo?: string | null;
             medium?: string | null;
@@ -526,6 +526,7 @@ export const AsaDataDocument = `
       category
       circSupply
       creator
+      fractionDecimals
       description
       discord
       fractionDecimals
