@@ -4,6 +4,7 @@ import { useStore } from "src/store";
 import styles from "./style.module.scss";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 
 export function GithubAnalysisSummary() {
     const { selectedAsa } = useStore();
@@ -20,18 +21,24 @@ export function GithubAnalysisSummary() {
                     height="50px"
                 />
             ) : (
-                <div className={styles.chartContainer}>
-                    <AnalysisSummary header="Stars" info={data?.githubOverview?.stars} />
-                    <AnalysisSummary header="Watches" info={data?.githubOverview?.watches} />
-                    <AnalysisSummary header="Commits" info={data?.githubOverview?.commits} />
-                    <AnalysisSummary header="Issues" info={data?.githubOverview?.issues} />
-                    <AnalysisSummary header="Pull Requests" info={data?.githubOverview?.pullRequests} />
-                    <AnalysisSummary header="Contributors" info={data?.githubOverview?.contributors} />
-                    <AnalysisSummary header="Forks" info={data?.githubOverview?.forks} />
-                    <AnalysisSummary
-                        header="Top Languages"
-                        info={data?.githubOverview?.languages.join(", ").toString()}
-                    />
+                <div>
+                    {data?.githubOverview ? (
+                        <div className={styles.chartContainer}>
+                            <AnalysisSummary header="Stars" info={data?.githubOverview?.stars} />
+                            <AnalysisSummary header="Watches" info={data?.githubOverview?.watches} />
+                            <AnalysisSummary header="Commits" info={data?.githubOverview?.commits} />
+                            <AnalysisSummary header="Issues" info={data?.githubOverview?.issues} />
+                            <AnalysisSummary header="Pull Requests" info={data?.githubOverview?.pullRequests} />
+                            <AnalysisSummary header="Contributors" info={data?.githubOverview?.contributors} />
+                            <AnalysisSummary header="Forks" info={data?.githubOverview?.forks} />
+                            <AnalysisSummary
+                                header="Top Languages"
+                                info={data?.githubOverview?.languages.join(", ").toString()}
+                            />
+                        </div>
+                    ) : (
+                        <PrimaryEmptyState text="No data for this section" />
+                    )}
                 </div>
             )}
         </div>
