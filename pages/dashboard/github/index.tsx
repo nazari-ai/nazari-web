@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
+import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { useGithubAnalyticsPerTimeQuery, useGithubOverviewQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
@@ -55,8 +56,25 @@ const Home: NextPage = () => {
                     />
                 ) : (
                     <div className={styles.summaryBarChartContainer}>
-                        <SummaryBarChart header="COMMITS ARE MOSTLY MADE ON" title="Wednesday" data={commitAnalytics} />
-                        <SummaryBarChart header="ISSUES ARE MOSTLY GOTTEN ON" title="Friday" data={issueAnalytics} />
+                        {data?.githubAnalyticsPertime?.repo?.length ? (
+                            <SummaryBarChart
+                                header="COMMITS ARE MOSTLY MADE ON"
+                                title="Wednesday"
+                                data={commitAnalytics}
+                            />
+                        ) : (
+                            <PrimaryEmptyState text="No data for this section" />
+                        )}
+
+                        {data?.githubAnalyticsPertime?.repo?.length ? (
+                            <SummaryBarChart
+                                header="ISSUES ARE MOSTLY GOTTEN ON"
+                                title="Friday"
+                                data={issueAnalytics}
+                            />
+                        ) : (
+                            <PrimaryEmptyState text="No data for this section" />
+                        )}
                     </div>
                 )}
             </div>

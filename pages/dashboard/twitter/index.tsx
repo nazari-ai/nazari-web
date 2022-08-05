@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { useTwitterAnalyticsQuery, useTwitterOverviewQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
@@ -63,8 +64,16 @@ const Home: NextPage = () => {
                     />
                 ) : (
                     <div className={styles.summaryBarChartContainer}>
-                        <SummaryBarChart header="RETWEETS ARE MOSTLY MADE ON" data={retweetAnalytics} />
-                        <SummaryBarChart header="LIKES ARE MOSTLY GOTTEN ON" data={likeAnalytics} />
+                        {data?.twitterAnalytics?.results?.length ? (
+                            <SummaryBarChart header="RETWEETS ARE MOSTLY MADE ON" data={retweetAnalytics} />
+                        ) : (
+                            <PrimaryEmptyState text="No data for this section" />
+                        )}
+                        {data?.twitterAnalytics?.results?.length ? (
+                            <SummaryBarChart header="LIKES ARE MOSTLY GOTTEN ON" data={likeAnalytics} />
+                        ) : (
+                            <PrimaryEmptyState text="No data for this section" />
+                        )}
                     </div>
                 )}
             </div>
