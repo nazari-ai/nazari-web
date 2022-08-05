@@ -1,11 +1,33 @@
 @import "/styles/variables.scss";
 
-
 .main {
-  
-  background-color: $primary-color;
-  height: 100vh;
-  max-height: 100vh;
-  display: flex;
-  flex-direction: column;
+    background-color: $primary-color;
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardContainer {
+    display: flex;
+}
+
+.dashboardSection {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .dashboardSection {
+        width: calc(100% - 100px);
+        margin-left: 100px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .dashboardSection {
+        width: 100%;
+        margin-bottom: 80px;
+        margin-left: 0;
+    }
 }

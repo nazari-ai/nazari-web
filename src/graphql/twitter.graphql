@@ -1,0 +1,23 @@
+query twitterOverview($asaID: String!) {
+    twitterOverview(asaID: $asaID) {
+        asaID
+        likeTotal
+        retweetTotal
+        sentimentTotal
+        tweetTotal
+    }
+}
+
+query twitterAnalytics($asaID: String!, $endDate: String, $startDate: String, $weekday: Boolean, $hour: Boolean) {
+    twitterAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate, weekday: $weekday, hour: $hour) {
+        asaID
+        results {
+            weekday
+            hour
+            likes
+            postedAt
+            retweets
+            sentiment
+        }
+    }
+}

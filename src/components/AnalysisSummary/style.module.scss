@@ -1,0 +1,15 @@
+.detailContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.detailHeader {
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
+.detail {
+    font-size: 1em;
+    font-weight: 700;
+}

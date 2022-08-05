@@ -1,0 +1,22 @@
+@import "/styles/variables.scss";
+
+.teamContainer {
+    padding: 5em 4em 5em 4em;
+    gap: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: $primary-color;
+}
+
+@media only screen and (max-width: 900px) {
+    .teamContainer {
+        padding: 2em;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .teamContainer {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

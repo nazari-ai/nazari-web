@@ -1,0 +1,42 @@
+query githubOverview($asaID: String!) {
+    githubOverview(asaID: $asaID) {
+        commits
+        contributors
+        forks
+        issues
+        languages
+        pullRequests
+        watches
+        stars
+    }
+}
+
+query githubAnalyticsPerTime($asaID: String!, $day: Boolean, $endDate: String, $startDate: String, $weekDay: Boolean) {
+    githubAnalyticsPertime(asaID: $asaID, day: $day, startDate: $startDate, endDate: $endDate, weekDay: $weekDay) {
+        repo {
+            commits
+            forks
+            issues
+            lastPushDate
+            lastPushDateDay
+            lastPushDateWeekday
+            pullRequests
+            watches
+            stars
+        }
+    }
+}
+
+query githubAnalyticsPerRepo($asaID: String!, $sortBy: String!) {
+    githubAnalyticsPerepo(asaID: $asaID, sortBy: $sortBy) {
+        repo {
+            commits
+            contributors
+            forks
+            issues
+            pullRequests
+            repoName
+            stars
+        }
+    }
+}

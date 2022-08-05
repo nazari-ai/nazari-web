@@ -1,34 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Asalytics
 
-## Getting Started
+Asalytics Public Link [asalytics.ai](https://asalytics.ai)
 
-First, run the development server:
+## Table of Content:
+
+-   [About The App](#about-the-app)
+-   [Screenshots](#screenshots)
+-   [Technologies](#technologies)
+-   [Setup](#setup)
+-   [Approach](#approach)
+-   [Status](#status)
+-   [Credits](#credits)
+-   [License](#license)
+
+## About The App
+
+**Asalytics** is a social media analytics web application that continually tracks market dynamics via gathering data on
+participants’ and stakeholders’ thoughts, feelings, and moods on social media platforms regarding ASAs, and using
+Natural Language Processing techniques to analyze the trends and generate insights dynamically.
+
+By using ASAlytics to track the market dynamics, users can understand the amount of hype or fear surrounding a specific cryptocurrency,
+e.g. Algo Tokens, Choice coin, etc.
+
+## Screenshots
+
+Web App V1
+
+## Technologies
+
+The frontend architecture use `Nextjs` as the JavaScript Framework written in `TypeScript` and Using `SCSS (Modular CSS)` for UI Styling.
+
+Other secondary technologies used on this project includes:
+
+-   `Jest`
+-   `React Testing Library`
+-   `Husky`
+-   `Prettier`
+-   `ESLint`
+
+## Setup
+
+### Download or clone the repository
+
+### Install dependencies
 
 ```bash
-npm run dev
-# or
+
+yarn install
+```
+
+### After, run the development server:
+
+```bash
+
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Approach
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Approach:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Status
 
-## Learn More
+**Asalytics** development is still in progress. `Version 1` will be out soon.
 
-To learn more about Next.js, take a look at the following resources:
+## Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+List of contriubutors:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+-   [Oladetoun Temitayo](https://temi.vercel.app/)
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+License:

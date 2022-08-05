@@ -1,0 +1,42 @@
+query asaData($asaID: String!) {
+    asaData(asaID: $asaID) {
+        result {
+            URL
+            assetId
+            available
+            category
+            circSupply
+            creator
+            fractionDecimals
+            description
+            discord
+            fractionDecimals
+            github
+            logo
+            medium
+            name
+            reddit
+            reputation_Algoexplorer
+            reputation_Pera
+            score_Algoexplorer
+            telegram
+            totalSupply
+            twitter
+            unitname1
+            unitname2
+            usdValue
+        }
+    }
+}
+
+query asaList {
+    asalist {
+        results {
+            assetId
+            available
+            logo
+            name
+            unitname1
+        }
+    }
+}

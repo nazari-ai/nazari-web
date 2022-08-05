@@ -1,0 +1,29 @@
+@import "/styles/variables.scss";
+
+.summaryContainer {
+    margin: 4em 0;
+    // padding: 1.5em 1.5em 2em 1.5em;
+    // border: 1px solid $primary-disabled-color;
+    border-radius: 0.8em;
+
+    br {
+        display: none;
+    }
+}
+
+.chartContainer {
+    display: flex;
+    width: 100%;
+    gap: 1em;
+}
+
+.summaryHeader {
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 1024px) {
+    .chartContainer {
+        overflow-y: scroll;
+    }
+}

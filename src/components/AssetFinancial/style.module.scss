@@ -1,0 +1,22 @@
+.detailContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    text-align: center;
+}
+
+.detailHeader {
+    font-size: 0.7em;
+    font-weight: 300;
+}
+
+.detail {
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 640px) {
+    .detailContainer {
+        width: 125px;
+    }
+}
