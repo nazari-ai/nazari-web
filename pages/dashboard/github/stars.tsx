@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useEffect } from "react";
+import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
@@ -34,7 +35,11 @@ const Home: NextPage = () => {
             <div className={styles.dashboardContainer}>
                 <GithubSubLinks />
                 <div className={styles.sentimentChartContainer}>
-                    <SentimentLineChart title="Stars (Past 15 days)" data={starAnalytics} />
+                    {data?.githubAnalyticsPertime?.repo?.length ? (
+                        <SentimentLineChart title="Stars (Past 15 days)" data={starAnalytics} />
+                    ) : (
+                        <PrimaryEmptyState text="No data for this section" />
+                    )}
                 </div>
             </div>
         </DashboardLayout>
