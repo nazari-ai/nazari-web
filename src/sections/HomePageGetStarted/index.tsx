@@ -16,8 +16,8 @@ export function HomePageGetStarted(props: Props) {
             <div className={styles.leftContainer}>
                 <h1 className={styles.heading}>How To Get Started</h1>
                 <p className={styles.paragraph}>Simple and easy way to analyze your favorite Algorand Asset.</p>
-                <PrimaryButton type="button" text="Join Waitlist 🔥" onClick={() => props.openPopup(true)} />
-                {/* <PrimaryButton type="button" text="ANALYZE ASAs" onClick={openAnalyzeModal} /> */}
+                {/* <PrimaryButton type="button" text="Join Waitlist 🔥" onClick={() => props.openPopup(true)} /> */}
+                <PrimaryButton type="button" text="ANALYZE ASAs" onClick={openAnalyzeModal} />
             </div>
             <div className={styles.rightContainer}>
                 <HowToGetStarted
