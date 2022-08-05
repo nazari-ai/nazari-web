@@ -5,7 +5,11 @@ import { useTransition, animated, useSpring } from "react-spring";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { useStore } from "src/store";
 
-export function HomePageHero() {
+type Props = {
+    openPopup: Function;
+};
+
+export function HomePageHero(props: Props) {
     const opacityAnimation: any = useSpring({
         config: { duration: 1500 },
         from: { opacity: 0 },
@@ -42,7 +46,8 @@ export function HomePageHero() {
                     Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one
                     platform.
                 </p>
-                <PrimaryButton type="button" text="ANALYZE ASAs" onClick={openAnalyzeModal} />
+                <PrimaryButton type="button" text="Join Waitlist 🔥" onClick={() => props.openPopup(true)} />
+                {/* <PrimaryButton type="button" text="ANALYZE ASAs" onClick={openAnalyzeModal} /> */}
             </div>
         </animated.div>
     );

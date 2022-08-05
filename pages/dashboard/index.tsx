@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useState } from "react";
 import { useAsaDataQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { AnalyzeAsaModal } from "src/sections/AnalyzeAsaModal";
@@ -9,6 +10,7 @@ import { RedditSummary } from "src/sections/RedditSummary";
 import { TwitterSummary } from "src/sections/TwitterSummary";
 import { useStore } from "src/store";
 import styles from "../../styles/dashboard.module.scss";
+import DatePicker from "react-date-picker/dist/entry.nostyle";
 
 const Home: NextPage = () => {
     const { analyzeModal } = useStore();
@@ -16,18 +18,23 @@ const Home: NextPage = () => {
     const salutation = presentHour < 12 ? "Good Morning!" : presentHour < 18 ? "Good Afternoon!" : "Good Evening!";
     const { selectedAsa } = useStore();
     const { data, isFetching, error, status } = useAsaDataQuery({ asaID: selectedAsa.assetId });
+    const [value, onChange] = useState(new Date());
     return (
         <DashboardLayout>
             <DashboardAssetSocial />
             {/* {analyzeModal ? <AnalyzeAsaModal  /> : null} */}
             <div className={styles.dashboardContainer}>
                 <div className={styles.dashboardHeader}>
-                    <h1 className={styles.dashboardGreeting}>{salutation}</h1>
-                    <p className={styles.dashboardNote}>
-                        Get an idea of how {data?.asaData?.result[0]?.name} is doing on{" "}
-                        <Link href="/dashboard/twitter">Twitter</Link>, <Link href="/dashboard/github">Github</Link> and{" "}
-                        <Link href="/dashboard/reddit">Reddit.</Link>
-                    </p>
+                    <div>
+                        <h1 className={styles.dashboardGreeting}>{salutation}</h1>
+                        <p className={styles.dashboardNote}>
+                            Get an idea of how {data?.asaData?.result[0]?.name} is doing on{" "}
+                            <Link href="/dashboard/twitter">Twitter</Link>, <Link href="/dashboard/github">Github</Link>{" "}
+                            and <Link href="/dashboard/reddit">Reddit.</Link>
+                        </p>
+                    </div>
+
+                    {/* <DatePicker onChange={onChange} value={value} /> */}
                 </div>
                 <div>
                     <TwitterSummary />
