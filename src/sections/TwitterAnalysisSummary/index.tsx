@@ -29,7 +29,10 @@ export function TwitterAnalysisSummary() {
                             <AnalysisSummary header="Posts" />
                             <AnalysisSummary header="Likes" info={data?.twitterOverview?.likeTotal} />
                             <AnalysisSummary header="Replies" />
-                            <AnalysisSummary header="Sentiments" info={data?.twitterOverview?.sentimentTotal} />
+                            <AnalysisSummary
+                                header="Sentiments"
+                                info={data?.twitterOverview?.sentimentTotal?.toFixed(1)}
+                            />
                             <AnalysisSummary header="Impressions" />
                             <AnalysisSummary header="Retweets" info={data?.twitterOverview?.retweetTotal} />
                         </div>
