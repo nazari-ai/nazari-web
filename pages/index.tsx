@@ -8,16 +8,20 @@ import { HomePageGetStarted } from "src/sections/HomePageGetStarted";
 import { useGithubOverviewQuery } from "src/generated/graphql";
 import { HomeLayout } from "src/layouts/HomeLayout";
 import { useStore } from "src/store";
+import { WaitlistPageHero } from "src/sections/WailistPageHero";
+import { WaitlistModal } from "src/sections/WaitlistModal";
 
 const Home: NextPage = () => {
     const { analyzeModal, openAnalyzeModal } = useStore();
-    console.log(analyzeModal);
+    const [close, setClose] = useState(false);
     return (
         <HomeLayout>
-            <HomePageHero />
-            {analyzeModal ? <AnalyzeAsaModal /> : null}
+            <HomePageHero openPopup={setClose} />
+            {/* {analyzeModal ? <AnalyzeAsaModal /> : null} */}
+            {/* <WaitlistPageHero openPopup={setClose} /> */}
+            {close ? <WaitlistModal closePopup={setClose} /> : null}
             {/* <HomePageMarketUpdate /> */}
-            <HomePageGetStarted />
+            <HomePageGetStarted openPopup={setClose} />
         </HomeLayout>
     );
 };
