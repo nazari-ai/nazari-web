@@ -145,6 +145,24 @@ export function AnalyzeAsaModal() {
                         label="Twitter"
                         value={searchInput}
                     />
+                    <PrimaryInput
+                        placeholder="Github Keyword"
+                        type="github_keyword"
+                        id="github_keyword"
+                        disabled={true}
+                        name="github_keyword"
+                        label="Github"
+                        value={searchInput}
+                    />
+                    <PrimaryInput
+                        placeholder="Reddit Keyword"
+                        type="reddit_keyword"
+                        id="reddit_keyword"
+                        disabled={true}
+                        name="reddit_keyword"
+                        label="Reddit"
+                        value={searchInput}
+                    />
                     <PrimaryButton isLoading={isLoading} type="submit" text="Analyze Asset" className="primaryButton" />
                 </form>
             </animated.div>
