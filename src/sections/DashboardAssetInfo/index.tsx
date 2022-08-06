@@ -23,8 +23,9 @@ export function DashboardAssetInfo() {
                         header="Value"
                         info={
                             data?.asaData?.result[0]?.usdValue
-                                ? `${approx(data?.asaData?.result[0]?.usdValue, { prefix: "$", capital: true })}`
-                                : "-"
+                                ? `$${Number(data?.asaData?.result[0]?.usdValue)}`
+                                : // ? `${approx(data?.asaData?.result[0]?.usdValue, { prefix: "$", capital: true })}`
+                                  "-"
                         }
                     />
                     <AssetFinancial header="Total Cap" info="-" />
