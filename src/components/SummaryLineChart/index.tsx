@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, Tooltip, ResponsiveContainer, CartesianGrid, XAxis, YAxis } from "recharts";
 
 type Props = {
     title?: string;
@@ -23,9 +23,9 @@ export function SummaryLineChart(props: Props) {
                 <LineChart data={data}>
                     <Line type="monotone" dataKey="data" stroke="#6FD791" />
                     <Tooltip />
-                    {/* <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis /> */}
+                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                    <XAxis dataKey="name" />
+                    {/* <YAxis /> */}
                 </LineChart>
             </ResponsiveContainer>
             <div className={styles.chartHeaderContainer}>

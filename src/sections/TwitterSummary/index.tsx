@@ -21,15 +21,15 @@ export function TwitterSummary() {
             data.twitterAnalytics?.results?.forEach((item) => {
                 sentimentAnalytics.push({
                     data: item.sentiment,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: new Date(item.postedAt)?.toLocaleString("en-US"),
                 });
                 retweetAnalytics.push({
                     data: item.retweets,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: new Date(item.postedAt)?.toLocaleString("en-US"),
                 });
                 likeAnalytics.push({
                     data: item.likes,
-                    name: new Date(item.postedAt)?.toLocaleDateString(),
+                    name: new Date(item.postedAt)?.toLocaleString("en-US"),
                 });
             });
         }
