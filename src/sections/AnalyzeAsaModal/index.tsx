@@ -117,6 +117,7 @@ export function AnalyzeAsaModal() {
                         label="Algorand Standard Asset"
                         onChange={(e) => searchItems(e.target.value)}
                         value={searchInput}
+                        error={!selectedAsa.assetId ? "No ASA Selected" : ""}
                     />
 
                     {searchInput && removeAsaList && (
@@ -163,7 +164,13 @@ export function AnalyzeAsaModal() {
                         label="Reddit"
                         value={searchInput}
                     />
-                    <PrimaryButton isLoading={isLoading} type="submit" text="Analyze Asset" className="primaryButton" />
+                    <PrimaryButton
+                        isLoading={isLoading}
+                        type="submit"
+                        text="Analyze Asset"
+                        className="primaryButton"
+                        disabled={!selectedAsa?.assetId}
+                    />
                 </form>
             </animated.div>
         </animated.div>
