@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
@@ -15,11 +16,12 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
+    const router = useRouter();
+    const { asaId } = router.query;
     const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: selectedAsa.assetId,
+        asaID: asaId as string,
         startDate: "2020-01-01",
-        weekDay: true,
     });
     let commitAnalytics = [] as Array<any>;
     let issueAnalytics = [] as Array<any>;
@@ -29,11 +31,11 @@ const Home: NextPage = () => {
             data.githubAnalyticsPertime?.repo?.forEach((item) => {
                 commitAnalytics.push({
                     data: item.commits,
-                    name: item.lastPushDateWeekday,
+                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
                 });
                 issueAnalytics.push({
                     data: item.issues,
-                    name: item.lastPushDateWeekday,
+                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
                 });
             });
         }

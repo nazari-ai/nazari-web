@@ -1,41 +1,50 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useGithubAnalyticsPerTimeQuery, useGithubOverviewQuery } from "src/generated/graphql";
+import { useTwitterAnalyticsQuery, useTwitterOverviewQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
-import { GithubAnalysisSummary } from "src/sections/GithubAnalysisSummary";
-import { GithubSubLinks } from "src/sections/GithubSubLinks";
 import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
+    const router = useRouter();
+    const { asaId } = router.query;
     const { selectedAsa } = useStore();
-    const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: selectedAsa.assetId,
+    const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
+        asaID: asaId as string,
         startDate: "2020-01-01",
-        weekDay: true,
+        weekday: true,
     });
-    let commitAnalytics = [] as Array<any>;
-    let issueAnalytics = [] as Array<any>;
+    let retweetAnalytics = [] as Array<any>;
+    let likeAnalytics = [] as Array<any>;
+    let sortedRetweet = [] as Array<any>;
+    let sortedLike = [] as Array<any>;
+
+    const [highestRetweetDay, setHighestRetweetDay] = useState({} as any);
+    const [highestLikeDay, setHighestLikeDay] = useState({} as any);
 
     useEffect(() => {
         if (data) {
-            data.githubAnalyticsPertime?.repo?.forEach((item) => {
-                commitAnalytics.push({
-                    data: item.commits,
-                    name: item.lastPushDateWeekday,
+            data.twitterAnalytics?.results?.forEach((item) => {
+                retweetAnalytics.push({
+                    data: item.retweets,
+                    name: item.weekday,
                 });
-                issueAnalytics.push({
-                    data: item.issues,
-                    name: item.lastPushDateWeekday,
+                likeAnalytics.push({
+                    data: item.likes,
+                    name: item.weekday,
                 });
             });
+
+            sortedRetweet = [...retweetAnalytics];
+            sortedLike = [...likeAnalytics];
         }
     }, [data]);
 
@@ -43,8 +52,9 @@ const Home: NextPage = () => {
         <DashboardLayout>
             <DashboardAssetSocial />
             <div className={styles.dashboardContainer}>
-                <GithubSubLinks />
-                <GithubAnalysisSummary />
+                <TwitterSubLinks />
+                <TwitterAnalysisSummary />
+
                 {isFetching ? (
                     <Skeleton
                         count={2}
@@ -57,22 +67,13 @@ const Home: NextPage = () => {
                     />
                 ) : (
                     <div className={styles.summaryBarChartContainer}>
-                        {data?.githubAnalyticsPertime?.repo?.length ? (
-                            <SummaryBarChart
-                                header="COMMITS ARE MOSTLY MADE ON"
-                                title="Wednesday"
-                                data={commitAnalytics}
-                            />
+                        {data?.twitterAnalytics?.results?.length ? (
+                            <SummaryBarChart header="RETWEETS ARE MOSTLY MADE ON" data={retweetAnalytics} />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
                         )}
-
-                        {data?.githubAnalyticsPertime?.repo?.length ? (
-                            <SummaryBarChart
-                                header="ISSUES ARE MOSTLY GOTTEN ON"
-                                title="Friday"
-                                data={issueAnalytics}
-                            />
+                        {data?.twitterAnalytics?.results?.length ? (
+                            <SummaryBarChart header="LIKES ARE MOSTLY GOTTEN ON" data={likeAnalytics} />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
                         )}
