@@ -6,7 +6,7 @@ export function AboutPageMission() {
     return (
         <div className={styles.heroContainer}>
             <div className={styles.heroLeftContainer}>
-                <p className={styles.heroParagraph}>Our Mission</p>
+                {/* <p className={styles.heroParagraph}>Our Mission</p> */}
                 <h1 className={styles.heroHeading}>ASALYTICS TEAM</h1>
                 <p className={styles.heroParagraph}>
                     We are building the right tool that allows you to analyze Algorand Standard Assets (ASAs) better,
