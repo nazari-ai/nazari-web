@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
+import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
@@ -13,18 +15,20 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
+    const router = useRouter();
+    const { asaId } = router.query;
     const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: selectedAsa.assetId,
+        asaID: asaId as string,
         startDate: "2020-01-01",
     });
-    let starAnalytics = [] as Array<any>;
+    let issueAnalytics = [] as Array<any>;
 
     useEffect(() => {
         if (data) {
             data.githubAnalyticsPertime?.repo?.forEach((item) => {
-                starAnalytics.push({
-                    data: item.stars,
+                issueAnalytics.push({
+                    data: item.issues,
                     name: new Date(item.lastPushDate)?.toLocaleDateString(),
                 });
             });
@@ -36,7 +40,7 @@ const Home: NextPage = () => {
                 <GithubSubLinks />
                 <div className={styles.sentimentChartContainer}>
                     {data?.githubAnalyticsPertime?.repo?.length ? (
-                        <SentimentLineChart title="Stars (Past 15 days)" data={starAnalytics} />
+                        <SentimentBarChart title="Issues (Past 15 days)" data={issueAnalytics} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

@@ -6,11 +6,11 @@ export function AboutPageMission() {
     return (
         <div className={styles.heroContainer}>
             <div className={styles.heroLeftContainer}>
-                <p className={styles.heroParagraph}>Our Mission</p>
-                <h1 className={styles.heroHeading}>Discover. Learn. Build.</h1>
+                {/* <p className={styles.heroParagraph}>Our Mission</p> */}
+                <h1 className={styles.heroHeading}>ASALYTICS TEAM</h1>
                 <p className={styles.heroParagraph}>
-                    ASAlytics is a ML-Powered Open Source Tool that helps user's analyze Algorand Standard Assets based
-                    on social sentiments. We are humble yet confident, inquisitive and hungry to learn.
+                    We are building the right tool that allows you to analyze Algorand Standard Assets (ASAs) better,
+                    but you can spend a minute to know more about us.
                 </p>
             </div>
             <div className={styles.heroRightContainer}>

@@ -21,15 +21,15 @@ export function GithubSummary() {
             data.githubAnalyticsPertime?.repo?.forEach((item) => {
                 commitAnalytics.push({
                     data: item.commits,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    name: new Date(item.lastPushDate)?.toLocaleString("en-US"),
                 });
                 starAnalytics.push({
                     data: item.stars,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    name: new Date(item.lastPushDate)?.toLocaleString("en-US"),
                 });
                 watchAnalytics.push({
                     data: item.watches,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    name: new Date(item.lastPushDate)?.toLocaleString("en-US"),
                 });
             });
         }

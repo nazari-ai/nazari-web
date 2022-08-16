@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
@@ -13,9 +14,11 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
+    const router = useRouter();
+    const { asaId } = router.query;
     const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: selectedAsa.assetId,
+        asaID: asaId as string,
         startDate: "2020-01-01",
     });
     let starAnalytics = [] as Array<any>;

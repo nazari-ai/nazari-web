@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useEffect } from "react";
+import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
@@ -35,7 +36,11 @@ const Home: NextPage = () => {
             <div className={styles.dashboardContainer}>
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
-                    <SentimentBarChart title="Retweets (Past 15 days)" data={retweetAnalytics} />
+                    {data?.twitterAnalytics?.results?.length ? (
+                        <SentimentBarChart title="Retweets (Past 15 days)" data={retweetAnalytics} />
+                    ) : (
+                        <PrimaryEmptyState text="No data for this section" />
+                    )}
                 </div>
             </div>
         </DashboardLayout>
