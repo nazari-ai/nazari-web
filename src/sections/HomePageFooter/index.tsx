@@ -15,10 +15,18 @@ export function HomePageFooter() {
                 <PrimaryLogo />
             </div>
             <div className={styles.footerSocial}>
-                <MemoTwitterIcon fill="#808080" />
-                <MemoLinkedinIcon fill="#808080" />
-                <MemoGithubIcon fill="#808080" />
-                <MemoYoutubeIcon fill="#808080" />
+                <a href="https://www.linkedin.com/company/asalytics" target="_blank">
+                    <MemoLinkedinIcon fill="#808080" />
+                </a>
+                <a href="https://twitter.com/asalytics" target="_blank">
+                    <MemoTwitterIcon fill="#808080" />
+                </a>
+                <a href="https://github.com/asalytics" target="_blank">
+                    <MemoGithubIcon fill="#808080" />
+                </a>
+                <a href="https://www.youtube.com/channel/UCVuX5OldhBO-fZinZMk5tVA" target="_blank">
+                    <MemoYoutubeIcon fill="#808080" />
+                </a>
             </div>
             <div className={styles.footerInfoContainer}>
                 <p className={styles.footerInfo}>2022 Asalytics. All rights reserved</p>
