@@ -13,9 +13,33 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
             <QueryClientProvider client={queryClient}>
                 <Head>
-                    <title>Asalytics</title>
-                    <meta name="description" content="Asalytics" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+                    <meta name="keywords" content="Alogrand Analytics Asalytics Coin Algofam"></meta>
+                    <meta property="og:title" content="Asalytics" />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:url" content="https://asalytics.ai" />
+                    <meta property="og:image" content="https://asalytics.ai/images/card.png" />
+                    <meta name="twitter:title" property="og:title" content="Asalytics" />
+                    <meta name="twitter:site_name" property="og:site_name" content="@asalytics" />
+                    <meta name="twitter:image" content="https://asalytics.ai/images/card.png" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta
+                        name="twitter:description"
+                        property="twitter:description"
+                        content="Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform."
+                    />
+                    <meta
+                        property="og:description"
+                        content="Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform."
+                    />
+                    <meta
+                        name="description"
+                        content="Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform."
+                    />
                     <link rel="icon" href="favicon.svg" />
+                    <meta charSet="utf-8"></meta>
+                    <link rel="icon" href="/favicon.ico"></link>
+                    <title>Asalytics</title>
                 </Head>
                 <Toaster position="top-center" reverseOrder={false} />
                 <AnimatePresence exitBeforeEnter initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
