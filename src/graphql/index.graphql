@@ -31,7 +31,7 @@ query asaData($asaID: String!) {
 
 query asaList {
     asalist {
-        results {
+        result {
             assetId
             available
             logo
