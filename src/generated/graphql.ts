@@ -20,15 +20,6 @@ export type Scalars = {
     DateTime: any;
 };
 
-export type Asa = {
-    __typename?: "Asa";
-    assetId: Scalars["String"];
-    available: Scalars["Boolean"];
-    logo?: Maybe<Scalars["String"]>;
-    name: Scalars["String"];
-    unitname1: Scalars["String"];
-};
-
 export type AsaData = {
     __typename?: "AsaData";
     URL?: Maybe<Scalars["String"]>;
@@ -58,7 +49,7 @@ export type AsaData = {
 
 export type AsaList = {
     __typename?: "AsaList";
-    results: Array<Asa>;
+    result: Array<AsaData>;
 };
 
 export type AsaResponse = {
@@ -320,13 +311,13 @@ export type AsaListQuery = {
     __typename?: "Query";
     asalist: {
         __typename?: "AsaList";
-        results: Array<{
-            __typename?: "Asa";
+        result: Array<{
+            __typename?: "AsaData";
             assetId: string;
             available: boolean;
             logo?: string | null;
             name: string;
-            unitname1: string;
+            unitname1?: string | null;
         }>;
     };
 };
@@ -564,7 +555,7 @@ useAsaDataQuery.fetcher = (variables: AsaDataQueryVariables, options?: RequestIn
 export const AsaListDocument = `
     query asaList {
   asalist {
-    results {
+    result {
       assetId
       available
       logo
