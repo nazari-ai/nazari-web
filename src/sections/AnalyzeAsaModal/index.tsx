@@ -42,10 +42,12 @@ export function AnalyzeAsaModal() {
     const searchItems = (searchValue: string) => {
         setSearchInput(searchValue);
         if (searchInput !== "") {
-            const filteredData = data?.asalist?.results.filter((item) => {
+            console.log(data?.asalist.result);
+            const filteredData = data?.asalist?.result.filter((item) => {
                 return Object.values(item).join("").toLowerCase().includes(searchInput?.toLowerCase());
             });
             setFilteredResults(filteredData as any);
+            console.log(filteredData);
             setSelectedAsa(defaultAsa);
             setRemoveAsaList(true);
         } else {
