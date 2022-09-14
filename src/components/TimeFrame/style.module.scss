@@ -1,0 +1,27 @@
+@import "/styles/variables.scss";
+@import "/styles/utils.scss";
+
+.timeFrameContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: compute_ems(12);
+    margin: compute_ems(58) 0 compute_ems(42);
+
+    button {
+        background-color: inherit;
+        padding: compute_ems(10) compute_ems(12);
+        border: 1px solid $secondary-grey-border;
+        border-radius: compute_ems(6);
+        cursor: pointer;
+
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: compute_ems(24);
+        color: #808080;
+    }
+
+    .timeBtn {
+        background-color: #0d3e36;
+        color: #ffffff;
+    }
+}

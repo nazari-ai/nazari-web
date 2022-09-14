@@ -1,0 +1,22 @@
+@import "/styles/variables.scss";
+@import "/styles/utils.scss";
+
+.analysisCointainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0 calc(compute_ems(32) - 2em);
+
+    .selectWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: compute_ems(8);
+
+        label {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 0.75rem;
+            line-height: compute_ems(15, 12);
+        }
+    }
+}

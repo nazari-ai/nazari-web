@@ -9,6 +9,7 @@ import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
 import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
+import { TimeFrame } from "src/components/TimeFrame";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
@@ -34,6 +35,7 @@ const Home: NextPage = () => {
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
                 <GithubSubLinks />
+                <TimeFrame />
                 <div className={styles.sentimentChartContainer}>
                     {data?.githubAnalyticsPertime?.repo?.length ? (
                         <SentimentLineChart title="Stars (Past 15 days)" data={starAnalytics} />

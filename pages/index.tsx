@@ -17,7 +17,7 @@ const Home: NextPage = () => {
     return (
         <HomeLayout>
             <HomePageHero openPopup={setClose} />
-            {/* {analyzeModal ? <AnalyzeAsaModal /> : null} */}
+            {/* {true ? <AnalyzeAsaModal /> : null} */}
             {/* <WaitlistPageHero openPopup={setClose} /> */}
             {close ? <WaitlistModal closePopup={setClose} /> : null}
             {/* <HomePageMarketUpdate /> */}
