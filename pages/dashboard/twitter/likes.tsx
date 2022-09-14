@@ -30,6 +30,7 @@ const Home: NextPage = () => {
     const queryClient = useQueryClient();
 
     useEffect(() => {
+        queryClient.invalidateQueries(["twitterAnalytics"]);
         refetch();
     }, [dateRange, analysisType]);
 
