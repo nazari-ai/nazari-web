@@ -9,17 +9,29 @@ import { useTwitterAnalyticsQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
+import { AnalysisBar } from "src/sections/AnalysisBar";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
+import { format } from "date-fns";
+import { useQueryClient } from "react-query";
 
 const Home: NextPage = () => {
-    const { selectedAsa } = useStore();
-    const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
+    const { selectedAsa, dateRange, analysisType } = useStore();
+    const { status, data, error, isFetching, refetch } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
-        startDate: "2020-01-01",
-        weekday: true,
+        startDate: dateRange.startDate,
+        endDate: dateRange.endDate ? dateRange.endDate : format(new Date(), "yyyy-MM-dd"),
+        hour: analysisType.hour,
+        weekday: analysisType.weekdays,
     });
+
     let likeAnalytics = [] as Array<any>;
+
+    const queryClient = useQueryClient();
+
+    useEffect(() => {
+        refetch();
+    }, [dateRange, analysisType]);
 
     useEffect(() => {
         if (data) {
@@ -30,11 +42,14 @@ const Home: NextPage = () => {
                 });
             });
         }
-    }, [data]);
+    }, [data, dateRange, analysisType]);
+
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
+                <AnalysisBar />
                 <TwitterSubLinks />
+
                 <div className={styles.sentimentChartContainer}>
                     {data?.twitterAnalytics?.results?.length ? (
                         <SentimentBarChart title="Likes (Past 15 days)" data={likeAnalytics} />
