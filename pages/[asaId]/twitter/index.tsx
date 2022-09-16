@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
@@ -14,14 +13,16 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const router = useRouter();
-    const { asaId } = router.query;
     const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
-        asaID: asaId as string,
+        asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
         weekday: true,
     });
+
+    const [retweetAnalyticsInState, setretweetAnalyticsInState] = useState([] as any);
+    const [likeAnalyticsInState, setlikeAnalyticsInState] = useState([] as any);
+
     let retweetAnalytics = [] as Array<any>;
     let likeAnalytics = [] as Array<any>;
     let sortedRetweet = [] as Array<any>;
@@ -42,6 +43,9 @@ const Home: NextPage = () => {
                     name: item.weekday,
                 });
             });
+
+            setretweetAnalyticsInState(retweetAnalytics);
+            setlikeAnalyticsInState(likeAnalytics);
 
             sortedRetweet = [...retweetAnalytics];
             sortedLike = [...likeAnalytics];
@@ -68,12 +72,12 @@ const Home: NextPage = () => {
                 ) : (
                     <div className={styles.summaryBarChartContainer}>
                         {data?.twitterAnalytics?.results?.length ? (
-                            <SummaryBarChart header="RETWEETS ARE MOSTLY MADE ON" data={retweetAnalytics} />
+                            <SummaryBarChart header="RETWEETS ARE MOSTLY MADE ON" data={retweetAnalyticsInState} />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
                         )}
                         {data?.twitterAnalytics?.results?.length ? (
-                            <SummaryBarChart header="LIKES ARE MOSTLY GOTTEN ON" data={likeAnalytics} />
+                            <SummaryBarChart header="LIKES ARE MOSTLY GOTTEN ON" data={likeAnalyticsInState} />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
                         )}

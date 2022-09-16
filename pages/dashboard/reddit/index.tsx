@@ -16,6 +16,7 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
+import { PrimaryTableMoreButton } from "src/components/PrimaryTableMoreButton";
 
 const Home: NextPage = () => {
     const { selectedAsa } = useStore();
@@ -74,6 +75,12 @@ const Home: NextPage = () => {
             title: "SENTIMENT SCORE",
             dataIndex: "sentimentScore",
             key: "sentimentScore",
+        },
+        {
+            title: "More",
+            dataIndex: "more",
+            key: "more",
+            render: () => <PrimaryTableMoreButton />,
         },
     ];
 

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { SentimentLineChart } from "src/components/SentimentLineChart";
@@ -13,33 +13,37 @@ import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { TimeFrame } from "src/components/TimeFrame";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
+import { AnalysisBar } from "src/sections/AnalysisBar";
+import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
 
 const Home: NextPage = () => {
-    const { selectedAsa } = useStore();
-    const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: selectedAsa.assetId,
-        startDate: "2020-01-01",
-    });
+    const { data, list, setList } = useSocialAnalyticsHook("github");
+
     let issueAnalytics = [] as Array<any>;
 
     useEffect(() => {
         if (data) {
-            data.githubAnalyticsPertime?.repo?.forEach((item) => {
-                issueAnalytics.push({
-                    data: item.issues,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
-                });
-            });
+            data.githubAnalyticsPertime?.repo?.forEach(
+                (item: { issues: any; lastPushDate: string | number | Date }) => {
+                    issueAnalytics.push({
+                        data: item.issues,
+                        name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    });
+                },
+            );
         }
+
+        setList(issueAnalytics);
     }, [data]);
+
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
                 <GithubSubLinks />
-                <TimeFrame />
+                <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
                     {data?.githubAnalyticsPertime?.repo?.length ? (
-                        <SentimentBarChart title="Issues (Past 15 days)" data={issueAnalytics} />
+                        <SentimentBarChart title="Issues (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

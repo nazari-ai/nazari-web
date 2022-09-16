@@ -8,6 +8,7 @@ import { dateRangeType } from "src/types";
 import { useStore } from "../../store";
 // @ts-ignore
 import { DateRange } from "react-date-range";
+import { TimeFrame } from "../TimeFrame";
 
 type Props = {
     isOpen: boolean;
@@ -15,17 +16,15 @@ type Props = {
     range: dateRangeType[];
     setRange: React.Dispatch<any>;
     onClose: () => void;
+    handleTimeFrame: (time: string) => void;
 };
 
 export function DateRangePicker(props: Props) {
     const dateRange = useStore((state) => state.dateRange);
 
     return (
-        <div className={styles.dateRangeContainer}>
-            <div className={styles.selectBox} onClick={props.handleClick}>
-                <p>{dateRange.endDate ? `${dateRange.startDate} ~ ${dateRange.endDate}` : "Select a range"}</p>
-                <Image src={"/images/select_icon.svg"} alt="Drop logo" width={10} height={6} priority={true} />
-            </div>
+        <div className={styles.dateRangeContainer} onClick={(e) => e.stopPropagation()}>
+            <TimeFrame handleDateRangeModal={props.handleClick} handleTimeFrame={props.handleTimeFrame} />
             {props.isOpen && (
                 <div className={styles.dateRangeWrapper}>
                     <DateRange

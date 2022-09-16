@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { PrimaryTable } from "src/components/PrimaryTable";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
+import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { useRedditAnalyticsQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
@@ -14,15 +14,53 @@ import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
+import { useEffect, useState } from "react";
+import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
+import { PrimaryTableMoreButton } from "src/components/PrimaryTableMoreButton";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
-    const router = useRouter();
-    const { asaId } = router.query;
     const { selectedAsa } = useStore();
     const { data, isFetching, error, status } = useRedditAnalyticsQuery({
-        asaID: asaId as string,
+        asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
     });
+
+    const router = useRouter();
+
+    const [issueAnalyticsStateInState, setissueAnalyticsStateInState] = useState([] as any);
+
+    let sentimentAnalytics = [] as Array<any>;
+
+    const getEmoji = (score: number): string => {
+        if (score < 20) {
+            return "😝";
+        }
+        if (score >= 20 && score < 40) {
+            return "😎";
+        }
+        if (score >= 40 && score < 60) {
+            return "😂";
+        }
+        if (score >= 60 && score < 80) {
+            return "😇";
+        }
+
+        return "😍";
+    };
+
+    useEffect(() => {
+        if (data) {
+            data.redditAnalytics?.forEach((item) => {
+                sentimentAnalytics.push({
+                    data: item.sentimentScore,
+                    name: getEmoji(Number(item.score)),
+                });
+            });
+        }
+
+        setissueAnalyticsStateInState(sentimentAnalytics);
+    }, [data]);
 
     const columns = [
         {
@@ -45,7 +83,21 @@ const Home: NextPage = () => {
             dataIndex: "sentimentScore",
             key: "sentimentScore",
         },
+        {
+            title: "More",
+            dataIndex: "more",
+            key: "more",
+            render: (value: any, row: any, index: any) => (
+                <PrimaryTableMoreButton handleRedditMore={() => handleRedditMore(row)} row={row} />
+            ),
+        },
     ];
+
+    const handleRedditMore = (row: any) => {
+        const postId = row.postId;
+        router.push(`/${selectedAsa.assetId}/reddit/posts/${postId}`);
+        console.log(postId);
+    };
 
     return (
         <DashboardLayout>
@@ -64,6 +116,13 @@ const Home: NextPage = () => {
                         />
                     ) : (
                         <PrimaryTable columns={columns} data={data?.redditAnalytics.slice(0, 10)} />
+                    )}
+                </div>
+                <div className={styles.sentimentChartContainer}>
+                    {data?.redditAnalytics?.length ? (
+                        <SentimentBarChart title="😡Aggressive" data={issueAnalyticsStateInState} />
+                    ) : (
+                        <PrimaryEmptyState text="No data for this section" />
                     )}
                 </div>
             </div>

@@ -21,12 +21,13 @@
 .dateRangeWrapper {
     position: absolute;
     right: 0;
-    z-index: 1;
+    z-index: 9999;
     background-color: #ffffff;
     border-radius: compute_ems(4, 12);
     border: 1px solid $secondary-grey-border;
     margin-top: 0.5em;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    width: min-content;
 
     .closeBtn {
         background-color: $primary-black;

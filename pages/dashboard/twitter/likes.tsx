@@ -10,50 +10,35 @@ import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { AnalysisBar } from "src/sections/AnalysisBar";
-import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
-import { format } from "date-fns";
-import { useQueryClient } from "react-query";
+import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
 
 const Home: NextPage = () => {
-    const { selectedAsa, dateRange, analysisType } = useStore();
-    const { status, data, error, isFetching, refetch } = useTwitterAnalyticsQuery({
-        asaID: selectedAsa.assetId,
-        startDate: dateRange.startDate,
-        endDate: dateRange.endDate ? dateRange.endDate : format(new Date(), "yyyy-MM-dd"),
-        hour: analysisType.hour,
-        weekday: analysisType.weekdays,
-    });
+    const { data, list, setList } = useSocialAnalyticsHook("twitter");
 
     let likeAnalytics = [] as Array<any>;
 
-    const queryClient = useQueryClient();
-
-    useEffect(() => {
-        queryClient.invalidateQueries(["twitterAnalytics"]);
-        refetch();
-    }, [dateRange, analysisType]);
-
     useEffect(() => {
         if (data) {
-            data.twitterAnalytics?.results?.forEach((item) => {
+            data.twitterAnalytics?.results?.forEach((item: { likes: any; weekday: any }) => {
                 likeAnalytics.push({
                     data: item.likes,
                     name: item.weekday,
                 });
             });
         }
-    }, [data, dateRange, analysisType]);
+        setList(likeAnalytics);
+    }, [data]);
 
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
-                <AnalysisBar />
+                <AnalysisBar socialType={"twitter"} />
                 <TwitterSubLinks />
 
                 <div className={styles.sentimentChartContainer}>
                     {data?.twitterAnalytics?.results?.length ? (
-                        <SentimentBarChart title="Likes (Past 15 days)" data={likeAnalytics} />
+                        <SentimentBarChart title="Likes (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

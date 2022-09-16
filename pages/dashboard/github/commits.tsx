@@ -13,33 +13,35 @@ import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { TimeFrame } from "src/components/TimeFrame";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
+import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
+import { AnalysisBar } from "src/sections/AnalysisBar";
 
 const Home: NextPage = () => {
-    const { selectedAsa } = useStore();
-    const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: selectedAsa.assetId,
-        startDate: "2020-01-01",
-    });
+    const { data, list, setList } = useSocialAnalyticsHook("github");
     let commitAnalytics = [] as Array<any>;
 
     useEffect(() => {
         if (data) {
-            data.githubAnalyticsPertime?.repo?.forEach((item) => {
-                commitAnalytics.push({
-                    data: item.commits,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
-                });
-            });
+            data.githubAnalyticsPertime?.repo?.forEach(
+                (item: { commits: any; lastPushDate: string | number | Date }) => {
+                    commitAnalytics.push({
+                        data: item.commits,
+                        name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    });
+                },
+            );
         }
+
+        setList(commitAnalytics);
     }, [data]);
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
                 <GithubSubLinks />
-                <TimeFrame />
+                <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
                     {data?.githubAnalyticsPertime?.repo?.length ? (
-                        <SentimentBarChart title="Commits (Past 15 days)" data={commitAnalytics} />
+                        <SentimentBarChart title="Commits (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

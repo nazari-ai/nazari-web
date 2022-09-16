@@ -1,29 +1,31 @@
 import styles from "./style.module.scss";
 import { useRouter } from "next/router";
 import { DashboardSubLink } from "src/components/DashboardSubLink";
+import { useStore } from "src/store";
 
 export function TwitterSubLinks() {
     const router = useRouter();
+    const { selectedAsa } = useStore();
     const dashboardLinks = [
         {
             id: 1,
-            path: "/dashboard/twitter",
-            title: "Overview",
+            path: `/${selectedAsa.assetId || "null"}/twitter`,
+            title: `Overview`,
         },
         {
             id: 2,
-            path: "/dashboard/twitter/likes",
-            title: "Likes",
+            path: `/${selectedAsa.assetId || "null"}/twitter/likes`,
+            title: `Likes`,
         },
         {
             id: 3,
-            path: "/dashboard/twitter/retweets",
-            title: "Retweets",
+            path: `/${selectedAsa.assetId || "null"}/twitter/retweets`,
+            title: `Retweets`,
         },
         {
             id: 4,
-            path: "/dashboard/twitter/sentiments",
-            title: "Sentiments",
+            path: `/${selectedAsa.assetId || "null"}/twitter/sentiments`,
+            title: `Sentiments`,
         },
     ];
 
@@ -36,7 +38,7 @@ export function TwitterSubLinks() {
                             key={link.id}
                             href={link.path}
                             title={link.title}
-                            className={router.pathname === link.path ? "activeLink" : ""}
+                            className={router.asPath === link.path ? "activeLink" : ""}
                         />
                     );
                 })}
