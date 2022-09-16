@@ -16,4 +16,5 @@ export interface dateRangeType {
 export interface AnalysisTypeType {
     hour: boolean;
     weekdays: boolean;
+    day: boolean;
 }

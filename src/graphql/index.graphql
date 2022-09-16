@@ -40,3 +40,12 @@ query asaList {
         }
     }
 }
+
+query asaDataMinimum($asaID: String!) {
+    asaData(asaID: $asaID) {
+        result {
+            assetId
+            available
+        }
+    }
+}

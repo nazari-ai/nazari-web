@@ -48,6 +48,7 @@ export function AnalyzeAsaModal() {
             });
             setFilteredResults(filteredData as any);
             console.log(filteredData);
+            console.table(defaultAsa);
             setSelectedAsa(defaultAsa);
             setRemoveAsaList(true);
         } else {
@@ -58,7 +59,7 @@ export function AnalyzeAsaModal() {
     const handleSubmit = (e: any) => {
         openAnalyzeModal();
         e.preventDefault();
-        router.push(`/dashboard`);
+        router.push(`/${selectedAsa.assetId}`);
     };
 
     //Animation and Transitions

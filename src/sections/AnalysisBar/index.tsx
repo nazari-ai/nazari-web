@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectInput } from "../../components/SelectInput";
 import { DateRangePicker } from "../../components/DateRangePicker";
 import styles from "./style.module.scss";
-import { dateRangeType } from "../../types";
-import { useStore } from "../../store";
-import { format } from "date-fns";
+import { AnalysisTypeType, dateRangeType } from "../../types";
+import { useStore, defaultAnalysisType } from "../../store";
+import { format, subDays, subMonths } from "date-fns";
 
-type Props = {};
+type Props = {
+    socialType: "github" | "twitter";
+};
 
-export function AnalysisBar({}: Props) {
-    const { globalSetDateRange, globaldateRange, setAnalysisType } = useStore((state) => ({
+export function AnalysisBar(props: Props) {
+    const { globalSetDateRange, globaldateRange, setAnalysisType, setTimeFrame, analysisType } = useStore((state) => ({
         globalSetDateRange: state.setDateRange,
         globaldateRange: state.dateRange,
         setAnalysisType: state.setAnalysisType,
+        setTimeFrame: state.setTimeFrame,
+        analysisType: state.analysisType,
     }));
-    const analysisTypeOptions = ["Select an option", "hourly", "weekdays"];
+    const analysisTypeOptions =
+        props.socialType === "twitter"
+            ? ["Select an option", "hourly", "weekdays"]
+            : ["Select an option", "day", "weekdays"];
+
     const [isOpen, setIsOpen] = useState(false);
 
     const [range, setRange] = useState<dateRangeType[]>([
@@ -42,22 +50,50 @@ export function AnalysisBar({}: Props) {
     };
 
     const handleAnalysisTypeChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-        let newAnalysisType;
+        let newAnalysisType: AnalysisTypeType = defaultAnalysisType;
 
-        if (e.target.value === "1") {
+        if (e.target.value === "hourly") {
             newAnalysisType = {
                 weekdays: false,
                 hour: true,
+                day: false,
             };
-        } else {
+        } else if (e.target.value === "day") {
+            newAnalysisType = {
+                hour: false,
+                weekdays: false,
+                day: true,
+            };
+        } else if (e.target.value === "weekdays") {
             newAnalysisType = {
                 hour: false,
                 weekdays: true,
+                day: false,
             };
         }
 
         setAnalysisType(newAnalysisType);
     };
+
+    const handleTimeFrame = (time: string) => {
+        const currentDate = new Date();
+        const endDate = format(currentDate, "yyyy-MM-dd");
+
+        if (time === "1d") {
+            const startDate = format(subDays(currentDate, 1), "yyyy-MM-dd");
+            globalSetDateRange({ startDate, endDate });
+        } else if (time === "1w") {
+            const startDate = format(subDays(currentDate, 7), "yyyy-MM-dd");
+            globalSetDateRange({ startDate, endDate });
+        } else if (time === "1m") {
+            const startDate = format(subMonths(currentDate, 1), "yyyy-MM-dd");
+            globalSetDateRange({ startDate, endDate });
+        }
+    };
+
+    useEffect(() => {
+        window.onclick = () => setIsOpen(false);
+    }, []);
 
     return (
         <div className={styles.analysisCointainer}>
@@ -74,6 +110,7 @@ export function AnalysisBar({}: Props) {
                     range={range}
                     setRange={setRange}
                     onClose={handleDateRangeSubmit}
+                    handleTimeFrame={handleTimeFrame}
                 />
             </div>
         </div>

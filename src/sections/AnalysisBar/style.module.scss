@@ -3,8 +3,9 @@
 
 .analysisCointainer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     margin: 1em 0 calc(compute_ems(32) - 2em);
+    gap: 1em;
 
     .selectWrapper {
         display: flex;
@@ -17,6 +18,19 @@
             font-weight: 400;
             font-size: 0.75rem;
             line-height: compute_ems(15, 12);
+        }
+    }
+
+    @media only screen and (min-width: 640px) {
+        & {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        & {
         }
     }
 }

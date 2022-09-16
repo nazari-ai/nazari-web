@@ -322,6 +322,18 @@ export type AsaListQuery = {
     };
 };
 
+export type AsaDataMinimumQueryVariables = Exact<{
+    asaID: Scalars["String"];
+}>;
+
+export type AsaDataMinimumQuery = {
+    __typename?: "Query";
+    asaData: {
+        __typename?: "AsaResponse";
+        result: Array<{ __typename?: "AsaData"; assetId: string; available: boolean }>;
+    };
+};
+
 export type RedditAnalyticsQueryVariables = Exact<{
     asaID: Scalars["String"];
     endDate?: InputMaybe<Scalars["String"]>;
@@ -579,6 +591,29 @@ useAsaListQuery.getKey = (variables?: AsaListQueryVariables) =>
     variables === undefined ? ["asaList"] : ["asaList", variables];
 useAsaListQuery.fetcher = (variables?: AsaListQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<AsaListQuery, AsaListQueryVariables>(AsaListDocument, variables, options);
+export const AsaDataMinimumDocument = `
+    query asaDataMinimum($asaID: String!) {
+  asaData(asaID: $asaID) {
+    result {
+      assetId
+      available
+    }
+  }
+}
+    `;
+export const useAsaDataMinimumQuery = <TData = AsaDataMinimumQuery, TError = unknown>(
+    variables: AsaDataMinimumQueryVariables,
+    options?: UseQueryOptions<AsaDataMinimumQuery, TError, TData>,
+) =>
+    useQuery<AsaDataMinimumQuery, TError, TData>(
+        ["asaDataMinimum", variables],
+        fetchData<AsaDataMinimumQuery, AsaDataMinimumQueryVariables>(AsaDataMinimumDocument, variables),
+        options,
+    );
+
+useAsaDataMinimumQuery.getKey = (variables: AsaDataMinimumQueryVariables) => ["asaDataMinimum", variables];
+useAsaDataMinimumQuery.fetcher = (variables: AsaDataMinimumQueryVariables, options?: RequestInit["headers"]) =>
+    fetchData<AsaDataMinimumQuery, AsaDataMinimumQueryVariables>(AsaDataMinimumDocument, variables, options);
 export const RedditAnalyticsDocument = `
     query redditAnalytics($asaID: String!, $endDate: String, $startDate: String) {
   redditAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate) {

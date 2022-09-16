@@ -10,28 +10,30 @@ import { Router, useRouter } from "next/router";
 import { PrimaryShortLogo } from "src/components/PrimaryShortLogo";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useStore } from "src/store";
 
 export function DashboardSidebar() {
     const router = useRouter();
+    const { selectedAsa } = useStore();
     const [width, setWidth] = useState(1024);
     const dashboardLinks = [
         {
             id: 2,
-            path: "/dashboard/twitter",
+            path: `/${selectedAsa.assetId || "null"}/twitter`,
             icon: <MemoTwitterIcon />,
-            title: "Twitter",
+            title: `Twitter`,
         },
         {
             id: 3,
-            path: "/dashboard/reddit",
+            path: `/${selectedAsa.assetId || "null"}/reddit`,
             icon: <MemoRedditIcon />,
-            title: "Reddit",
+            title: `Reddit`,
         },
         {
             id: 4,
-            path: "/dashboard/github",
+            path: `/${selectedAsa.assetId || "null"}/github`,
             icon: <MemoGithubIcon />,
-            title: "Github",
+            title: `Github`,
         },
     ];
 
@@ -48,10 +50,10 @@ export function DashboardSidebar() {
             <div className={styles.linkContainer}>
                 <div className={styles.homeLinkContainer}>
                     <DashboardLink
-                        href="/dashboard"
+                        href={`/${selectedAsa.assetId || "null"}`}
                         title="Home"
                         icon={<MemoHomeIcon />}
-                        className={router.pathname === "/dashboard" ? "activeLink" : ""}
+                        className={router.pathname === "/[asaId]" ? "activeLink" : ""}
                     />
                 </div>
 
@@ -65,7 +67,7 @@ export function DashboardSidebar() {
                                     href={link.path}
                                     icon={link.icon}
                                     title={link.title}
-                                    className={router.pathname.includes(link.path) ? "activeLink" : ""}
+                                    className={router.asPath.includes(link.path) ? "activeLink" : ""}
                                 />
                             );
                         })}

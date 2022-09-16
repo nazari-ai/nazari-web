@@ -10,7 +10,7 @@ export function SelectInput(props: Props) {
     return (
         <select name="SelectInput" className={styles.selectInput} onChange={props.handleChange}>
             {props.options.map((option, index) => (
-                <option key={index} value={index}>
+                <option key={index} value={option}>
                     {option}
                 </option>
             ))}
