@@ -6,9 +6,6 @@
 .pnp.js
 
 
-/pages/dashboard
-/pages/asaIdstale
-
 # testing
 /coverage
 
