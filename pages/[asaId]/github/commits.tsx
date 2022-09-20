@@ -1,17 +1,9 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
-import { SentimentLineChart } from "src/components/SentimentLineChart";
-import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
-import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
-import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
-import { TimeFrame } from "src/components/TimeFrame";
-import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
 import { AnalysisBar } from "src/sections/AnalysisBar";

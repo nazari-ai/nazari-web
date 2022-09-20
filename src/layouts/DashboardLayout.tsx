@@ -67,24 +67,6 @@ export function DashboardLayout({ children }: Type) {
         }
     }, [router]);
 
-    // useEffect(() => {
-    //     if (asaId === undefined) {
-    //         console.log(asaId)
-    //         router.push("/");
-    //         toast("No asset selected", {
-    //             id: "waitlist-toast",
-    //             icon: "👏",
-    //             style: {
-    //                 borderRadius: "10px",
-    //                 background: "#fb6c6c",
-    //                 color: "#fff",
-    //             },
-    //         });
-    //         openAnalyzeModal();
-    //     }
-    //     console.log(asaId)
-    // }, [selectedAsa]);
-
     return (
         <DefaultLayout>
             {/* <motion.div

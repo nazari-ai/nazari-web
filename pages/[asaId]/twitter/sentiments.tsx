@@ -2,22 +2,13 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
-import { SentimentLineChart } from "src/components/SentimentLineChart";
-import { useTwitterAnalyticsQuery } from "src/generated/graphql";
 import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { AnalysisBar } from "src/sections/AnalysisBar";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
-import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    // const { selectedAsa } = useStore();
-    // const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
-    //     asaID: selectedAsa.assetId,
-    //     startDate: "2020-01-01",
-    //     weekday: true,
-    // });
     const { data, list, setList } = useSocialAnalyticsHook("twitter");
     let sentimentAnalytics = [] as Array<any>;
 

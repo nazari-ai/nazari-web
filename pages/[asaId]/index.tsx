@@ -3,14 +3,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { useAsaDataQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
-import { AnalyzeAsaModal } from "src/sections/AnalyzeAsaModal";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { GithubSummary } from "src/sections/GithubSummary";
 import { RedditSummary } from "src/sections/RedditSummary";
 import { TwitterSummary } from "src/sections/TwitterSummary";
 import { useStore } from "src/store";
 import styles from "../../styles/dashboard.module.scss";
-import DatePicker from "react-date-picker/dist/entry.nostyle";
 
 const Home: NextPage = () => {
     const { analyzeModal } = useStore();
