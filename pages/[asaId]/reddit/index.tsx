@@ -1,17 +1,11 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { PrimaryTable } from "src/components/PrimaryTable";
-import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { useRedditAnalyticsQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
-import { GithubAnalysisSummary } from "src/sections/GithubAnalysisSummary";
-import { GithubSubLinks } from "src/sections/GithubSubLinks";
-import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
-import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 import { useEffect, useState } from "react";

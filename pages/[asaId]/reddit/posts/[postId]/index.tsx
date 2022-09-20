@@ -88,7 +88,7 @@ const Home: NextPage = () => {
                         <PrimaryEmptyState text="No data for this section" />
                     )}
                 </div>
-                <div className={styles.chartContainer}>
+                <div className={styles.sentimentChartContainer}>
                     <SummaryLineChart title="Comment Upvote (Past 15 days)" data={commentSentimentAnalyticsInState} />
                 </div>
             </div>

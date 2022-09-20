@@ -26,8 +26,15 @@ const validate = (values: any) => {
 
 export function AnalyzeAsaModal() {
     const router = useRouter();
-    const { id } = router.query;
-    const { openAnalyzeModal, selectedAsa, setSelectedAsa } = useStore();
+
+    const { openAnalyzeModal, selectedAsa, setSelectedAsa, pickedAsa, setPickedAsa } = useStore((state) => ({
+        openAnalyzeModal: state.openAnalyzeModal,
+        selectedAsa: state.selectedAsa,
+        setSelectedAsa: state.setSelectedAsa,
+        pickedAsa: state.pickedAsa,
+        setPickedAsa: state.setPickedAsa,
+    }));
+
     const { status, data, error, isFetching } = useAsaListQuery();
     const [filteredResults, setFilteredResults] = useState([] as asset[]);
     const [searchInput, setSearchInput] = useState("");
@@ -47,19 +54,25 @@ export function AnalyzeAsaModal() {
                 return Object.values(item).join("").toLowerCase().includes(searchInput?.toLowerCase());
             });
             setFilteredResults(filteredData as any);
-            console.log(filteredData);
-            console.table(defaultAsa);
-            setSelectedAsa(defaultAsa);
+            // setSelectedAsa(defaultAsa);
             setRemoveAsaList(true);
         } else {
             setFilteredResults([]);
         }
     };
 
+    const handleRemoveAsaList = (asa: asset) => {
+        setSearchInput(asa.name);
+        setRemoveAsaList(false);
+        setPickedAsa(asa);
+    };
+
     const handleSubmit = (e: any) => {
-        openAnalyzeModal();
         e.preventDefault();
-        router.push(`/${selectedAsa.assetId}`);
+        openAnalyzeModal();
+        setSelectedAsa(pickedAsa);
+        setPickedAsa(defaultAsa);
+        router.push(`/${pickedAsa.assetId}`);
     };
 
     //Animation and Transitions
@@ -120,7 +133,7 @@ export function AnalyzeAsaModal() {
                         label="Algorand Standard Asset"
                         onChange={(e) => searchItems(e.target.value)}
                         value={searchInput}
-                        error={!selectedAsa.assetId ? "No ASA Selected" : ""}
+                        error={!pickedAsa.assetId ? "No ASA Selected" : ""}
                     />
 
                     {searchInput && removeAsaList && (
@@ -132,6 +145,7 @@ export function AnalyzeAsaModal() {
                                             asset={asset}
                                             key={asset.assetId}
                                             className={!asset.available ? "unavailable" : ""}
+                                            handleClick={handleRemoveAsaList}
                                         />
                                     ))}
                                 </div>
@@ -172,7 +186,7 @@ export function AnalyzeAsaModal() {
                         type="submit"
                         text="Analyze Asset"
                         className="primaryButton"
-                        disabled={!selectedAsa?.assetId}
+                        disabled={!pickedAsa?.assetId}
                     />
                 </form>
             </animated.div>

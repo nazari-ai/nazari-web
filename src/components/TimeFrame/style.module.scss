@@ -17,11 +17,30 @@
         font-size: 0.85rem;
         line-height: compute_ems(24);
         color: #808080;
+
+        &:hover {
+            border: 1px solid #ffffff;
+            background-color: $secondary-grey-border;
+            color: #ffffff;
+        }
+    }
+
+    .activeBtn {
+        background-color: $primary-black;
+        color: #ffffff;
+        border: none;
     }
 
     .timeBtn {
         background-color: #0d3e36;
         color: #ffffff;
+        border: 1px solid #0d3e36;
+
+        &:hover {
+            background-color: #ffffff;
+            color: #0d3e36;
+            border: 1px solid #0d3e36;
+        }
     }
 
     @media only screen and (min-width: 640px) {

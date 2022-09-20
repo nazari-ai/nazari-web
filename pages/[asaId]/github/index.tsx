@@ -1,16 +1,13 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useGithubAnalyticsPerTimeQuery, useGithubOverviewQuery } from "src/generated/graphql";
+import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { GithubAnalysisSummary } from "src/sections/GithubAnalysisSummary";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
-import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
-import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 

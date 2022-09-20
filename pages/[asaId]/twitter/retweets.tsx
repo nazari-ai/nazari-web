@@ -1,14 +1,10 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
-import { SentimentLineChart } from "src/components/SentimentLineChart";
-import { SummaryBarChart } from "src/components/SummaryBarChart";
 import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { AnalysisBar } from "src/sections/AnalysisBar";
-import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import styles from "../../../styles/dashboard.module.scss";
 

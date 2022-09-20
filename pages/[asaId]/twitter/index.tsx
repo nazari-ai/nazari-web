@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useTwitterAnalyticsQuery, useTwitterOverviewQuery } from "src/generated/graphql";
+import { useTwitterAnalyticsQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";

@@ -11,16 +11,16 @@ type Props = {
 };
 
 export function AnalysisBar(props: Props) {
-    const { globalSetDateRange, globaldateRange, setAnalysisType, setTimeFrame, analysisType } = useStore((state) => ({
-        globalSetDateRange: state.setDateRange,
-        globaldateRange: state.dateRange,
+    const { setDateRange, dateRange, setAnalysisType, setTimeFrame, analysisType } = useStore((state) => ({
+        setDateRange: state.setDateRange,
+        dateRange: state.dateRange,
         setAnalysisType: state.setAnalysisType,
         setTimeFrame: state.setTimeFrame,
         analysisType: state.analysisType,
     }));
     const analysisTypeOptions =
         props.socialType === "twitter"
-            ? ["Select an option", "hourly", "weekdays"]
+            ? ["Select an option", "hour", "weekdays"]
             : ["Select an option", "day", "weekdays"];
 
     const [isOpen, setIsOpen] = useState(false);
@@ -38,10 +38,11 @@ export function AnalysisBar(props: Props) {
             return {
                 startDate: format(r.startDate, "yyyy-MM-dd"),
                 endDate: r.endDate ? format(r.endDate, "yyyy-MM-dd") : null,
+                activeTimeFrame: null,
             };
         });
 
-        globalSetDateRange(newRange[0]);
+        setDateRange(newRange[0]);
         setIsOpen(false);
     };
 
@@ -52,15 +53,15 @@ export function AnalysisBar(props: Props) {
     const handleAnalysisTypeChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         let newAnalysisType: AnalysisTypeType = defaultAnalysisType;
 
-        if (e.target.value === "hourly") {
+        if (e.target.value === "hour") {
             newAnalysisType = {
                 weekdays: false,
                 hour: true,
-                day: false,
+                day: true,
             };
         } else if (e.target.value === "day") {
             newAnalysisType = {
-                hour: false,
+                hour: true,
                 weekdays: false,
                 day: true,
             };
@@ -81,13 +82,13 @@ export function AnalysisBar(props: Props) {
 
         if (time === "1d") {
             const startDate = format(subDays(currentDate, 1), "yyyy-MM-dd");
-            globalSetDateRange({ startDate, endDate });
+            setDateRange({ startDate, endDate, activeTimeFrame: "1d" });
         } else if (time === "1w") {
             const startDate = format(subDays(currentDate, 7), "yyyy-MM-dd");
-            globalSetDateRange({ startDate, endDate });
+            setDateRange({ startDate, endDate, activeTimeFrame: "1w" });
         } else if (time === "1m") {
             const startDate = format(subMonths(currentDate, 1), "yyyy-MM-dd");
-            globalSetDateRange({ startDate, endDate });
+            setDateRange({ startDate, endDate, activeTimeFrame: "1m" });
         }
     };
 

@@ -15,9 +15,24 @@ export function TimeFrame(props: Props) {
             <button className={styles.timeBtn} onClick={props.handleDateRangeModal}>
                 {dateRange.endDate ? `${dateRange.startDate} ~ ${dateRange.endDate}` : "Time"}
             </button>
-            <button onClick={() => props.handleTimeFrame("1d")}>1D</button>
-            <button onClick={() => props.handleTimeFrame("1w")}>1W</button>
-            <button onClick={() => props.handleTimeFrame("1m")}>1M</button>
+            <button
+                className={dateRange.activeTimeFrame === "1d" ? styles.activeBtn : ""}
+                onClick={() => props.handleTimeFrame("1d")}
+            >
+                1D
+            </button>
+            <button
+                className={dateRange.activeTimeFrame === "1w" ? styles.activeBtn : ""}
+                onClick={() => props.handleTimeFrame("1w")}
+            >
+                1W
+            </button>
+            <button
+                className={dateRange.activeTimeFrame === "1m" ? styles.activeBtn : ""}
+                onClick={() => props.handleTimeFrame("1m")}
+            >
+                1M
+            </button>
         </div>
     );
 }
