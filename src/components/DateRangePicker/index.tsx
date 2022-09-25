@@ -1,9 +1,7 @@
 import React from "react";
-import { useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import styles from "./style.module.scss";
-import Image from "next/image";
 import { dateRangeType } from "src/types";
 import { useStore } from "../../store";
 // @ts-ignore
@@ -35,7 +33,7 @@ export function DateRangePicker(props: Props) {
                         rangeColors={["#000000", "#000000", "#000000"]}
                     />
 
-                    <button className={styles.closeBtn} onClick={props.onClose}>
+                    <button data-testid="close-btn" className={styles.closeBtn} onClick={props.onClose}>
                         OK
                     </button>
                 </div>
