@@ -16,7 +16,7 @@ export function SentimentLineChart(props: Props) {
         }
     }, [props.data]);
     return (
-        <div className={styles.chartContainer}>
+        <div data-testid="sentiment-line-chart" className={styles.chartContainer}>
             <div className={styles.chartHeaderContainer}>
                 <h1 className={styles.chartTitle}>{props.title}</h1>
             </div>

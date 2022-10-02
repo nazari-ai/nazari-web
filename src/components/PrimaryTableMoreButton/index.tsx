@@ -5,12 +5,15 @@ import Image from "next/image";
 
 type Props = {
     handleRedditMore: (row: any) => void;
-    row: any;
 };
 
 export function PrimaryTableMoreButton(props: Props) {
     return (
-        <div className={styles.moreButtonWrapper} onClick={props.handleRedditMore}>
+        <div
+            data-testid="primary-table-more-button"
+            className={styles.moreButtonWrapper}
+            onClick={props.handleRedditMore}
+        >
             <Image src={"/images/more-arrow-down.svg"} width={12} height={10} />
         </div>
     );

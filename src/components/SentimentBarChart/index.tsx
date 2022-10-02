@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import { XAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from "recharts";
-import { schemeCategory10 } from "d3-scale-chromatic";
-import { scaleOrdinal } from "d3-scale";
+import randomColor from "randomcolor";
 
-const colors = scaleOrdinal(schemeCategory10).range();
+const colors = randomColor({
+    count: 10,
+});
 
 type Props = {
     title?: string;

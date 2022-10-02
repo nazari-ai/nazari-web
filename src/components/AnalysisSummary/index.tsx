@@ -9,7 +9,7 @@ type Props = {
 export function AnalysisSummary(props: Props) {
     return (
         <>
-            <div className={`${styles.detailContainer}`}>
+            <div data-testid="analysis-summary" className={`${styles.detailContainer}`}>
                 <p className={styles.detailHeader}>{props.header}</p>
                 <div>
                     <p className={styles.detail}>{props.info || "-"}</p>

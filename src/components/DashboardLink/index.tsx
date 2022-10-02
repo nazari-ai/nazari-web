@@ -14,7 +14,7 @@ type Props = {
 
 export function DashboardLink(props: Props) {
     return (
-        <Link className={styles.dashboardLink} href={props.href}>
+        <Link data-testid="link" className={styles.dashboardLink} href={props.href}>
             <div className={`${styles.linkContainer} ${styles[props.className]}`}>
                 {props.icon}
 

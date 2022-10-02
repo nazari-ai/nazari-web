@@ -18,6 +18,7 @@ export function AssetInfo(props: Props) {
         <div
             className={`${styles.asset} ${styles[props.className]}`}
             onClick={() => (props.asset.available ? props.handleClick(props.asset) : null)}
+            data-testid="asset-info"
         >
             <div className={styles.assetInfo}>
                 <p className={styles.assetName}>{props.asset.name}</p>

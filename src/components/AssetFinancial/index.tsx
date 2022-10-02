@@ -9,7 +9,7 @@ type Props = {
 export function AssetFinancial(props: Props) {
     return (
         <>
-            <div className={`${styles.detailContainer}`}>
+            <div data-testid="asset-financial" className={`${styles.detailContainer}`}>
                 <p className={styles.detailHeader}>{props.header}</p>
                 <p className={styles.detail}>{props.info}</p>
             </div>
