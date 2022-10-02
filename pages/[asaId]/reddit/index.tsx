@@ -82,7 +82,7 @@ const Home: NextPage = () => {
             dataIndex: "more",
             key: "more",
             render: (value: any, row: any, index: any) => (
-                <PrimaryTableMoreButton handleRedditMore={() => handleRedditMore(row)} row={row} />
+                <PrimaryTableMoreButton handleRedditMore={() => handleRedditMore(row)} />
             ),
         },
     ];
