@@ -39,7 +39,14 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <link rel="icon" href="favicon.svg" />
                     <meta charSet="utf-8"></meta>
                     <link rel="icon" href="/favicon.ico"></link>
+
                     <title>Asalytics</title>
+
+                    <script
+                        src="https://sak.userreport.com/asalytics/launcher.js"
+                        async
+                        id="userreport-launcher-script"
+                    ></script>
                 </Head>
                 <Toaster position="top-center" reverseOrder={false} />
                 <AnimatePresence exitBeforeEnter initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
