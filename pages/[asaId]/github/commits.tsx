@@ -5,37 +5,35 @@ import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
 import styles from "../../../styles/dashboard.module.scss";
-import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
+import { useGithubHook } from "src/hooks/useGithubHook";
 import { AnalysisBar } from "src/sections/AnalysisBar";
-import { useRouter } from "next/router";
+import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const router = useRouter();
-    const { asaId } = router.query;
-    const { data, list, setList } = useSocialAnalyticsHook("github");
+    const { repo, list, setList } = useGithubHook();
+    const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
+
     let commitAnalytics = [] as Array<any>;
 
     useEffect(() => {
-        if (data) {
-            data.githubAnalyticsPertime?.repo?.forEach(
-                (item: { commits: any; lastPushDate: string | number | Date }) => {
-                    commitAnalytics.push({
-                        data: item.commits,
-                        name: new Date(item.lastPushDate)?.toLocaleDateString(),
-                    });
-                },
-            );
+        if (repo) {
+            repo.forEach((item) => {
+                commitAnalytics.push({
+                    data: item.commits,
+                    name: analysisType.weekdays ? item.lastPushDateWeekday : item.lastPushDateDay,
+                });
+            });
         }
 
         setList(commitAnalytics);
-    }, [data]);
+    }, [repo]);
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
                 <GithubSubLinks />
                 <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
-                    {data?.githubAnalyticsPertime?.repo?.length ? (
+                    {repo.length > 0 ? (
                         <SentimentBarChart title="Commits (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />

@@ -2,36 +2,38 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
-import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
+import { useTwitterHook } from "src/hooks/useTwitterHook";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { AnalysisBar } from "src/sections/AnalysisBar";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
+import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const { data, list, setList } = useSocialAnalyticsHook("twitter");
+    const { results, list, setList } = useTwitterHook();
+    const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let retweetAnalytics = [] as Array<any>;
 
     useEffect(() => {
-        if (data) {
-            data.twitterAnalytics?.results?.forEach((item: { likes: any; weekday: any }) => {
+        if (results) {
+            results?.forEach((item) => {
                 retweetAnalytics.push({
                     data: item.likes,
-                    name: item.weekday,
+                    name: analysisType.weekdays ? item.weekday : item.hour,
                 });
             });
         }
 
         setList(retweetAnalytics);
-    }, [data]);
+    }, [results]);
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
                 <AnalysisBar socialType={"twitter"} />
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
-                    {data?.twitterAnalytics?.results?.length ? (
+                    {results?.length > 0 ? (
                         <SentimentBarChart title="Retweets (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />

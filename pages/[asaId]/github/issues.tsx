@@ -6,27 +6,28 @@ import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
 import styles from "../../../styles/dashboard.module.scss";
 import { AnalysisBar } from "src/sections/AnalysisBar";
-import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
+import { useGithubHook } from "src/hooks/useGithubHook";
+import { useStore } from "src/store";
+import { sortByWeekday } from "src/utils/sortFunctions";
 
 const Home: NextPage = () => {
-    const { data, list, setList } = useSocialAnalyticsHook("github");
+    const { repo, list, setList } = useGithubHook();
+    const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let issueAnalytics = [] as Array<any>;
 
     useEffect(() => {
-        if (data) {
-            data.githubAnalyticsPertime?.repo?.forEach(
-                (item: { issues: any; lastPushDate: string | number | Date }) => {
-                    issueAnalytics.push({
-                        data: item.issues,
-                        name: new Date(item.lastPushDate)?.toLocaleDateString(),
-                    });
-                },
-            );
+        if (repo) {
+            repo.forEach((item) => {
+                issueAnalytics.push({
+                    data: item.issues,
+                    name: analysisType.weekdays ? item.lastPushDateWeekday : item.lastPushDateDay,
+                });
+            });
         }
 
         setList(issueAnalytics);
-    }, [data]);
+    }, [repo]);
 
     return (
         <DashboardLayout>
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
                 <GithubSubLinks />
                 <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
-                    {data?.githubAnalyticsPertime?.repo?.length ? (
+                    {repo.length > 0 ? (
                         <SentimentBarChart title="Issues (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />

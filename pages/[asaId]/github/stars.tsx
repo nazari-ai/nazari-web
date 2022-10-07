@@ -5,25 +5,28 @@ import { SentimentLineChart } from "src/components/SentimentLineChart";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
 import styles from "../../../styles/dashboard.module.scss";
-import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
+import { useGithubHook } from "src/hooks/useGithubHook";
 import { AnalysisBar } from "src/sections/AnalysisBar";
+import { sortByWeekday } from "src/utils/sortFunctions";
+import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const { data, list, setList } = useSocialAnalyticsHook("github");
+    const { repo, list, setList } = useGithubHook();
+    const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let starAnalytics = [] as Array<any>;
 
     useEffect(() => {
-        if (data) {
-            data.githubAnalyticsPertime?.repo?.forEach((item: { stars: any; lastPushDate: string | number | Date }) => {
+        if (repo) {
+            repo.forEach((item) => {
                 starAnalytics.push({
                     data: item.stars,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    name: analysisType.weekdays ? item.lastPushDateWeekday : item.lastPushDateDay,
                 });
             });
         }
         setList(starAnalytics);
-    }, [data]);
+    }, [repo]);
 
     return (
         <DashboardLayout>
@@ -31,7 +34,7 @@ const Home: NextPage = () => {
                 <GithubSubLinks />
                 <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
-                    {data?.githubAnalyticsPertime?.repo?.length ? (
+                    {repo.length > 0 ? (
                         <SentimentLineChart title="Stars (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
