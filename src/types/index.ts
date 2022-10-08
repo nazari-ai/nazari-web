@@ -17,4 +17,5 @@ export interface AnalysisTypeType {
     hour: boolean;
     weekdays: boolean;
     day: boolean;
+    byrepo: boolean;
 }

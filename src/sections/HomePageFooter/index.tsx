@@ -29,7 +29,7 @@ export function HomePageFooter() {
                 </a>
             </div>
             <div className={styles.footerInfoContainer}>
-                <p className={styles.footerInfo}>2022 Asalytics. All rights reserved</p>
+                <p className={styles.footerInfo}>2022 Nazari. All rights reserved</p>
             </div>
         </div>
     );

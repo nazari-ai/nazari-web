@@ -12,10 +12,10 @@ export function PrimaryLogo(props: Props) {
             <Image
                 data-testid="primary-logo"
                 className={styles.headerLogo}
-                src="/images/logo.svg"
-                alt="Asalytics Logo"
+                src="/images/logo.png"
+                alt="Nazari Logo"
                 width={133}
-                height={62}
+                height={35}
                 priority={true}
             />
         </>

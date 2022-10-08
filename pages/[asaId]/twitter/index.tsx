@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useTwitterAnalyticsQuery } from "src/generated/graphql";
+import { TwitterAnalyticsQuery, useTwitterAnalyticsQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
+import { removeDuplicate, getMostDoneInWeekDay } from "src/utils";
+import { sortByWeekdayTwitter } from "src/utils/sortFunctions";
 
 const Home: NextPage = () => {
     const { selectedAsa } = useStore();
@@ -19,20 +21,25 @@ const Home: NextPage = () => {
         weekday: true,
     });
 
+    const sortedData: TwitterAnalyticsQuery["twitterAnalytics"]["results"] = sortByWeekdayTwitter(
+        data?.twitterAnalytics.results ?? ["hello"],
+    );
+
+    const mostRetweetssWeekday = getMostDoneInWeekDay(sortedData, "retweets")?.weekday ?? "";
+    const mostLikesWeekday = getMostDoneInWeekDay(sortedData, "likes")?.weekday ?? "";
+
     const [retweetAnalyticsInState, setretweetAnalyticsInState] = useState([] as any);
     const [likeAnalyticsInState, setlikeAnalyticsInState] = useState([] as any);
 
     let retweetAnalytics = [] as Array<any>;
     let likeAnalytics = [] as Array<any>;
-    let sortedRetweet = [] as Array<any>;
-    let sortedLike = [] as Array<any>;
 
     const [highestRetweetDay, setHighestRetweetDay] = useState({} as any);
     const [highestLikeDay, setHighestLikeDay] = useState({} as any);
 
     useEffect(() => {
         if (data) {
-            data.twitterAnalytics?.results?.forEach((item) => {
+            sortedData.forEach((item) => {
                 retweetAnalytics.push({
                     data: item.retweets,
                     name: item.weekday,
@@ -43,11 +50,8 @@ const Home: NextPage = () => {
                 });
             });
 
-            setretweetAnalyticsInState(retweetAnalytics);
-            setlikeAnalyticsInState(likeAnalytics);
-
-            sortedRetweet = [...retweetAnalytics];
-            sortedLike = [...likeAnalytics];
+            setretweetAnalyticsInState(removeDuplicate(retweetAnalytics));
+            setlikeAnalyticsInState(removeDuplicate(likeAnalytics));
         }
     }, [data]);
 
@@ -71,12 +75,20 @@ const Home: NextPage = () => {
                 ) : (
                     <div className={styles.summaryBarChartContainer}>
                         {data?.twitterAnalytics?.results?.length ? (
-                            <SummaryBarChart header="RETWEETS ARE MOSTLY MADE ON" data={retweetAnalyticsInState} />
+                            <SummaryBarChart
+                                header="RETWEETS ARE MOSTLY MADE ON"
+                                title={mostRetweetssWeekday}
+                                data={retweetAnalyticsInState}
+                            />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
                         )}
                         {data?.twitterAnalytics?.results?.length ? (
-                            <SummaryBarChart header="LIKES ARE MOSTLY GOTTEN ON" data={likeAnalyticsInState} />
+                            <SummaryBarChart
+                                header="LIKES ARE MOSTLY GOTTEN ON"
+                                title={mostLikesWeekday}
+                                data={likeAnalyticsInState}
+                            />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
                         )}
