@@ -5,14 +5,14 @@ export const removeDuplicate = (data: any) => {
 };
 
 export const getMostDoneInWeekDay = <T>(data: T[], key: string) => {
-    const res = Math.max.apply(
+    const res: any = Math.max.apply(
         Math,
         data.map((o: any) => {
             return o[key];
         }),
     );
 
-    const rr = data.find((o) => o[key as keyof T] == res);
+    const rr = data.find((o) => o[key as keyof T] === res);
 
     return rr;
 };
