@@ -6,19 +6,21 @@ import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { AnalysisBar } from "src/sections/AnalysisBar";
 import styles from "../../../styles/dashboard.module.scss";
-import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
+import { useTwitterHook } from "src/hooks/useTwitterHook";
+import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const { data, list, setList } = useSocialAnalyticsHook("twitter");
+    const { data, results, list, setList, formattedTime } = useTwitterHook();
+    const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let likeAnalytics = [] as Array<any>;
 
     useEffect(() => {
         if (data) {
-            data.twitterAnalytics?.results?.forEach((item: { likes: any; weekday: any }) => {
+            results?.forEach((item) => {
                 likeAnalytics.push({
                     data: item.likes,
-                    name: item.weekday,
+                    name: analysisType.weekdays ? item.weekday : item.hour,
                 });
             });
         }
@@ -32,8 +34,8 @@ const Home: NextPage = () => {
                 <TwitterSubLinks />
 
                 <div className={styles.sentimentChartContainer}>
-                    {data?.twitterAnalytics?.results?.length ? (
-                        <SentimentBarChart title="Likes (Past 15 days)" data={list} />
+                    {results?.length > 0 ? (
+                        <SentimentBarChart title={`Likes (${formattedTime})`} data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

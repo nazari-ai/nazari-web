@@ -18,11 +18,14 @@ export function SelectInput(props: Props) {
             className={styles.selectInput}
             onChange={props.handleChange}
         >
-            {props.options.map((option, index) => (
-                <option key={index} value={option} selected={analysisType[option as keyof AnalysisTypeType]}>
-                    {option}
-                </option>
-            ))}
+            {props.options.map((option, index) => {
+                const value = option === "byrepo" ? "by repo" : option;
+                return (
+                    <option key={index} value={option} selected={analysisType[option as keyof AnalysisTypeType]}>
+                        {value}
+                    </option>
+                );
+            })}
         </select>
     );
 }

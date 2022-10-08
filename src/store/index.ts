@@ -41,6 +41,7 @@ export const defaultAnalysisType = {
     hour: false,
     weekdays: true,
     day: false,
+    byrepo: false,
 };
 
 export const useStore = create<State>((set) => ({

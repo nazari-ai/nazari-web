@@ -41,7 +41,7 @@ export function AboutPageHero() {
                     Our Mission
                 </animated.h3>
                 <p className={styles.heroParagraph}>
-                    ASAlytics is a one-stop destination for market stakeholders to do an extensive DYOR (Do Your Own
+                    Nazari is a one-stop destination for market stakeholders to do an extensive DYOR (Do Your Own
                     Research) on their preferred assets and get a real-time market opinion of the assets. We are a
                     social media analytics web application that continually tracks market dynamics via gathering data on
                     participants’ and stakeholders’ thoughts, feelings, and mood on social media platforms regarding
@@ -49,8 +49,8 @@ export function AboutPageHero() {
                     trends and generate insights dynamically. Market participants’ feelings don’t always reflects
                     assets’ potential but they can significantly affect the price which is why many stakeholders aim to
                     analyze the market’s sentiment to track (and sometimes predict) the short and mid-term potential of
-                    a crypto asset. By using ASAlytics to track the market dynamics, everyone can understand the amount
-                    of fear or hype surrounding a specific cryptocurrency, e.g $Algo, Choice coin.
+                    a crypto asset. By using Nazari to track the market dynamics, everyone can understand the amount of
+                    fear or hype surrounding a specific cryptocurrency, e.g $Algo, Choice coin.
                 </p>
             </div>
         </animated.div>
