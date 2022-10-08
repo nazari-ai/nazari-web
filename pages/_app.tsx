@@ -17,11 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <meta name="keywords" content="Alogrand Analytics Nazari Coin Algofam"></meta>
                     <meta property="og:title" content="Nazari" />
                     <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://asalytics.ai" />
-                    <meta property="og:image" content="https://asalytics.ai/images/card.png" />
+                    <meta property="og:url" content="https://nazari.ai" />
+                    <meta property="og:image" content="https://nazari.ai/images/card.png" />
                     <meta name="twitter:title" property="og:title" content="Nazari" />
-                    <meta name="twitter:site_name" property="og:site_name" content="@asalytics" />
-                    <meta name="twitter:image" content="https://asalytics.ai/images/card.png" />
+                    <meta name="twitter:site_name" property="og:site_name" content="@nazari" />
+                    <meta name="twitter:image" content="https://nazari.ai/images/card.png" />
                     <meta name="twitter:card" content="summary_large_image" />
                     <meta
                         name="twitter:description"

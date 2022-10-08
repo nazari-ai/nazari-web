@@ -118,7 +118,7 @@ export function WaitlistModal(props: Props) {
                         error={formik.errors.username}
                     />
                     <PrimaryInput
-                        placeholder="hello@asalytics.ai"
+                        placeholder="hello@nazari.ai"
                         type="email"
                         id="name"
                         name="email"

@@ -1,6 +1,6 @@
 # Nazari
 
-Nazari Public Link [asalytics.ai](https://asalytics.ai)
+Nazari Public Link [nazari.ai](https://nazari.ai)
 
 ## Table of Content:
 
