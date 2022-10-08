@@ -17,7 +17,7 @@ export const sortByWeekday = (data: any) => {
     });
 };
 
-export const sortByWeekdayTwiiter = (data: any) => {
+export const sortByWeekdayTwitter = (data: any) => {
     const sorter = {
         monday: 1,
         tuesday: 2,

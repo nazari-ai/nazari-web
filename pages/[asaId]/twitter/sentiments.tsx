@@ -10,7 +10,7 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const { results, list, setList } = useTwitterHook();
+    const { data, results, list, setList, formattedTime } = useTwitterHook();
     const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let sentimentAnalytics = [] as Array<any>;
@@ -25,7 +25,8 @@ const Home: NextPage = () => {
             });
         }
         setList(sentimentAnalytics);
-    }, [results]);
+    }, [data]);
+
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
@@ -33,7 +34,7 @@ const Home: NextPage = () => {
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
                     {results?.length > 0 ? (
-                        <SentimentBarChart title="Replies (Past 15 days)" data={list} />
+                        <SentimentBarChart title={`Replies (${formattedTime})`} data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

@@ -3,21 +3,28 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
+import { useGithubAnalyticsPerTimeQuery, GithubAnalyticsPerTime } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { GithubAnalysisSummary } from "src/sections/GithubAnalysisSummary";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
+import { sortByWeekday } from "src/utils/sortFunctions";
+import { removeDuplicate, getMostDoneInWeekDay } from "src/utils";
 
 const Home: NextPage = () => {
     const { selectedAsa } = useStore();
-    const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
+    const { data, isFetching } = useGithubAnalyticsPerTimeQuery({
         asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
         weekDay: true,
     });
+
+    const sortedData: GithubAnalyticsPerTime[] = sortByWeekday(data?.githubAnalyticsPertime.repo ?? ["hello"]);
+
+    const mostCommitsWeekday = getMostDoneInWeekDay(sortedData, "commits")?.lastPushDateWeekday ?? "";
+    const mostIssuesWeekday = getMostDoneInWeekDay(sortedData, "issues")?.lastPushDateWeekday ?? "";
 
     const [commitAnalyticsState, setcommitAnalyticsState] = useState([] as any);
     const [issueAnalyticsState, setissueAnalyticsState] = useState([] as any);
@@ -25,9 +32,11 @@ const Home: NextPage = () => {
     let commitAnalytics = [] as Array<any>;
     let issueAnalytics = [] as Array<any>;
 
+    console.log(commitAnalytics);
+
     useEffect(() => {
         if (data) {
-            data.githubAnalyticsPertime?.repo?.forEach((item) => {
+            sortedData.forEach((item) => {
                 commitAnalytics.push({
                     data: item.commits,
                     name: item.lastPushDateWeekday,
@@ -37,10 +46,10 @@ const Home: NextPage = () => {
                     name: item.lastPushDateWeekday,
                 });
             });
-            setissueAnalyticsState(issueAnalytics);
-            setcommitAnalyticsState(commitAnalytics);
+            setcommitAnalyticsState(removeDuplicate(commitAnalytics));
+            setissueAnalyticsState(removeDuplicate(issueAnalytics));
         }
-    }, [data]);
+    }, [sortedData]);
 
     return (
         <DashboardLayout>
@@ -63,7 +72,7 @@ const Home: NextPage = () => {
                         {data?.githubAnalyticsPertime?.repo?.length ? (
                             <SummaryBarChart
                                 header="COMMITS ARE MOSTLY MADE ON"
-                                title="Wednesday"
+                                title={mostCommitsWeekday}
                                 data={commitAnalyticsState}
                             />
                         ) : (
@@ -73,7 +82,7 @@ const Home: NextPage = () => {
                         {data?.githubAnalyticsPertime?.repo?.length ? (
                             <SummaryBarChart
                                 header="ISSUES ARE MOSTLY GOTTEN ON"
-                                title="Friday"
+                                title={mostIssuesWeekday}
                                 data={issueAnalyticsState}
                             />
                         ) : (

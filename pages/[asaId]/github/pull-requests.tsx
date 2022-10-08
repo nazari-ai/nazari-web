@@ -11,7 +11,7 @@ import { useStore } from "src/store";
 import { sortByWeekday } from "src/utils/sortFunctions";
 
 const Home: NextPage = () => {
-    const { repo, list, setList } = useGithubHook();
+    const { data, repo, list, setList, formattedTime } = useGithubHook();
     const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let pullRequestAnalytics = [] as Array<any>;
@@ -21,13 +21,17 @@ const Home: NextPage = () => {
             repo.forEach((item) => {
                 pullRequestAnalytics.push({
                     data: item.pullRequests,
-                    name: analysisType.weekdays ? item.lastPushDateWeekday : item.lastPushDateDay,
+                    name: analysisType.byrepo
+                        ? item.repoName
+                        : analysisType.weekdays
+                        ? item.lastPushDateWeekday
+                        : item.lastPushDateDay,
                 });
             });
         }
 
         setList(pullRequestAnalytics);
-    }, [repo]);
+    }, [data]);
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
@@ -35,7 +39,7 @@ const Home: NextPage = () => {
                 <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
                     {repo?.length > 0 ? (
-                        <SentimentBarChart title="Pull Requests (Past 15 days)" data={list} />
+                        <SentimentBarChart title={`Pull Requests (${formattedTime})`} data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

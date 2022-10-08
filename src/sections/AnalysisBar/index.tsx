@@ -21,7 +21,7 @@ export function AnalysisBar(props: Props) {
     const analysisTypeOptions =
         props.socialType === "twitter"
             ? ["Select an option", "hour", "weekdays"]
-            : ["Select an option", "day", "weekdays"];
+            : ["Select an option", "day", "weekdays", "byrepo"];
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -58,18 +58,28 @@ export function AnalysisBar(props: Props) {
                 weekdays: false,
                 hour: true,
                 day: true,
+                byrepo: false,
             };
         } else if (e.target.value === "day") {
             newAnalysisType = {
                 hour: true,
                 weekdays: false,
                 day: true,
+                byrepo: false,
             };
         } else if (e.target.value === "weekdays") {
             newAnalysisType = {
                 hour: false,
                 weekdays: true,
                 day: false,
+                byrepo: false,
+            };
+        } else if (e.target.value === "byrepo") {
+            newAnalysisType = {
+                hour: true,
+                weekdays: false,
+                day: false,
+                byrepo: true,
             };
         }
 

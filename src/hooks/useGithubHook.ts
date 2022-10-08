@@ -1,11 +1,14 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useStore } from "src/store";
-import { GithubAnalyticsPerTime, useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
+import { formatDistance } from "date-fns";
+import { removeDuplicate } from "src/utils";
+
+import { useGithubAnalyticsPerTimeQuery, useGithubAnalyticsPerRepoQuery } from "src/generated/graphql";
 import { sortByWeekday, sortByDay } from "src/utils/sortFunctions";
 
 export const useGithubHook = () => {
-    const [list, setList] = useState([] as Array<any>);
+    let [list, setList] = useState([] as Array<any>);
 
     const { selectedAsa, dateRange, analysisType, setSelectedAsa } = useStore((state) => ({
         selectedAsa: state.selectedAsa,
@@ -13,6 +16,15 @@ export const useGithubHook = () => {
         analysisType: state.analysisType,
         setSelectedAsa: state.setSelectedAsa,
     }));
+
+    let formattedTime = formatDistance(new Date(dateRange?.endDate ?? new Date()), new Date(dateRange.startDate), {
+        addSuffix: true,
+    });
+
+    const { data: dataPerRepo } = useGithubAnalyticsPerRepoQuery({
+        asaID: selectedAsa.assetId,
+        sortBy: "commits",
+    });
 
     const { data, refetch } = useGithubAnalyticsPerTimeQuery({
         asaID: selectedAsa.assetId,
@@ -22,10 +34,12 @@ export const useGithubHook = () => {
         weekDay: analysisType.weekdays,
     });
 
-    let repo: GithubAnalyticsPerTime[];
+    let repo: any[];
 
     if (analysisType.weekdays) {
         repo = sortByWeekday(data?.githubAnalyticsPertime?.repo ?? []);
+    } else if (analysisType.byrepo) {
+        repo = dataPerRepo?.githubAnalyticsPerepo.repo ?? [];
     } else {
         repo = sortByDay(data?.githubAnalyticsPertime?.repo ?? []);
     }
@@ -34,5 +48,7 @@ export const useGithubHook = () => {
         refetch();
     }, [dateRange, analysisType]);
 
-    return { repo, list, setList };
+    list = removeDuplicate(list);
+
+    return { data, repo, list, setList, formattedTime };
 };

@@ -11,7 +11,7 @@ import { sortByWeekday } from "src/utils/sortFunctions";
 import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const { repo, list, setList } = useGithubHook();
+    const { data, repo, list, setList, formattedTime } = useGithubHook();
     const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let starAnalytics = [] as Array<any>;
@@ -21,12 +21,16 @@ const Home: NextPage = () => {
             repo.forEach((item) => {
                 starAnalytics.push({
                     data: item.stars,
-                    name: analysisType.weekdays ? item.lastPushDateWeekday : item.lastPushDateDay,
+                    name: analysisType.byrepo
+                        ? item.repoName
+                        : analysisType.weekdays
+                        ? item.lastPushDateWeekday
+                        : item.lastPushDateDay,
                 });
             });
         }
         setList(starAnalytics);
-    }, [repo]);
+    }, [data]);
 
     return (
         <DashboardLayout>
@@ -35,7 +39,7 @@ const Home: NextPage = () => {
                 <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
                     {repo.length > 0 ? (
-                        <SentimentLineChart title="Stars (Past 15 days)" data={list} />
+                        <SentimentLineChart title={`Stars (${formattedTime})`} data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

@@ -10,7 +10,7 @@ import { useGithubHook } from "src/hooks/useGithubHook";
 import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const { repo, list, setList } = useGithubHook();
+    const { data, repo, list, setList, formattedTime } = useGithubHook();
     const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let watchAnalytics = [] as Array<any>;
@@ -20,13 +20,18 @@ const Home: NextPage = () => {
             repo.forEach((item) => {
                 watchAnalytics.push({
                     data: item.watches,
-                    name: analysisType.weekdays ? item.lastPushDateWeekday : item.lastPushDateDay,
+                    name: analysisType.byrepo
+                        ? item.repoName
+                        : analysisType.weekdays
+                        ? item.lastPushDateWeekday
+                        : item.lastPushDateDay,
                 });
             });
         }
 
         setList(watchAnalytics);
-    }, [repo]);
+    }, [data]);
+
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
@@ -34,7 +39,7 @@ const Home: NextPage = () => {
                 <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
                     {repo?.length > 0 ? (
-                        <SentimentBarChart title="Watches (Past 15 days)" data={list} />
+                        <SentimentBarChart title={`Watches (${formattedTime})`} data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

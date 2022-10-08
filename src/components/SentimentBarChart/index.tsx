@@ -13,13 +13,13 @@ type Props = {
 };
 
 export function SentimentBarChart(props: Props) {
-    const [data, setData] = useState([] as Array<any>);
+    // const [data, setData] = useState([] as Array<any>);
 
-    useEffect(() => {
-        if (props.data) {
-            setData(props.data);
-        }
-    }, [props.data]);
+    // useEffect(() => {
+    //     if (props.data) {
+    //         setData(props.data);
+    //     }
+    // }, [props.data]);
 
     return (
         <div className={styles.chartContainer}>
@@ -27,9 +27,9 @@ export function SentimentBarChart(props: Props) {
                 <h1 className={styles.chartTitle}>{props.title}</h1>
             </div>
             <ResponsiveContainer height={300}>
-                <BarChart width={150} height={40} barCategoryGap="1%" data={data}>
+                <BarChart width={150} height={40} barCategoryGap="1%" data={props.data}>
                     <Bar dataKey="data" fill="#6FD791" radius={[5, 5, 0, 0]}>
-                        {data.map((entry, index) => (
+                        {props.data.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={colors[index % 20]} />
                         ))}
                     </Bar>

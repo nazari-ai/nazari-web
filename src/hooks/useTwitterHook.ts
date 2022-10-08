@@ -1,8 +1,8 @@
-import { format } from "date-fns";
+import { format, formatDistance } from "date-fns";
 import { useEffect, useState } from "react";
 import { useStore } from "src/store";
 import { TwitterAnalyticsQuery, useTwitterAnalyticsQuery } from "src/generated/graphql";
-import { sortByWeekdayTwiiter, sortByHour } from "src/utils/sortFunctions";
+import { sortByWeekdayTwitter, sortByHour } from "src/utils/sortFunctions";
 
 export const useTwitterHook = () => {
     const [list, setList] = useState([] as Array<any>);
@@ -13,6 +13,10 @@ export const useTwitterHook = () => {
         analysisType: state.analysisType,
         setSelectedAsa: state.setSelectedAsa,
     }));
+
+    let formattedTime = formatDistance(new Date(dateRange?.endDate ?? new Date()), new Date(dateRange.startDate), {
+        addSuffix: true,
+    });
 
     const { data, refetch } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
@@ -25,7 +29,7 @@ export const useTwitterHook = () => {
     let results: TwitterAnalyticsQuery["twitterAnalytics"]["results"];
 
     if (analysisType.weekdays) {
-        results = sortByWeekdayTwiiter(data?.twitterAnalytics?.results ?? []);
+        results = sortByWeekdayTwitter(data?.twitterAnalytics?.results ?? []);
     } else {
         results = sortByHour(data?.twitterAnalytics?.results ?? []);
     }
@@ -34,5 +38,5 @@ export const useTwitterHook = () => {
         refetch();
     }, [dateRange, analysisType]);
 
-    return { results, list, setList };
+    return { data, results, list, setList, formattedTime };
 };

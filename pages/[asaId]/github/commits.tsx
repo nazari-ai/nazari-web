@@ -10,7 +10,7 @@ import { AnalysisBar } from "src/sections/AnalysisBar";
 import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const { repo, list, setList } = useGithubHook();
+    const { data, repo, list, setList, formattedTime } = useGithubHook();
     const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let commitAnalytics = [] as Array<any>;
@@ -20,13 +20,18 @@ const Home: NextPage = () => {
             repo.forEach((item) => {
                 commitAnalytics.push({
                     data: item.commits,
-                    name: analysisType.weekdays ? item.lastPushDateWeekday : item.lastPushDateDay,
+                    name: analysisType.byrepo
+                        ? item.repoName
+                        : analysisType.weekdays
+                        ? item.lastPushDateWeekday
+                        : item.lastPushDateDay,
                 });
             });
         }
 
         setList(commitAnalytics);
-    }, [repo]);
+    }, [data]);
+
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
@@ -34,7 +39,7 @@ const Home: NextPage = () => {
                 <AnalysisBar socialType={"github"} />
                 <div className={styles.sentimentChartContainer}>
                     {repo.length > 0 ? (
-                        <SentimentBarChart title="Commits (Past 15 days)" data={list} />
+                        <SentimentBarChart title={`Commits (${formattedTime})`} data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

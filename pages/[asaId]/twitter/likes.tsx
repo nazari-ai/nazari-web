@@ -10,13 +10,13 @@ import { useTwitterHook } from "src/hooks/useTwitterHook";
 import { useStore } from "src/store";
 
 const Home: NextPage = () => {
-    const { results, list, setList } = useTwitterHook();
+    const { data, results, list, setList, formattedTime } = useTwitterHook();
     const { analysisType } = useStore((state) => ({ analysisType: state.analysisType }));
 
     let likeAnalytics = [] as Array<any>;
 
     useEffect(() => {
-        if (results) {
+        if (data) {
             results?.forEach((item) => {
                 likeAnalytics.push({
                     data: item.likes,
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
             });
         }
         setList(likeAnalytics);
-    }, [results]);
+    }, [data]);
 
     return (
         <DashboardLayout>
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
 
                 <div className={styles.sentimentChartContainer}>
                     {results?.length > 0 ? (
-                        <SentimentBarChart title="Likes (Past 15 days)" data={list} />
+                        <SentimentBarChart title={`Likes (${formattedTime})`} data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}
