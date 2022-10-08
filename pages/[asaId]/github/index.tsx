@@ -32,8 +32,6 @@ const Home: NextPage = () => {
     let commitAnalytics = [] as Array<any>;
     let issueAnalytics = [] as Array<any>;
 
-    console.log(commitAnalytics);
-
     useEffect(() => {
         if (data) {
             sortedData.forEach((item) => {

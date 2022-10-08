@@ -90,7 +90,6 @@ const Home: NextPage = () => {
     const handleRedditMore = (row: any) => {
         const postId = row.postId;
         router.push(`/${selectedAsa.assetId}/reddit/posts/${postId}`);
-        console.log(postId);
     };
 
     return (
