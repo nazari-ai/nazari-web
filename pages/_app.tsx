@@ -14,12 +14,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             <QueryClientProvider client={queryClient}>
                 <Head>
                     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-                    <meta name="keywords" content="Alogrand Analytics Asalytics Coin Algofam"></meta>
-                    <meta property="og:title" content="Asalytics" />
+                    <meta name="keywords" content="Alogrand Analytics Nazari Coin Algofam"></meta>
+                    <meta property="og:title" content="Nazari" />
                     <meta property="og:type" content="website" />
                     <meta property="og:url" content="https://asalytics.ai" />
                     <meta property="og:image" content="https://asalytics.ai/images/card.png" />
-                    <meta name="twitter:title" property="og:title" content="Asalytics" />
+                    <meta name="twitter:title" property="og:title" content="Nazari" />
                     <meta name="twitter:site_name" property="og:site_name" content="@asalytics" />
                     <meta name="twitter:image" content="https://asalytics.ai/images/card.png" />
                     <meta name="twitter:card" content="summary_large_image" />
@@ -36,11 +36,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                         name="description"
                         content="Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform."
                     />
-                    <link rel="icon" href="favicon.svg" />
+                    <link rel="icon" href="/favicon.png" />
                     <meta charSet="utf-8"></meta>
                     <link rel="icon" href="/favicon.ico"></link>
 
-                    <title>Asalytics</title>
+                    <title>Nazari</title>
 
                     <script
                         src="https://sak.userreport.com/asalytics/launcher.js"

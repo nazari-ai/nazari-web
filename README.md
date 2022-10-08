@@ -1,6 +1,6 @@
-# Asalytics
+# Nazari
 
-Asalytics Public Link [asalytics.ai](https://asalytics.ai)
+Nazari Public Link [asalytics.ai](https://asalytics.ai)
 
 ## Table of Content:
 
@@ -15,11 +15,11 @@ Asalytics Public Link [asalytics.ai](https://asalytics.ai)
 
 ## About The App
 
-**Asalytics** is a social media analytics web application that continually tracks market dynamics via gathering data on
+**Nazari** is a social media analytics web application that continually tracks market dynamics via gathering data on
 participants’ and stakeholders’ thoughts, feelings, and moods on social media platforms regarding ASAs, and using
 Natural Language Processing techniques to analyze the trends and generate insights dynamically.
 
-By using ASAlytics to track the market dynamics, users can understand the amount of hype or fear surrounding a specific cryptocurrency,
+By using Nazari to track the market dynamics, users can understand the amount of hype or fear surrounding a specific cryptocurrency,
 e.g. Algo Tokens, Choice coin, etc.
 
 ## Screenshots
@@ -64,7 +64,7 @@ Approach:
 
 ## Status
 
-**Asalytics** development is still in progress. `Version 1` will be out soon.
+**Nazari** development is still in progress. `Version 1` will be out soon.
 
 ## Credits
 

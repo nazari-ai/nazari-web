@@ -4,5 +4,5 @@ import { PrimaryShortLogo } from ".";
 
 test("renders the component correctly", async () => {
     render(<PrimaryShortLogo />);
-    expect(screen.getByAltText("Asalytics Logo")).toBeInTheDocument();
+    expect(screen.getByAltText("Nazari Logo")).toBeInTheDocument();
 });

@@ -12,7 +12,7 @@ export function PrimaryShortLogo(props: Props) {
             <Image
                 className={styles.headerLogo}
                 src="/favicon.svg"
-                alt="Asalytics Logo"
+                alt="Nazari Logo"
                 width={30}
                 height={30}
                 priority={true}
