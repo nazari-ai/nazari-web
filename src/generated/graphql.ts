@@ -20,15 +20,6 @@ export type Scalars = {
     DateTime: any;
 };
 
-export type Asa = {
-    __typename?: "Asa";
-    assetId: Scalars["String"];
-    available: Scalars["Boolean"];
-    logo?: Maybe<Scalars["String"]>;
-    name: Scalars["String"];
-    unitname1: Scalars["String"];
-};
-
 export type AsaData = {
     __typename?: "AsaData";
     URL?: Maybe<Scalars["String"]>;
@@ -58,7 +49,7 @@ export type AsaData = {
 
 export type AsaList = {
     __typename?: "AsaList";
-    results: Array<Asa>;
+    result: Array<AsaData>;
 };
 
 export type AsaResponse = {
@@ -320,14 +311,26 @@ export type AsaListQuery = {
     __typename?: "Query";
     asalist: {
         __typename?: "AsaList";
-        results: Array<{
-            __typename?: "Asa";
+        result: Array<{
+            __typename?: "AsaData";
             assetId: string;
             available: boolean;
             logo?: string | null;
             name: string;
-            unitname1: string;
+            unitname1?: string | null;
         }>;
+    };
+};
+
+export type AsaDataMinimumQueryVariables = Exact<{
+    asaID: Scalars["String"];
+}>;
+
+export type AsaDataMinimumQuery = {
+    __typename?: "Query";
+    asaData: {
+        __typename?: "AsaResponse";
+        result: Array<{ __typename?: "AsaData"; assetId: string; available: boolean }>;
     };
 };
 
@@ -564,7 +567,7 @@ useAsaDataQuery.fetcher = (variables: AsaDataQueryVariables, options?: RequestIn
 export const AsaListDocument = `
     query asaList {
   asalist {
-    results {
+    result {
       assetId
       available
       logo
@@ -588,6 +591,29 @@ useAsaListQuery.getKey = (variables?: AsaListQueryVariables) =>
     variables === undefined ? ["asaList"] : ["asaList", variables];
 useAsaListQuery.fetcher = (variables?: AsaListQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<AsaListQuery, AsaListQueryVariables>(AsaListDocument, variables, options);
+export const AsaDataMinimumDocument = `
+    query asaDataMinimum($asaID: String!) {
+  asaData(asaID: $asaID) {
+    result {
+      assetId
+      available
+    }
+  }
+}
+    `;
+export const useAsaDataMinimumQuery = <TData = AsaDataMinimumQuery, TError = unknown>(
+    variables: AsaDataMinimumQueryVariables,
+    options?: UseQueryOptions<AsaDataMinimumQuery, TError, TData>,
+) =>
+    useQuery<AsaDataMinimumQuery, TError, TData>(
+        ["asaDataMinimum", variables],
+        fetchData<AsaDataMinimumQuery, AsaDataMinimumQueryVariables>(AsaDataMinimumDocument, variables),
+        options,
+    );
+
+useAsaDataMinimumQuery.getKey = (variables: AsaDataMinimumQueryVariables) => ["asaDataMinimum", variables];
+useAsaDataMinimumQuery.fetcher = (variables: AsaDataMinimumQueryVariables, options?: RequestInit["headers"]) =>
+    fetchData<AsaDataMinimumQuery, AsaDataMinimumQueryVariables>(AsaDataMinimumDocument, variables, options);
 export const RedditAnalyticsDocument = `
     query redditAnalytics($asaID: String!, $endDate: String, $startDate: String) {
   redditAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate) {

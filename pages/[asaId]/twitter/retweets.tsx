@@ -1,46 +1,38 @@
 import type { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SentimentBarChart } from "src/components/SentimentBarChart";
-import { SentimentLineChart } from "src/components/SentimentLineChart";
-import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useTwitterAnalyticsQuery } from "src/generated/graphql";
+import { useSocialAnalyticsHook } from "src/hooks/useSocialAnalyticsHook";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
-import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
+import { AnalysisBar } from "src/sections/AnalysisBar";
 import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
-import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const router = useRouter();
-    const { asaId } = router.query;
-    const { selectedAsa } = useStore();
-    const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
-        asaID: asaId as string,
-        startDate: "2020-01-01",
-        weekday: true,
-    });
+    const { data, list, setList } = useSocialAnalyticsHook("twitter");
+
     let retweetAnalytics = [] as Array<any>;
 
     useEffect(() => {
         if (data) {
-            data.twitterAnalytics?.results?.forEach((item) => {
+            data.twitterAnalytics?.results?.forEach((item: { likes: any; weekday: any }) => {
                 retweetAnalytics.push({
                     data: item.likes,
                     name: item.weekday,
                 });
             });
         }
+
+        setList(retweetAnalytics);
     }, [data]);
     return (
         <DashboardLayout>
             <div className={styles.dashboardContainer}>
+                <AnalysisBar socialType={"twitter"} />
                 <TwitterSubLinks />
                 <div className={styles.sentimentChartContainer}>
                     {data?.twitterAnalytics?.results?.length ? (
-                        <SentimentBarChart title="Retweets (Past 15 days)" data={retweetAnalytics} />
+                        <SentimentBarChart title="Retweets (Past 15 days)" data={list} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

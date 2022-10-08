@@ -6,6 +6,10 @@
     align-items: center;
     padding: 2em 4em;
     background-color: $primary-color;
+
+    & > div {
+        cursor: pointer;
+    }
 }
 
 .headerInfoContainer {

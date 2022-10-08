@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SummaryLineChart } from "src/components/SummaryLineChart";
@@ -12,6 +12,11 @@ export function GithubSummary() {
         asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
     });
+
+    const [commitAnalyticsInState, setcommitAnalyticsInState] = useState([] as any);
+    const [starAnalyticsInState, setstarAnalyticsInState] = useState([] as any);
+    const [watchAnalyticsInState, setwatchAnalyticsInState] = useState([] as any);
+
     const commitAnalytics = [] as Array<any>;
     const starAnalytics = [] as Array<any>;
     const watchAnalytics = [] as Array<any>;
@@ -33,6 +38,10 @@ export function GithubSummary() {
                 });
             });
         }
+
+        setcommitAnalyticsInState(commitAnalytics);
+        setstarAnalyticsInState(starAnalytics);
+        setwatchAnalyticsInState(watchAnalytics);
     }, [data]);
     return (
         <div className={styles.summaryContainer}>
@@ -50,9 +59,9 @@ export function GithubSummary() {
                 />
             ) : (
                 <div className={styles.chartContainer}>
-                    <SummaryLineChart title="Commits" data={commitAnalytics} />
-                    <SummaryLineChart title="Stars" data={starAnalytics} />
-                    <SummaryLineChart title="Watches" data={watchAnalytics} />
+                    <SummaryLineChart title="Commits" data={commitAnalyticsInState} />
+                    <SummaryLineChart title="Stars" data={starAnalyticsInState} />
+                    <SummaryLineChart title="Watches" data={watchAnalyticsInState} />
                 </div>
             )}
         </div>

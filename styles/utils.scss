@@ -1,0 +1,11 @@
+@function compute_ems($px_value, $font_size: 16) {
+    $compute_ems: ($px_value / $font_size);
+    @return $compute_ems + em;
+}
+
+@mixin appearance($property) {
+    appearance: $property;
+    -webkit-appearance: $property;
+    -moz-appearance: $property;
+    -ms-appearance: $property;
+}

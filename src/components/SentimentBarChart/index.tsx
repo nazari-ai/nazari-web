@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-import { XAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
+import { XAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from "recharts";
+import randomColor from "randomcolor";
+
+const colors = randomColor({
+    count: 10,
+});
 
 type Props = {
     title?: string;
@@ -23,7 +28,11 @@ export function SentimentBarChart(props: Props) {
             </div>
             <ResponsiveContainer height={300}>
                 <BarChart width={150} height={40} barCategoryGap="1%" data={data}>
-                    <Bar dataKey="data" fill="#6FD791" radius={[5, 5, 0, 0]} />
+                    <Bar dataKey="data" fill="#6FD791" radius={[5, 5, 0, 0]}>
+                        {data.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                        ))}
+                    </Bar>
                     <XAxis
                         dataKey="name"
                         tickLine={false}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SummaryLineChart } from "src/components/SummaryLineChart";
@@ -12,6 +12,11 @@ export function TwitterSummary() {
         asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
     });
+
+    const [sentimentAnalyticsInState, setsentimentAnalyticsInState] = useState([] as any);
+    const [retweetAnalyticsInState, setretweetAnalyticsInState] = useState([] as any);
+    const [likeAnalyticsInState, setlikeAnalyticsInState] = useState([] as any);
+
     const sentimentAnalytics = [] as Array<any>;
     const retweetAnalytics = [] as Array<any>;
     const likeAnalytics = [] as Array<any>;
@@ -33,6 +38,10 @@ export function TwitterSummary() {
                 });
             });
         }
+
+        setsentimentAnalyticsInState(sentimentAnalytics);
+        setretweetAnalyticsInState(retweetAnalytics);
+        setlikeAnalyticsInState(likeAnalytics);
     }, [data]);
     return (
         <div className={styles.summaryContainer}>
@@ -50,9 +59,9 @@ export function TwitterSummary() {
                 />
             ) : (
                 <div className={styles.chartContainer}>
-                    <SummaryLineChart title="Likes" data={likeAnalytics} />
-                    <SummaryLineChart title="Retweet" data={retweetAnalytics} />
-                    <SummaryLineChart title="Sentiments" data={sentimentAnalytics} />
+                    <SummaryLineChart title="Likes" data={likeAnalyticsInState} />
+                    <SummaryLineChart title="Retweet" data={retweetAnalyticsInState} />
+                    <SummaryLineChart title="Sentiments" data={sentimentAnalyticsInState} />
                 </div>
             )}
         </div>

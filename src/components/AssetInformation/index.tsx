@@ -14,7 +14,7 @@ export function AssetInformation(props: Props) {
     const { selectedAsa } = useStore();
     const { data, isFetching, error, status } = useAsaDataQuery({ asaID: selectedAsa.assetId });
     return (
-        <div className={`${styles.infoContainer}`}>
+        <div data-testid="asset-information" className={`${styles.infoContainer}`}>
             {data?.asaData?.result[0]?.logo ? (
                 <Image
                     className={styles.assetLogo}
@@ -26,7 +26,7 @@ export function AssetInformation(props: Props) {
                 />
             ) : (
                 <div className={styles.assetLogoPlaceholder}>
-                    <p>{selectedAsa.name.substring(0, 2).toUpperCase()}</p>
+                    <p>{data?.asaData?.result[0]?.name.substring(0, 2).toUpperCase()}</p>
                 </div>
             )}
             <div className={styles.infoSection}>

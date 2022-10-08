@@ -1,38 +1,41 @@
 import styles from "./style.module.scss";
 import { useRouter } from "next/router";
 import { DashboardSubLink } from "src/components/DashboardSubLink";
+import { useStore } from "src/store";
 
 export function GithubSubLinks() {
+    const { selectedAsa } = useStore();
     const router = useRouter();
+
     const dashboardLinks = [
         {
             id: 1,
-            path: "/dashboard/github",
+            path: `/${selectedAsa.assetId || "pass"}/github`,
             title: "Overview",
         },
         {
             id: 2,
-            path: "/dashboard/github/stars",
+            path: `/${selectedAsa.assetId || "pass"}/github/stars`,
             title: "Stars",
         },
         {
             id: 3,
-            path: "/dashboard/github/watches",
+            path: `/${selectedAsa.assetId || "pass"}/github/watches`,
             title: "Watches",
         },
         {
             id: 4,
-            path: "/dashboard/github/commits",
+            path: `/${selectedAsa.assetId || "pass"}/github/commits`,
             title: "Commits",
         },
         {
             id: 5,
-            path: "/dashboard/github/issues",
+            path: `/${selectedAsa.assetId || "pass"}/github/issues`,
             title: "Issues",
         },
         {
             id: 6,
-            path: "/dashboard/github/pull-requests",
+            path: `/${selectedAsa.assetId || "pass"}/github/pull-requests`,
             title: "Pull Requests",
         },
     ];
@@ -46,7 +49,7 @@ export function GithubSubLinks() {
                             key={link.id}
                             href={link.path}
                             title={link.title}
-                            className={router.pathname === link.path ? "activeLink" : ""}
+                            className={router.asPath === link.path ? "activeLink" : ""}
                         />
                     );
                 })}

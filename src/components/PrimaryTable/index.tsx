@@ -10,7 +10,7 @@ type Props = {
 
 export function PrimaryTable(props: Props) {
     return (
-        <div className={styles.tableContainer}>
+        <div data-testid="primary-table" className={styles.tableContainer}>
             <Table
                 className={styles.table}
                 columns={props.columns}

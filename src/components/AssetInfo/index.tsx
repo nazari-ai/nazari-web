@@ -9,14 +9,16 @@ import styles from "./style.module.scss";
 type Props = {
     asset: asset;
     className: string;
+    handleClick: (asa: asset) => void;
 };
 
 export function AssetInfo(props: Props) {
-    const { setSelectedAsa } = useStore();
+    const { setPickedAsa } = useStore();
     return (
         <div
             className={`${styles.asset} ${styles[props.className]}`}
-            onClick={() => (props.asset.available ? setSelectedAsa(props.asset) : null)}
+            onClick={() => (props.asset.available ? props.handleClick(props.asset) : null)}
+            data-testid="asset-info"
         >
             <div className={styles.assetInfo}>
                 <p className={styles.assetName}>{props.asset.name}</p>

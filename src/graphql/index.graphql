@@ -31,12 +31,21 @@ query asaData($asaID: String!) {
 
 query asaList {
     asalist {
-        results {
+        result {
             assetId
             available
             logo
             name
             unitname1
+        }
+    }
+}
+
+query asaDataMinimum($asaID: String!) {
+    asaData(asaID: $asaID) {
+        result {
+            assetId
+            available
         }
     }
 }

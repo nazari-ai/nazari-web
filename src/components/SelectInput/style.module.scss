@@ -1,0 +1,20 @@
+@import "/styles/variables.scss";
+@import "/styles/utils.scss";
+
+.selectInput {
+    border: 1px solid $secondary-grey-border;
+    border-radius: compute_ems(4, 12);
+    outline: none;
+    padding: compute_ems(8, 12);
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: compute_ems(24, 12);
+    width: 142px;
+
+    @include appearance(none);
+    background: url("../../../public/images/select_icon.svg");
+    background-repeat: no-repeat;
+    background-size: 10.52px 6.25px;
+    background-position: right;
+    background-origin: content-box;
+}

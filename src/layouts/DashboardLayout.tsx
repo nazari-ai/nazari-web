@@ -7,7 +7,7 @@ import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { motion } from "framer-motion";
 import { DefaultLayout } from "./DefaultLayout";
 import { useStore } from "src/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { useAsaDataQuery } from "src/generated/graphql";
@@ -16,9 +16,33 @@ type Type = {
     children: any;
 };
 export function DashboardLayout({ children }: Type) {
-    const { analyzeModal, selectedAsa, openAnalyzeModal } = useStore();
+    const { analyzeModal, selectedAsa, openAnalyzeModal, setSelectedAsa } = useStore();
+    const [asaID, setAsaID] = useState("");
     const router = useRouter();
-    const { data, isFetching, error, status } = useAsaDataQuery({ asaID: selectedAsa.assetId });
+    const { asaId } = router.query;
+
+    const { data, error, status, isLoading } = useAsaDataQuery({ asaID: asaID });
+
+    useEffect(() => {
+        if (asaId) {
+            setAsaID(asaId as string);
+        }
+    }, [router]);
+
+    useEffect(() => {
+        if (data) {
+            if (data.asaData.result[0]?.assetId) {
+                setSelectedAsa({
+                    assetId: data.asaData.result[0].assetId,
+                    available: data.asaData.result[0].available,
+                    logo: data.asaData.result[0].logo,
+                    unitname1: data.asaData.result[0].unitname1 ?? "",
+                    name: data.asaData.result[0].name,
+                });
+            }
+        }
+    }, [data]);
+
     const variants = {
         hidden: { opacity: 0, x: 0, y: 0 },
         enter: { opacity: 1, x: 0, y: 0 },
@@ -26,18 +50,20 @@ export function DashboardLayout({ children }: Type) {
     };
 
     useEffect(() => {
-        if (selectedAsa.assetId === "") {
-            router.push("/");
-            toast("No asset selected", {
-                id: "waitlist-toast",
-                icon: "👏",
-                style: {
-                    borderRadius: "10px",
-                    background: "#fb6c6c",
-                    color: "#fff",
-                },
-            });
-            openAnalyzeModal();
+        if (status === "success") {
+            if (selectedAsa.assetId === "") {
+                router.push("/");
+                toast("No asset selected", {
+                    id: "waitlist-toast",
+                    icon: "👏",
+                    style: {
+                        borderRadius: "10px",
+                        background: "#fb6c6c",
+                        color: "#fff",
+                    },
+                });
+                openAnalyzeModal();
+            }
         }
     }, [router]);
 

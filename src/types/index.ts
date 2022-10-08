@@ -6,3 +6,15 @@ export interface asset {
     name: string;
     unitname1: string;
 }
+
+export interface dateRangeType {
+    startDate: Date;
+    endDate: Date | null;
+    key: string;
+}
+
+export interface AnalysisTypeType {
+    hour: boolean;
+    weekdays: boolean;
+    day: boolean;
+}

@@ -1,28 +1,27 @@
 import type { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
-import { useGithubAnalyticsPerTimeQuery, useGithubOverviewQuery } from "src/generated/graphql";
+import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
 import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { GithubAnalysisSummary } from "src/sections/GithubAnalysisSummary";
 import { GithubSubLinks } from "src/sections/GithubSubLinks";
-import { TwitterAnalysisSummary } from "src/sections/TwitterAnalysisSummary";
-import { TwitterSubLinks } from "src/sections/TwitterSubLinks";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 
 const Home: NextPage = () => {
-    const router = useRouter();
-    const { asaId } = router.query;
     const { selectedAsa } = useStore();
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
-        asaID: asaId as string,
+        asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
+        weekDay: true,
     });
+
+    const [commitAnalyticsState, setcommitAnalyticsState] = useState([] as any);
+    const [issueAnalyticsState, setissueAnalyticsState] = useState([] as any);
+
     let commitAnalytics = [] as Array<any>;
     let issueAnalytics = [] as Array<any>;
 
@@ -31,13 +30,15 @@ const Home: NextPage = () => {
             data.githubAnalyticsPertime?.repo?.forEach((item) => {
                 commitAnalytics.push({
                     data: item.commits,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    name: item.lastPushDateWeekday,
                 });
                 issueAnalytics.push({
                     data: item.issues,
-                    name: new Date(item.lastPushDate)?.toLocaleDateString(),
+                    name: item.lastPushDateWeekday,
                 });
             });
+            setissueAnalyticsState(issueAnalytics);
+            setcommitAnalyticsState(commitAnalytics);
         }
     }, [data]);
 
@@ -63,7 +64,7 @@ const Home: NextPage = () => {
                             <SummaryBarChart
                                 header="COMMITS ARE MOSTLY MADE ON"
                                 title="Wednesday"
-                                data={commitAnalytics}
+                                data={commitAnalyticsState}
                             />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
@@ -73,7 +74,7 @@ const Home: NextPage = () => {
                             <SummaryBarChart
                                 header="ISSUES ARE MOSTLY GOTTEN ON"
                                 title="Friday"
-                                data={issueAnalytics}
+                                data={issueAnalyticsState}
                             />
                         ) : (
                             <PrimaryEmptyState text="No data for this section" />
