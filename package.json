@@ -35,6 +35,7 @@
         "react-loading-skeleton": "^3.1.0",
         "react-query": "^3.39.0",
         "react-spring": "^9.4.5",
+        "react-switch": "^7.0.0",
         "recharts": "^2.1.10",
         "sass": "^1.51.0",
         "suggestion-react-input-search": "^1.4.0",

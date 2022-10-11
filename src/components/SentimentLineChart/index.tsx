@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import { LineChart, Line, Tooltip, ResponsiveContainer, CartesianGrid, XAxis, YAxis } from "recharts";
+import { CustomTooltip } from "../CustomTooltip";
 
 type Props = {
     title?: string;
@@ -23,7 +24,7 @@ export function SentimentLineChart(props: Props) {
             <ResponsiveContainer height={300}>
                 <LineChart data={data}>
                     <Line type="monotone" dataKey="data" stroke="#6FD791" />
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip />} />
                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <XAxis dataKey="name" />
                     <YAxis />

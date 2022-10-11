@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .table {
     border-collapse: collapse;
     width: 100%;
@@ -11,7 +13,7 @@
         font-size: 0.8em;
         text-align: left;
         padding: 20px;
-        color: #808080;
+        color: var(--secondary-grey-text);
     }
 
     td {
@@ -19,7 +21,7 @@
         font-size: 0.8em;
         text-align: left;
         padding: 20px;
-        color: #808080;
+        color: var(--secondary-grey-text);
     }
 
     tr {

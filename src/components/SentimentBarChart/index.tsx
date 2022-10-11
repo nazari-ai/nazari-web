@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import { XAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from "recharts";
 import randomColor from "randomcolor";
+import { CustomTooltip } from "../CustomTooltip";
 
 const colors = randomColor({
     count: 10,
@@ -39,7 +40,7 @@ export function SentimentBarChart(props: Props) {
                         axisLine={false}
                         tick={{ color: "#333333", strokeWidth: 0.1, fontWeight: 300, fontSize: ".6em" }}
                     />
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip />} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

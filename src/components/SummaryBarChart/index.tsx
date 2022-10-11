@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import { BarChart, Bar, Cell, XAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { CustomTooltip } from "../CustomTooltip";
 
 type Props = {
     title?: string;
@@ -37,7 +38,7 @@ export function SummaryBarChart(props: Props) {
                         axisLine={false}
                         tick={{ color: "#333333", strokeWidth: 0.1, fontWeight: 300, fontSize: ".6em" }}
                     />
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip />} />
                 </BarChart>
             </ResponsiveContainer>
         </div>
