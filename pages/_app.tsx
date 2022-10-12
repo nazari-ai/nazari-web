@@ -1,5 +1,6 @@
-import "../styles/globals.scss";
 import "../styles/reset.scss";
+import "../styles/globals.scss";
+
 import Head from "next/head";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
@@ -7,8 +8,22 @@ import { QueryClientProvider } from "react-query";
 import { queryClient } from "src/utils/gateway";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { AnimatePresence } from "framer-motion";
+import { createContext, useState } from "react";
+
+interface contextType {
+    theme: boolean;
+    toggleTheme: () => void;
+}
+
+export const ThemeContext = createContext<contextType | null>(null);
 
 function MyApp({ Component, pageProps }: AppProps) {
+    const [theme, setTheme] = useState(true);
+
+    const toggleTheme = () => {
+        setTheme(!theme);
+    };
+
     return (
         <>
             <QueryClientProvider client={queryClient}>
@@ -50,7 +65,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </Head>
                 <Toaster position="top-center" reverseOrder={false} />
                 <AnimatePresence exitBeforeEnter initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
-                    <Component {...pageProps} />
+                    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+                        <Component {...pageProps} />
+                    </ThemeContext.Provider>
                 </AnimatePresence>
                 <ReactQueryDevtools />
             </QueryClientProvider>

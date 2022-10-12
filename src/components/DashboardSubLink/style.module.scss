@@ -16,9 +16,9 @@
 }
 
 .activeLink {
-    color: $primary-black;
+    color: var(--primary-black);
     font-weight: 600;
-    border-bottom: 3px solid $primary-black;
+    border-bottom: 3px solid var(--primary-black);
 }
 
 @media only screen and (max-width: 640px) {

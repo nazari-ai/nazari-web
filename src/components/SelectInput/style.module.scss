@@ -10,6 +10,7 @@
     font-size: 0.75rem;
     line-height: compute_ems(24, 12);
     width: 142px;
+    color: var(--primary-black);
 
     @include appearance(none);
     background: url("../../../public/images/select_icon.svg");

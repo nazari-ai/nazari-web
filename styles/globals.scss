@@ -1,5 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=Readex+Pro:wght@200;300;400;500;600;700&display=swap");
 
+:root {
+    #{--primary-color}: #f2fbf6;
+    #{--primary-black}: #000000;
+    #{--primary-white}: #ffffff;
+    #{--primary-green}: #6fd791;
+    #{--primary-disabled-color}: #eaeaea;
+    #{--secondary-grey-border}: #b7becc;
+    #{--secondary-grey-text}: #626772b2;
+    #{--secondary-disabled-color}: #bbbcbb;
+    #{--error-red}: #ff0033;
+    #{--modal-background-color}: #ffffff;
+    #{--modal-ovelay-color}: #00000099;
+    #{--input-border-color}: rgb(98 103 114 / 30%);
+    #{--input-background-color}: #ffffff;
+}
+
+[data-theme="dark"] {
+    #{--primary-color}: #141517;
+    #{--primary-black}: #ffffff;
+    #{--primary-white}: #000000;
+    #{--primary-green}: #6fd791;
+    #{--primary-disabled-color}: #eaeaea;
+    #{--secondary-grey-border}: #b7becc;
+    #{--secondary-grey-text}: #a6a7ab;
+    #{--secondary-disabled-color}: #bbbcbb;
+    #{--error-red}: #ff0033;
+    #{--modal-background-color}: #1a1b1e;
+    #{--modal-ovelay-color}: #101113;
+    #{--input-border-color}: rgb(55, 58, 64);
+    #{--input-background-color}: rgb(37, 38, 43);
+}
+
 html,
 body {
     padding: 0;
@@ -18,4 +50,33 @@ a {
 
 .recharts-xAxis {
     display: none !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    color: var(--primary-black);
+}
+
+.switch {
+    cursor: pointer;
+    padding: 0px;
+    appearance: none;
+    font-size: 16px;
+    text-align: left;
+    text-decoration: none;
+    box-sizing: border-box;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid var(--secondary-grey-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-black);
+    background-color: var(--primary-color);
 }

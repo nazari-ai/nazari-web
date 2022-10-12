@@ -2,7 +2,7 @@
 
 .heroContainer {
     height: fit-container;
-    background-color: $primary-color;
+    background-color: var(--primary-color);
     flex-grow: 1;
     display: flex;
     justify-content: center;
@@ -36,7 +36,7 @@
     font-size: 1em;
     width: 450px;
     line-height: 1.6em;
-    color: $secondary-grey-text;
+    color: var(--secondary-grey-text);
     font-weight: 300;
     margin-bottom: 1.5em;
 }

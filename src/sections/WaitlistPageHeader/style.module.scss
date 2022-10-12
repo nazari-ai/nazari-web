@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 2em 4em;
-    background-color: $primary-color;
+    background-color: var(--primary-color);
 }
 
 .headerInfoContainer {
@@ -24,7 +24,7 @@
 }
 .disabledButton {
     background-color: $primary-disabled-color;
-    color: $primary-black;
+    color: var(--primary-black);
     font-weight: 500;
     padding: 1.5em;
     border-radius: 0.8em;
@@ -33,8 +33,8 @@
 }
 
 .activeButton {
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: var(--primary-black);
+    color: var(--primary-white);
     font-weight: 500;
     padding: 1.5em;
     border-radius: 0.8em;
