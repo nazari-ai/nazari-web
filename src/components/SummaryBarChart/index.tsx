@@ -12,6 +12,8 @@ type Props = {
 export function SummaryBarChart(props: Props) {
     const [data, setData] = useState([] as Array<any>);
 
+    const colors = ["#EEEEBB", "#284328", "#BC3131", "#FFFFFF", "#1C78AC"];
+
     useEffect(() => {
         if (props.data) {
             setData(props.data);
@@ -31,7 +33,12 @@ export function SummaryBarChart(props: Props) {
             </div>
             <ResponsiveContainer height={300}>
                 <BarChart width={150} height={40} barCategoryGap="3%" data={data}>
-                    <Bar dataKey="data" fill="#6FD791" radius={[10, 10, 0, 0]} />
+                    {/* <Bar dataKey="data" fill="#6FD791"  /> */}
+                    <Bar dataKey="data" fill="#6FD791" radius={[10, 10, 0, 0]}>
+                        {props.data.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={colors[index]} />
+                        ))}
+                    </Bar>
                     <XAxis
                         dataKey="name"
                         tickLine={false}

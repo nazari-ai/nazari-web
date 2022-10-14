@@ -18,4 +18,8 @@
     background-size: 10.52px 6.25px;
     background-position: right;
     background-origin: content-box;
+
+    option {
+        background-color: var(--input-background-color);
+    }
 }
