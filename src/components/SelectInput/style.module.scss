@@ -13,7 +13,7 @@
     color: var(--primary-black);
 
     @include appearance(none);
-    background: url("../../../public/images/select_icon.svg");
+    background: var(--select-icon);
     background-repeat: no-repeat;
     background-size: 10.52px 6.25px;
     background-position: right;

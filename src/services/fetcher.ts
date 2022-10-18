@@ -1,6 +1,6 @@
 export const fetchData = <TData, TVariables>(query: string, variables?: TVariables): (() => Promise<TData>) => {
     return async (): Promise<TData> => {
-        const res = await fetch(`https://analytics-api.herokuapp.com/analytics`, {
+        const res = await fetch(`https://asalytics-backend-lhnwbn4frq-uc.a.run.app/analytics`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -15,6 +15,7 @@
     #{--input-border-color}: rgb(98 103 114 / 30%);
     #{--input-background-color}: #ffffff;
     #{--sidebar-background-color}: #f2fbf6;
+    #{--select-icon}: url("../public/images/select_icon.svg");
 }
 
 [data-theme="dark"] {
@@ -32,6 +33,7 @@
     #{--input-border-color}: rgb(55, 58, 64);
     #{--input-background-color}: rgb(37, 38, 43);
     #{--sidebar-background-color}: #040406;
+    #{--select-icon}: url("../public/images/dark-down-select.png");
 }
 
 html,

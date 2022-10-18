@@ -12,7 +12,7 @@ type Props = {
 export function SummaryBarChart(props: Props) {
     const [data, setData] = useState([] as Array<any>);
 
-    const colors = ["#EEEEBB", "#284328", "#BC3131", "#FFFFFF", "#1C78AC"];
+    const colors = ["#EEEEBB", "#284328", "#BC3131", "#FFFFFF", "#1C78AC", "#6F6B84", "#EE8C8C"];
 
     useEffect(() => {
         if (props.data) {
