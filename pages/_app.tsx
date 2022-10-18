@@ -56,6 +56,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <link rel="icon" href="/favicon.ico"></link>
 
                     <title>Nazari</title>
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300;400;700&display=swap"
+                        rel="stylesheet"
+                    ></link>
 
                     <script
                         src="https://sak.userreport.com/asalytics/launcher.js"
