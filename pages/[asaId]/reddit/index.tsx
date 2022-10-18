@@ -8,10 +8,11 @@ import { DashboardLayout } from "src/layouts/DashboardLayout";
 import { DashboardAssetSocial } from "src/sections/DashboardAssetSocials";
 import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { PrimaryTableMoreButton } from "src/components/PrimaryTableMoreButton";
 import { useRouter } from "next/router";
+import { ThemeContext } from "@pages/_app";
 
 const Home: NextPage = () => {
     const { selectedAsa } = useStore();
@@ -21,6 +22,7 @@ const Home: NextPage = () => {
     });
 
     const router = useRouter();
+    const theme = useContext(ThemeContext);
 
     const [issueAnalyticsStateInState, setissueAnalyticsStateInState] = useState([] as any);
 
@@ -102,8 +104,8 @@ const Home: NextPage = () => {
                             count={1}
                             containerClassName={styles.summaryBarChartContainer}
                             className={styles.detailContainer}
-                            baseColor="#ebebeb"
-                            highlightColor="#f5f5f5"
+                            baseColor={theme?.theme ? "#333333" : "#ebebeb"}
+                            highlightColor={theme?.theme ? "#626772" : "#f5f5f5"}
                             height="200px"
                             width="100%"
                         />

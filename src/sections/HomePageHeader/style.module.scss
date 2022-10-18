@@ -34,7 +34,7 @@
     left: -20px;
 }
 .disabledButton {
-    background-color: $primary-disabled-color;
+    background-color: var(--primary-disabled-color);
     color: var(--primary-black);
     font-weight: 500;
     padding: 1.5em;

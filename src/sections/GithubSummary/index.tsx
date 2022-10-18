@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { ThemeContext } from "@pages/_app";
+import { useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SummaryLineChart } from "src/components/SummaryLineChart";
@@ -8,6 +9,7 @@ import styles from "./style.module.scss";
 
 export function GithubSummary() {
     const { selectedAsa } = useStore();
+    const theme = useContext(ThemeContext);
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
         asaID: selectedAsa.assetId,
         startDate: "2020-01-01",
@@ -52,8 +54,8 @@ export function GithubSummary() {
                     count={3}
                     containerClassName={styles.chartContainer}
                     className={styles.detailContainer}
-                    baseColor="#ebebeb"
-                    highlightColor="#f5f5f5"
+                    baseColor={theme?.theme ? "#333333" : "#ebebeb"}
+                    highlightColor={theme?.theme ? "#626772" : "#f5f5f5"}
                     height="150px"
                     width="100%"
                 />
