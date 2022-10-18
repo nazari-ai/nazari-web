@@ -10,11 +10,11 @@ function Sun({}: Props) {
             width="22"
             height="22"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         >
             <desc>Download more icon variants from https://tabler-icons.io/i/sun</desc>
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

@@ -11,7 +11,7 @@ export function CustomTooltip({ payload, label, active }: CustomTooltipType) {
         return (
             <div className={styles.customTooltip}>
                 <p className={styles.label}>{label}</p>
-                <p className={styles.intro}>{payload[0].value}</p>
+                <p className={styles.intro}>{payload && payload.length ? payload[0].value : ""}</p>
             </div>
         );
     }
