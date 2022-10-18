@@ -12,7 +12,7 @@ export function DefaultLayout({ children }: Type) {
     const { analyzeModal } = useStore();
 
     return (
-        <div data-theme={theme?.theme ? "dark" : "light"} style={{ backgroundColor: theme?.theme ? "#141517" : "" }}>
+        <div data-theme={theme?.theme ? "dark" : "light"} style={{ backgroundColor: theme?.theme ? "#262626" : "" }}>
             {analyzeModal ? <AnalyzeAsaModal /> : null}
             {children}
         </div>

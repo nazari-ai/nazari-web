@@ -17,7 +17,7 @@
     margin-top: 2em;
 
     & a {
-        color: #800080;
+        color: var(--note-primary);
         font-weight: 500;
     }
 }

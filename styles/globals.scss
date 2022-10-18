@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=Readex+Pro:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300;400;700&display=swap");
 
 :root {
     #{--primary-color}: #f2fbf6;
@@ -16,6 +16,7 @@
     #{--input-background-color}: #ffffff;
     #{--sidebar-background-color}: #f2fbf6;
     #{--select-icon}: url("../public/images/select_icon.svg");
+    #{--note-primary}: #800080;
 }
 
 [data-theme="dark"] {
@@ -23,7 +24,7 @@
     #{--primary-black}: #ffffff;
     #{--primary-white}: #000000;
     #{--primary-green}: #6fd791;
-    #{--primary-disabled-color}: #eaeaea;
+    #{--primary-disabled-color}: #626772b2;
     #{--secondary-grey-border}: #b7becc;
     #{--secondary-grey-text}: #a6a7ab;
     #{--secondary-disabled-color}: #bbbcbb;
@@ -32,8 +33,9 @@
     #{--modal-ovelay-color}: #101113;
     #{--input-border-color}: rgb(55, 58, 64);
     #{--input-background-color}: rgb(37, 38, 43);
-    #{--sidebar-background-color}: #040406;
+    #{--sidebar-background-color}: #262626;
     #{--select-icon}: url("../public/images/dark-down-select.png");
+    #{--note-primary}: #e477e4;
 }
 
 html,
@@ -49,7 +51,7 @@ a {
 
 * {
     box-sizing: border-box;
-    font-family: "Readex Pro", sans-serif;
+    font-family: "Averia Sans Libre", cursive;
 }
 
 .recharts-xAxis {
