@@ -5,7 +5,7 @@ import { PrimaryInput } from "../../components/PrimaryInput";
 import styles from "./style.module.scss";
 import { useFormik } from "formik";
 import { useSpring, animated } from "react-spring";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { defaultAsa, useStore } from "src/store";
@@ -14,6 +14,8 @@ import { AssetInfo } from "src/components/AssetInfo";
 import { SearchInput } from "src/components/SearchInput";
 import { asset } from "src/types";
 import { useRouter } from "next/router";
+import CloseIcon from "src/components/Icons/CloseIcon";
+import { ThemeContext } from "@pages/_app";
 
 const validate = (values: any) => {
     const errors = {} as any;
@@ -26,6 +28,7 @@ const validate = (values: any) => {
 
 export function AnalyzeAsaModal() {
     const router = useRouter();
+    const theme = useContext(ThemeContext);
 
     const { openAnalyzeModal, selectedAsa, setSelectedAsa, pickedAsa, setPickedAsa } = useStore((state) => ({
         openAnalyzeModal: state.openAnalyzeModal,
@@ -112,7 +115,7 @@ export function AnalyzeAsaModal() {
             >
                 <div className={styles.modalHeader}>
                     <div className={styles.headerLogoContainer}></div>
-                    <Image
+                    {/* <Image
                         className={styles.headerCloseIcon}
                         onClick={openAnalyzeModal}
                         src="/images/close.svg"
@@ -120,7 +123,10 @@ export function AnalyzeAsaModal() {
                         width={50}
                         height={60}
                         priority={true}
-                    />
+                    /> */}
+                    <div className={styles.headerCloseIcon} onClick={openAnalyzeModal}>
+                        <CloseIcon fill={theme?.theme ? "#ffffff" : ""} />
+                    </div>
                 </div>
 
                 <form className={styles.form} onSubmit={handleSubmit} name="Analyze ASA">

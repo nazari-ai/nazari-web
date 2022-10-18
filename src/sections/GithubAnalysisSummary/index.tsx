@@ -5,9 +5,12 @@ import styles from "./style.module.scss";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
+import { ThemeContext } from "@pages/_app";
+import { useContext } from "react";
 
 export function GithubAnalysisSummary() {
     const { selectedAsa } = useStore();
+    const theme = useContext(ThemeContext);
     const { status, data, error, isFetching } = useGithubOverviewQuery({ asaID: selectedAsa.assetId });
     return (
         <div className={styles.summaryContainer}>
@@ -16,8 +19,8 @@ export function GithubAnalysisSummary() {
                 <Skeleton
                     count={6}
                     containerClassName={styles.chartContainer}
-                    baseColor="#ebebeb"
-                    highlightColor="#f5f5f5"
+                    baseColor={theme?.theme ? "#333333" : "#ebebeb"}
+                    highlightColor={theme?.theme ? "#626772" : "#f5f5f5"}
                     height="50px"
                 />
             ) : (

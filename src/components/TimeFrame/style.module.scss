@@ -26,8 +26,8 @@
     }
 
     .activeBtn {
-        background-color: $primary-black;
-        color: #ffffff;
+        background-color: var(--primary-black);
+        color: var(--primary-color);
         border: none;
     }
 

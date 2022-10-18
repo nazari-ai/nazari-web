@@ -23,7 +23,7 @@
 .paragraph {
     font-size: 1em;
     line-height: 1.6em;
-    color: $secondary-grey-text;
+    color: var(--secondary-grey-text);
     font-weight: 300;
     margin-bottom: 1.5em;
 }

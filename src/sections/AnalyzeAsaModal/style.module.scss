@@ -27,7 +27,7 @@
     border-radius: 20px;
     width: 100%;
     max-width: 500px;
-    background-color: $primary-white;
+    background-color: var(--modal-background-color);
     height: fit-content;
     position: relative;
 }
@@ -54,7 +54,7 @@
     flex-direction: column;
     margin: 1em 0em 1em 0em;
     gap: 1.5em;
-    background-color: $primary-color;
+    background-color: var(--primary-color);
     padding: 1em;
     border-radius: 20px;
     position: absolute;

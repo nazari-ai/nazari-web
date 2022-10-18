@@ -5,7 +5,8 @@
     justify-content: flex-end;
     align-items: center;
     padding: 1em 2em;
-    border-bottom: 1px solid $primary-disabled-color;
+    border-bottom: 1px solid var(--primary-disabled-color);
+    gap: 1em;
 }
 
 @media only screen and (max-width: 640px) {

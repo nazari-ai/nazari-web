@@ -1,8 +1,8 @@
 @import "/styles/variables.scss";
 
 .primaryButton {
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: var(--primary-black);
+    color: var(--primary-white);
     font-weight: 500;
     padding: 1.4em 2em;
     border-radius: 0.8em;
@@ -16,13 +16,13 @@
 
 .secondaryButton {
     background-color: $primary-green;
-    color: $primary-black;
+    color: var(--primary-black);
     cursor: not-allowed;
 }
 
 .disabledButton {
-    background-color: $primary-disabled-color;
-    color: $primary-black;
+    background-color: var(--primary-disabled-color);
+    color: var(--primary-black);
 }
 
 @media only screen and (max-width: 600px) {

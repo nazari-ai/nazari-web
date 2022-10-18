@@ -1,7 +1,7 @@
 @import "/styles/variables.scss";
 
 .chartContainer {
-    border: 1px solid $primary-disabled-color;
+    border: 1px solid var(--primary-disabled-color);
     border-radius: 0.8em;
     min-width: 95%;
     width: 100%;
@@ -15,7 +15,7 @@
 
 .chartTitle {
     font-size: 0.8em;
-    color: $secondary-grey-text;
+    color: var(--secondary-grey-text);
     text-decoration: underline;
     // margin: 1em;
 }

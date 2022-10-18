@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
 import { SummaryBarChart } from "src/components/SummaryBarChart";
@@ -12,6 +12,7 @@ import { useStore } from "src/store";
 import styles from "../../../styles/dashboard.module.scss";
 import { sortByWeekday } from "src/utils/sortFunctions";
 import { removeDuplicate, getMostDoneInWeekDay } from "src/utils";
+import { ThemeContext } from "@pages/_app";
 
 const Home: NextPage = () => {
     const { selectedAsa } = useStore();
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
         startDate: "2020-01-01",
         weekDay: true,
     });
+    const theme = useContext(ThemeContext);
 
     const sortedData: GithubAnalyticsPerTime[] = sortByWeekday(data?.githubAnalyticsPertime.repo ?? ["hello"]);
 
@@ -60,8 +62,8 @@ const Home: NextPage = () => {
                         count={2}
                         containerClassName={styles.summaryBarChartContainer}
                         className={styles.detailContainer}
-                        baseColor="#ebebeb"
-                        highlightColor="#f5f5f5"
+                        baseColor={theme?.theme ? "#333333" : "#ebebeb"}
+                        highlightColor={theme?.theme ? "#626772" : "#f5f5f5"}
                         height="200px"
                         width="100%"
                     />
