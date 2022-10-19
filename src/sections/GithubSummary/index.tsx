@@ -8,11 +8,11 @@ import { useStore } from "src/store";
 import styles from "./style.module.scss";
 
 export function GithubSummary() {
-    const { selectedAsa } = useStore();
+    const { selectedAsa, dateRange } = useStore();
     const theme = useContext(ThemeContext);
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
         asaID: selectedAsa.assetId,
-        startDate: "2020-01-01",
+        startDate: dateRange.startDate,
     });
 
     const [commitAnalyticsInState, setcommitAnalyticsInState] = useState([] as any);

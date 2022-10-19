@@ -171,6 +171,7 @@ export type RedditPostSchema = {
     postId: Scalars["String"];
     postText?: Maybe<Scalars["String"]>;
     postTitle: Scalars["String"];
+    rank: Scalars["Int"];
     score: Scalars["Int"];
     sentimentScore: Scalars["Float"];
 };

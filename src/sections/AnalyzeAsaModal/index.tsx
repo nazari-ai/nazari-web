@@ -30,7 +30,7 @@ export function AnalyzeAsaModal() {
     const router = useRouter();
     const theme = useContext(ThemeContext);
 
-    const { openAnalyzeModal, selectedAsa, setSelectedAsa, pickedAsa, setPickedAsa } = useStore((state) => ({
+    const { openAnalyzeModal, selectedAsa, setSelectedAsa, pickedAsa, setPickedAsa } = useStore((state: any) => ({
         openAnalyzeModal: state.openAnalyzeModal,
         selectedAsa: state.selectedAsa,
         setSelectedAsa: state.setSelectedAsa,
@@ -115,15 +115,7 @@ export function AnalyzeAsaModal() {
             >
                 <div className={styles.modalHeader}>
                     <div className={styles.headerLogoContainer}></div>
-                    {/* <Image
-                        className={styles.headerCloseIcon}
-                        onClick={openAnalyzeModal}
-                        src="/images/close.svg"
-                        alt="Close Icon"
-                        width={50}
-                        height={60}
-                        priority={true}
-                    /> */}
+
                     <div className={styles.headerCloseIcon} onClick={openAnalyzeModal}>
                         <CloseIcon fill={theme?.theme ? "#ffffff" : ""} />
                     </div>
