@@ -23,6 +23,19 @@
     font-weight: 500;
 }
 
+.selectInput {
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-end;
+
+    label {
+        color: var(--primary-black);
+        font-size: 0.9rem;
+        margin-bottom: 0.6em;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .chartContainer {
         overflow-y: scroll;

@@ -1,7 +1,9 @@
 import { ThemeContext } from "@pages/_app";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
+import { SelectInput } from "src/components/SelectInput";
 import { SummaryLineChart } from "src/components/SummaryLineChart";
 import { useTwitterAnalyticsQuery } from "src/generated/graphql";
 import { useStore } from "src/store";
@@ -13,6 +15,12 @@ export function TwitterSummary() {
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
         startDate: dateRange.startDate,
+    });
+
+    const [analysisTypeState, setAnalysisTypeState] = useState({
+        likes: true,
+        retweets: false,
+        sentiments: false,
     });
 
     const [sentimentAnalyticsInState, setsentimentAnalyticsInState] = useState([] as any);
@@ -45,9 +53,43 @@ export function TwitterSummary() {
         setretweetAnalyticsInState(retweetAnalytics);
         setlikeAnalyticsInState(likeAnalytics);
     }, [data]);
+
+    const selectOptions = ["likes", "retweets", "sentiments"];
+
+    const handleChangeAnalysisType: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+        let newAnalysisType;
+
+        if (e.target.value === "likes") {
+            newAnalysisType = {
+                likes: true,
+                retweets: false,
+                sentiments: false,
+            };
+        } else if (e.target.value === "retweets") {
+            newAnalysisType = {
+                likes: false,
+                retweets: true,
+                sentiments: false,
+            };
+        } else {
+            newAnalysisType = {
+                likes: false,
+                retweets: false,
+                sentiments: true,
+            };
+        }
+
+        setAnalysisTypeState(newAnalysisType);
+    };
+
     return (
         <div className={styles.summaryContainer}>
             <h1 className={styles.summaryHeader}>Twitter Summary</h1>
+
+            <div className={styles.selectInput}>
+                <label htmlFor="analysis_type">Analysis Type</label>
+                <SelectInput options={selectOptions} handleChange={handleChangeAnalysisType} />
+            </div>
 
             {isFetching ? (
                 <Skeleton
@@ -59,12 +101,16 @@ export function TwitterSummary() {
                     height="150px"
                     width="100%"
                 />
-            ) : (
+            ) : data && data?.twitterAnalytics?.results?.length > 0 ? (
                 <div className={styles.chartContainer}>
-                    <SummaryLineChart title="Likes" data={likeAnalyticsInState} />
-                    <SummaryLineChart title="Retweet" data={retweetAnalyticsInState} />
-                    <SummaryLineChart title="Sentiments" data={sentimentAnalyticsInState} />
+                    {analysisTypeState.likes && <SummaryLineChart title="Likes" data={likeAnalyticsInState} />}
+                    {analysisTypeState.retweets && <SummaryLineChart title="Retweet" data={retweetAnalyticsInState} />}
+                    {analysisTypeState.sentiments && (
+                        <SummaryLineChart title="Sentiments" data={sentimentAnalyticsInState} />
+                    )}
                 </div>
+            ) : (
+                <PrimaryEmptyState text="No data for this section" />
             )}
         </div>
     );
