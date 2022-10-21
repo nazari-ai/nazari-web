@@ -15,6 +15,7 @@ export function TwitterSummary() {
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
         startDate: dateRange.startDate,
+        endDate: dateRange.endDate,
     });
 
     const [analysisTypeState, setAnalysisTypeState] = useState({
