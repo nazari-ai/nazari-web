@@ -176,6 +176,7 @@ export function AnalyzeAsaModal() {
                         type="text"
                         id="twitter_keyword"
                         disabled={false}
+                        readonly={true}
                         name="twitter_keyword"
                         label="Date Range"
                         onClick={handleDateRangeModal}

@@ -51,10 +51,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                         name="description"
                         content="Explore opinions for Algorand Standard Assets across multiple social platforms for free all on one platform."
                     />
+                    <meta name="userreport:mediaId" content="320c31b8-bd1e-4969-aa09-fb79986738fa" />
+
                     <link rel="icon" href="/favicon.png" />
                     <meta charSet="utf-8"></meta>
                     <link rel="icon" href="/favicon.ico"></link>
-
                     <title>Nazari</title>
                     <link
                         href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300;400;700&display=swap"

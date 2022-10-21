@@ -13,6 +13,7 @@ type Props = {
     id?: string;
     label?: string;
     error?: string;
+    readonly?: boolean;
 };
 
 export function PrimaryInput(props: Props) {
