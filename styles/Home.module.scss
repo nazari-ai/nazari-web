@@ -1,5 +1,9 @@
 @import "/styles/variables.scss";
 
+.motherContainer {
+    min-height: 100vh;
+}
+
 .main {
     background-color: var(--primary-color);
     height: 100vh;
