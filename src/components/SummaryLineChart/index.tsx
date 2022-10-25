@@ -22,7 +22,7 @@ export function SummaryLineChart(props: Props) {
         <div className={styles.chartContainer}>
             <ResponsiveContainer height={200}>
                 <LineChart data={data}>
-                    <Line type="monotone" dataKey="data" stroke="#6FD791" />
+                    <Line type="monotone" dataKey="data" stroke="#6FD791" dot={false} />
                     <Tooltip content={<CustomTooltip />} />
                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <XAxis dataKey="name" />

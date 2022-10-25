@@ -1,0 +1,8 @@
+.assets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+    gap: 1.5em;
+    place-content: center;
+    margin-bottom: 2rem;
+    padding: 0 2em;
+}

@@ -1,4 +1,5 @@
 @import "/styles/variables.scss";
+@import "/styles/utils.scss";
 
 .modalContainer {
     position: fixed;
@@ -60,6 +61,28 @@
     position: absolute;
     top: 12em;
     width: 400px;
+}
+
+.dateRangeWrapper {
+    background-color: #ffffff;
+    border-radius: compute_ems(4, 12);
+    border: 1px solid $secondary-grey-border;
+    margin: 0 0 1em;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    width: min-content;
+
+    .closeBtn {
+        background-color: #000;
+        color: #ffffff;
+        border-radius: compute_ems(4, 12);
+        align-self: flex-end;
+        margin: 0 1em 1em;
+        padding: 0.5em 1em;
+        border-radius: 1.042em;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
 }
 
 @media only screen and (max-width: 600px) {

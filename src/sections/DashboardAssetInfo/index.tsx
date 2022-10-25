@@ -28,7 +28,6 @@ export function DashboardAssetInfo() {
                                   "-"
                         }
                     />
-                    <AssetFinancial header="Total Cap" info="-" />
                     {data?.asaData?.result[0]?.totalSupply ? (
                         <AssetFinancial
                             header="Total Supply"

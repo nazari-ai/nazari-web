@@ -5,6 +5,7 @@ type Props = {
     className?: any;
     placeholder: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onClick?: () => void;
     value?: string;
     type?: React.HTMLInputTypeAttribute;
     disabled?: boolean;
@@ -12,6 +13,7 @@ type Props = {
     id?: string;
     label?: string;
     error?: string;
+    readonly?: boolean;
 };
 
 export function PrimaryInput(props: Props) {
@@ -30,6 +32,7 @@ export function PrimaryInput(props: Props) {
                     name={props.name}
                     id={props.id}
                     onChange={props.onChange}
+                    onClick={props.onClick}
                 />
                 {props.error ? <p className={styles.errorMessage}>{props.error}</p> : null}
             </div>

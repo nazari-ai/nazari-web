@@ -12,10 +12,16 @@ import { defaultAsa, useStore } from "src/store";
 import { useAsaListQuery } from "src/generated/graphql";
 import { AssetInfo } from "src/components/AssetInfo";
 import { SearchInput } from "src/components/SearchInput";
-import { asset } from "src/types";
+import { asset, dateRangeType } from "src/types";
 import { useRouter } from "next/router";
 import CloseIcon from "src/components/Icons/CloseIcon";
 import { ThemeContext } from "@pages/_app";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import dateRangeStyles from "src/components/DateRangePicker/style.module.scss";
+// @ts-ignore
+import { DateRange } from "react-date-range";
+import { addDays, addMonths, addYears, format } from "date-fns";
 
 const validate = (values: any) => {
     const errors = {} as any;
@@ -30,19 +36,23 @@ export function AnalyzeAsaModal() {
     const router = useRouter();
     const theme = useContext(ThemeContext);
 
-    const { openAnalyzeModal, selectedAsa, setSelectedAsa, pickedAsa, setPickedAsa } = useStore((state) => ({
-        openAnalyzeModal: state.openAnalyzeModal,
-        selectedAsa: state.selectedAsa,
-        setSelectedAsa: state.setSelectedAsa,
-        pickedAsa: state.pickedAsa,
-        setPickedAsa: state.setPickedAsa,
-    }));
+    const { openAnalyzeModal, selectedAsa, setSelectedAsa, pickedAsa, setPickedAsa, setDateRange } = useStore(
+        (state: any) => ({
+            openAnalyzeModal: state.openAnalyzeModal,
+            selectedAsa: state.selectedAsa,
+            setSelectedAsa: state.setSelectedAsa,
+            pickedAsa: state.pickedAsa,
+            setPickedAsa: state.setPickedAsa,
+            setDateRange: state.setDateRange,
+        }),
+    );
 
     const { status, data, error, isFetching } = useAsaListQuery();
     const [filteredResults, setFilteredResults] = useState([] as asset[]);
     const [searchInput, setSearchInput] = useState("");
     const [removeAsaList, setRemoveAsaList] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         setSearchInput(selectedAsa?.name as any);
@@ -100,6 +110,34 @@ export function AnalyzeAsaModal() {
     //         setIsLoading(true);
     //     },
     // });
+
+    const handleDateRangeButton = () => {
+        const makeRangeSameWithState = {
+            startDate: format(range[0].startDate, "yyyy-MM-dd"),
+            endDate: format(range[0].endDate ? range[0].endDate : new Date(), "yyyy-MM-dd"),
+            activeTimeFrame: null,
+        };
+        setDateRange(makeRangeSameWithState);
+        setIsOpen(false);
+    };
+
+    const handleDateRangeModal = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const [range, setRange] = useState<dateRangeType[]>([
+        {
+            startDate: new Date("2022-10-01"),
+            endDate: new Date(),
+            key: "selection",
+        },
+    ]);
+
+    const formattedDate = `${format(range[0].startDate, "PPP")} to ${format(
+        range[0].endDate ? range[0].endDate : new Date(),
+        "PPP",
+    )}`;
+
     return (
         <animated.div
             className={styles.modalContainer}
@@ -115,15 +153,7 @@ export function AnalyzeAsaModal() {
             >
                 <div className={styles.modalHeader}>
                     <div className={styles.headerLogoContainer}></div>
-                    {/* <Image
-                        className={styles.headerCloseIcon}
-                        onClick={openAnalyzeModal}
-                        src="/images/close.svg"
-                        alt="Close Icon"
-                        width={50}
-                        height={60}
-                        priority={true}
-                    /> */}
+
                     <div className={styles.headerCloseIcon} onClick={openAnalyzeModal}>
                         <CloseIcon fill={theme?.theme ? "#ffffff" : ""} />
                     </div>
@@ -140,6 +170,34 @@ export function AnalyzeAsaModal() {
                         value={searchInput}
                         error={!pickedAsa.assetId ? "No ASA Selected" : ""}
                     />
+
+                    <PrimaryInput
+                        placeholder="Select Date Range"
+                        type="text"
+                        id="twitter_keyword"
+                        disabled={false}
+                        readonly={true}
+                        name="twitter_keyword"
+                        label="Date Range"
+                        onClick={handleDateRangeModal}
+                        value={formattedDate}
+                    />
+
+                    {isOpen && (
+                        <div className={styles.dateRangeWrapper}>
+                            <DateRange
+                                editableDateInputs={true}
+                                onChange={(item: any) => setRange([item.selection])}
+                                moveRangeOnFirstSelection={true}
+                                ranges={range}
+                                rangeColors={["#141517", "#141517", "#141517"]}
+                                maxDate={addMonths(range[0].startDate, 3)}
+                            />
+                            <button data-testid="close-btn" className={styles.closeBtn} onClick={handleDateRangeButton}>
+                                OK
+                            </button>
+                        </div>
+                    )}
 
                     {searchInput && removeAsaList && (
                         <div>
