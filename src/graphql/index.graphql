@@ -29,8 +29,8 @@ query asaData($asaID: String!) {
     }
 }
 
-query asaList {
-    asalist {
+query asaList($endIndex: Int! = 50, $startIndex: Int! = 0) {
+    asalist(endIndex: $endIndex, startIndex: $startIndex) {
         result {
             assetId
             available

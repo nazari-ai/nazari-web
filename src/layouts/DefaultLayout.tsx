@@ -15,6 +15,7 @@ export function DefaultLayout({ children }: Type) {
     return (
         <div
             data-theme={theme?.theme ? "dark" : "light"}
+            className={styles.motherContainer}
             style={{ backgroundColor: theme?.theme ? "#262626" : "#f2fbf6", minHeight: "100vh" }}
         >
             {analyzeModal ? <AnalyzeAsaModal /> : null}

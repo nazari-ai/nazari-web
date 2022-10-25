@@ -12,3 +12,4 @@ generates:
                 func: "../services/fetcher#fetchData"
             exposeQueryKeys: true
             exposeFetcher: true
+            addInfiniteQuery: true

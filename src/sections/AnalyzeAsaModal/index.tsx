@@ -66,7 +66,6 @@ export function AnalyzeAsaModal() {
                 return Object.values(item).join("").toLowerCase().includes(searchInput?.toLowerCase());
             });
             setFilteredResults(filteredData as any);
-            // setSelectedAsa(defaultAsa);
             setRemoveAsaList(true);
         } else {
             setFilteredResults([]);
@@ -84,6 +83,7 @@ export function AnalyzeAsaModal() {
         openAnalyzeModal();
         setSelectedAsa(pickedAsa);
         setPickedAsa(defaultAsa);
+
         router.push(`/${pickedAsa.assetId}`);
     };
 
@@ -99,17 +99,6 @@ export function AnalyzeAsaModal() {
         to: { marginTop: 0 },
         config: { duration: 300 },
     });
-
-    // //Form validator and handler
-    // const formik = useFormik({
-    //     initialValues: {
-    //         asa_id: "",
-    //     },
-    //     validate,
-    //     onSubmit: (values) => {
-    //         setIsLoading(true);
-    //     },
-    // });
 
     const handleDateRangeButton = () => {
         const makeRangeSameWithState = {

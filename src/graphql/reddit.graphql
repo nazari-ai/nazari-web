@@ -1,5 +1,5 @@
-query redditAnalytics($asaID: String!, $endDate: String, $startDate: String) {
-    redditAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate) {
+query redditAnalytics($asaID: String!) {
+    redditAnalytics(asaID: $asaID) {
         asaID
         more {
             commentId

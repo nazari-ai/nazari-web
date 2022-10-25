@@ -18,6 +18,7 @@
     #{--sidebar-background-color}: #f2fbf6;
     #{--select-icon}: url("../public/images/select_icon.svg");
     #{--note-primary}: #800080;
+    #{--dashboard-color}: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -37,6 +38,7 @@
     #{--sidebar-background-color}: #262626;
     #{--select-icon}: url("../public/images/dark-down-select.png");
     #{--note-primary}: #e477e4;
+    #{--dashboard-color}: #262626;
 }
 
 html,
