@@ -1,0 +1,53 @@
+@import "/styles/variables.scss";
+
+.heroContainer {
+    height: fit-container;
+    background-color: var(--primary-color);
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.heroLeftContainer {
+    margin: calc(4.625em - 2em) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.heroHeading {
+    font-size: 2.25rem;
+    line-height: 1.2em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+
+@media only screen and (min-width: 1440px) and (min-height: 900px) {
+    .heroLeftContainer {
+        margin-top: calc(4.625em - 2em);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .heroLeftContainer {
+        margin-top: 8em;
+    }
+
+    .heroHeading {
+        font-size: 2em;
+        width: 90%;
+    }
+
+    .heroBackgroundImage {
+        top: 70px;
+    }
+
+    .heroParagraph {
+        font-size: 0.7em;
+        width: 80%;
+        line-height: 1.4em;
+    }
+}

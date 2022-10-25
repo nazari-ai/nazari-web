@@ -16,6 +16,7 @@ export function GithubSummary() {
     const { status, data, error, isFetching } = useGithubAnalyticsPerTimeQuery({
         asaID: selectedAsa.assetId,
         startDate: dateRange.startDate,
+        endDate: dateRange.endDate,
     });
 
     const [analysisTypeState, setAnalysisTypeState] = useState({

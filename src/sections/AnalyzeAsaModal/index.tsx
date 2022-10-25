@@ -21,7 +21,7 @@ import "react-date-range/dist/theme/default.css";
 import dateRangeStyles from "src/components/DateRangePicker/style.module.scss";
 // @ts-ignore
 import { DateRange } from "react-date-range";
-import { addDays, format } from "date-fns";
+import { addDays, addMonths, addYears, format } from "date-fns";
 
 const validate = (values: any) => {
     const errors = {} as any;
@@ -190,9 +190,8 @@ export function AnalyzeAsaModal() {
                                 onChange={(item: any) => setRange([item.selection])}
                                 moveRangeOnFirstSelection={true}
                                 ranges={range}
-                                rangeColors={["#000000", "#000000", "#000000"]}
-                                minDate={new Date("2022-10-01")}
-                                maxDate={new Date()}
+                                rangeColors={["#141517", "#141517", "#141517"]}
+                                maxDate={addMonths(range[0].startDate, 3)}
                             />
                             <button data-testid="close-btn" className={styles.closeBtn} onClick={handleDateRangeButton}>
                                 OK
