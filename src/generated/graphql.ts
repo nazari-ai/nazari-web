@@ -2,7 +2,13 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { useQuery, UseQueryOptions } from "react-query";
+import {
+    useQuery,
+    useInfiniteQuery,
+    UseQueryOptions,
+    UseInfiniteQueryOptions,
+    QueryFunctionContext,
+} from "react-query";
 import { fetchData } from "../services/fetcher";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -120,6 +126,11 @@ export type QueryAsaDataArgs = {
     asaID: Scalars["String"];
 };
 
+export type QueryAsalistArgs = {
+    endIndex?: Scalars["Int"];
+    startIndex?: Scalars["Int"];
+};
+
 export type QueryGithubAnalyticsPerepoArgs = {
     asaID: Scalars["String"];
     sortBy: Scalars["String"];
@@ -139,8 +150,6 @@ export type QueryGithubOverviewArgs = {
 
 export type QueryRedditAnalyticsArgs = {
     asaID: Scalars["String"];
-    endDate?: Scalars["String"];
-    startDate?: Scalars["String"];
 };
 
 export type QueryTwitterAnalyticsArgs = {
@@ -306,7 +315,10 @@ export type AsaDataQuery = {
     };
 };
 
-export type AsaListQueryVariables = Exact<{ [key: string]: never }>;
+export type AsaListQueryVariables = Exact<{
+    endIndex?: Scalars["Int"];
+    startIndex?: Scalars["Int"];
+}>;
 
 export type AsaListQuery = {
     __typename?: "Query";
@@ -337,8 +349,6 @@ export type AsaDataMinimumQuery = {
 
 export type RedditAnalyticsQueryVariables = Exact<{
     asaID: Scalars["String"];
-    endDate?: InputMaybe<Scalars["String"]>;
-    startDate?: InputMaybe<Scalars["String"]>;
 }>;
 
 export type RedditAnalyticsQuery = {
@@ -428,6 +438,25 @@ export const useGithubOverviewQuery = <TData = GithubOverviewQuery, TError = unk
     );
 
 useGithubOverviewQuery.getKey = (variables: GithubOverviewQueryVariables) => ["githubOverview", variables];
+export const useInfiniteGithubOverviewQuery = <TData = GithubOverviewQuery, TError = unknown>(
+    variables: GithubOverviewQueryVariables,
+    options?: UseInfiniteQueryOptions<GithubOverviewQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<GithubOverviewQuery, TError, TData>(
+        ["githubOverview.infinite", variables],
+        (metaData) =>
+            fetchData<GithubOverviewQuery, GithubOverviewQueryVariables>(GithubOverviewDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteGithubOverviewQuery.getKey = (variables: GithubOverviewQueryVariables) => [
+    "githubOverview.infinite",
+    variables,
+];
 useGithubOverviewQuery.fetcher = (variables: GithubOverviewQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<GithubOverviewQuery, GithubOverviewQueryVariables>(GithubOverviewDocument, variables, options);
 export const GithubAnalyticsPerTimeDocument = `
@@ -470,6 +499,25 @@ useGithubAnalyticsPerTimeQuery.getKey = (variables: GithubAnalyticsPerTimeQueryV
     "githubAnalyticsPerTime",
     variables,
 ];
+export const useInfiniteGithubAnalyticsPerTimeQuery = <TData = GithubAnalyticsPerTimeQuery, TError = unknown>(
+    variables: GithubAnalyticsPerTimeQueryVariables,
+    options?: UseInfiniteQueryOptions<GithubAnalyticsPerTimeQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<GithubAnalyticsPerTimeQuery, TError, TData>(
+        ["githubAnalyticsPerTime.infinite", variables],
+        (metaData) =>
+            fetchData<GithubAnalyticsPerTimeQuery, GithubAnalyticsPerTimeQueryVariables>(
+                GithubAnalyticsPerTimeDocument,
+                { ...variables, ...(metaData.pageParam ?? {}) },
+            )(),
+        options,
+    );
+};
+
+useInfiniteGithubAnalyticsPerTimeQuery.getKey = (variables: GithubAnalyticsPerTimeQueryVariables) => [
+    "githubAnalyticsPerTime.infinite",
+    variables,
+];
 useGithubAnalyticsPerTimeQuery.fetcher = (
     variables: GithubAnalyticsPerTimeQueryVariables,
     options?: RequestInit["headers"],
@@ -509,6 +557,25 @@ export const useGithubAnalyticsPerRepoQuery = <TData = GithubAnalyticsPerRepoQue
 
 useGithubAnalyticsPerRepoQuery.getKey = (variables: GithubAnalyticsPerRepoQueryVariables) => [
     "githubAnalyticsPerRepo",
+    variables,
+];
+export const useInfiniteGithubAnalyticsPerRepoQuery = <TData = GithubAnalyticsPerRepoQuery, TError = unknown>(
+    variables: GithubAnalyticsPerRepoQueryVariables,
+    options?: UseInfiniteQueryOptions<GithubAnalyticsPerRepoQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<GithubAnalyticsPerRepoQuery, TError, TData>(
+        ["githubAnalyticsPerRepo.infinite", variables],
+        (metaData) =>
+            fetchData<GithubAnalyticsPerRepoQuery, GithubAnalyticsPerRepoQueryVariables>(
+                GithubAnalyticsPerRepoDocument,
+                { ...variables, ...(metaData.pageParam ?? {}) },
+            )(),
+        options,
+    );
+};
+
+useInfiniteGithubAnalyticsPerRepoQuery.getKey = (variables: GithubAnalyticsPerRepoQueryVariables) => [
+    "githubAnalyticsPerRepo.infinite",
     variables,
 ];
 useGithubAnalyticsPerRepoQuery.fetcher = (
@@ -563,11 +630,27 @@ export const useAsaDataQuery = <TData = AsaDataQuery, TError = unknown>(
     );
 
 useAsaDataQuery.getKey = (variables: AsaDataQueryVariables) => ["asaData", variables];
+export const useInfiniteAsaDataQuery = <TData = AsaDataQuery, TError = unknown>(
+    variables: AsaDataQueryVariables,
+    options?: UseInfiniteQueryOptions<AsaDataQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<AsaDataQuery, TError, TData>(
+        ["asaData.infinite", variables],
+        (metaData) =>
+            fetchData<AsaDataQuery, AsaDataQueryVariables>(AsaDataDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteAsaDataQuery.getKey = (variables: AsaDataQueryVariables) => ["asaData.infinite", variables];
 useAsaDataQuery.fetcher = (variables: AsaDataQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<AsaDataQuery, AsaDataQueryVariables>(AsaDataDocument, variables, options);
 export const AsaListDocument = `
-    query asaList {
-  asalist {
+    query asaList($endIndex: Int! = 50, $startIndex: Int! = 0) {
+  asalist(endIndex: $endIndex, startIndex: $startIndex) {
     result {
       assetId
       available
@@ -590,6 +673,23 @@ export const useAsaListQuery = <TData = AsaListQuery, TError = unknown>(
 
 useAsaListQuery.getKey = (variables?: AsaListQueryVariables) =>
     variables === undefined ? ["asaList"] : ["asaList", variables];
+export const useInfiniteAsaListQuery = <TData = AsaListQuery, TError = unknown>(
+    variables?: AsaListQueryVariables,
+    options?: UseInfiniteQueryOptions<AsaListQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<AsaListQuery, TError, TData>(
+        variables === undefined ? ["asaList.infinite"] : ["asaList.infinite", variables],
+        (metaData) =>
+            fetchData<AsaListQuery, AsaListQueryVariables>(AsaListDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteAsaListQuery.getKey = (variables?: AsaListQueryVariables) =>
+    variables === undefined ? ["asaList.infinite"] : ["asaList.infinite", variables];
 useAsaListQuery.fetcher = (variables?: AsaListQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<AsaListQuery, AsaListQueryVariables>(AsaListDocument, variables, options);
 export const AsaDataMinimumDocument = `
@@ -613,11 +713,30 @@ export const useAsaDataMinimumQuery = <TData = AsaDataMinimumQuery, TError = unk
     );
 
 useAsaDataMinimumQuery.getKey = (variables: AsaDataMinimumQueryVariables) => ["asaDataMinimum", variables];
+export const useInfiniteAsaDataMinimumQuery = <TData = AsaDataMinimumQuery, TError = unknown>(
+    variables: AsaDataMinimumQueryVariables,
+    options?: UseInfiniteQueryOptions<AsaDataMinimumQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<AsaDataMinimumQuery, TError, TData>(
+        ["asaDataMinimum.infinite", variables],
+        (metaData) =>
+            fetchData<AsaDataMinimumQuery, AsaDataMinimumQueryVariables>(AsaDataMinimumDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteAsaDataMinimumQuery.getKey = (variables: AsaDataMinimumQueryVariables) => [
+    "asaDataMinimum.infinite",
+    variables,
+];
 useAsaDataMinimumQuery.fetcher = (variables: AsaDataMinimumQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<AsaDataMinimumQuery, AsaDataMinimumQueryVariables>(AsaDataMinimumDocument, variables, options);
 export const RedditAnalyticsDocument = `
-    query redditAnalytics($asaID: String!, $endDate: String, $startDate: String) {
-  redditAnalytics(asaID: $asaID, startDate: $startDate, endDate: $endDate) {
+    query redditAnalytics($asaID: String!) {
+  redditAnalytics(asaID: $asaID) {
     asaID
     more {
       commentId
@@ -645,6 +764,25 @@ export const useRedditAnalyticsQuery = <TData = RedditAnalyticsQuery, TError = u
     );
 
 useRedditAnalyticsQuery.getKey = (variables: RedditAnalyticsQueryVariables) => ["redditAnalytics", variables];
+export const useInfiniteRedditAnalyticsQuery = <TData = RedditAnalyticsQuery, TError = unknown>(
+    variables: RedditAnalyticsQueryVariables,
+    options?: UseInfiniteQueryOptions<RedditAnalyticsQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<RedditAnalyticsQuery, TError, TData>(
+        ["redditAnalytics.infinite", variables],
+        (metaData) =>
+            fetchData<RedditAnalyticsQuery, RedditAnalyticsQueryVariables>(RedditAnalyticsDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteRedditAnalyticsQuery.getKey = (variables: RedditAnalyticsQueryVariables) => [
+    "redditAnalytics.infinite",
+    variables,
+];
 useRedditAnalyticsQuery.fetcher = (variables: RedditAnalyticsQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<RedditAnalyticsQuery, RedditAnalyticsQueryVariables>(RedditAnalyticsDocument, variables, options);
 export const TwitterOverviewDocument = `
@@ -669,6 +807,25 @@ export const useTwitterOverviewQuery = <TData = TwitterOverviewQuery, TError = u
     );
 
 useTwitterOverviewQuery.getKey = (variables: TwitterOverviewQueryVariables) => ["twitterOverview", variables];
+export const useInfiniteTwitterOverviewQuery = <TData = TwitterOverviewQuery, TError = unknown>(
+    variables: TwitterOverviewQueryVariables,
+    options?: UseInfiniteQueryOptions<TwitterOverviewQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<TwitterOverviewQuery, TError, TData>(
+        ["twitterOverview.infinite", variables],
+        (metaData) =>
+            fetchData<TwitterOverviewQuery, TwitterOverviewQueryVariables>(TwitterOverviewDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteTwitterOverviewQuery.getKey = (variables: TwitterOverviewQueryVariables) => [
+    "twitterOverview.infinite",
+    variables,
+];
 useTwitterOverviewQuery.fetcher = (variables: TwitterOverviewQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<TwitterOverviewQuery, TwitterOverviewQueryVariables>(TwitterOverviewDocument, variables, options);
 export const TwitterAnalyticsDocument = `
@@ -703,5 +860,24 @@ export const useTwitterAnalyticsQuery = <TData = TwitterAnalyticsQuery, TError =
     );
 
 useTwitterAnalyticsQuery.getKey = (variables: TwitterAnalyticsQueryVariables) => ["twitterAnalytics", variables];
+export const useInfiniteTwitterAnalyticsQuery = <TData = TwitterAnalyticsQuery, TError = unknown>(
+    variables: TwitterAnalyticsQueryVariables,
+    options?: UseInfiniteQueryOptions<TwitterAnalyticsQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<TwitterAnalyticsQuery, TError, TData>(
+        ["twitterAnalytics.infinite", variables],
+        (metaData) =>
+            fetchData<TwitterAnalyticsQuery, TwitterAnalyticsQueryVariables>(TwitterAnalyticsDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteTwitterAnalyticsQuery.getKey = (variables: TwitterAnalyticsQueryVariables) => [
+    "twitterAnalytics.infinite",
+    variables,
+];
 useTwitterAnalyticsQuery.fetcher = (variables: TwitterAnalyticsQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<TwitterAnalyticsQuery, TwitterAnalyticsQueryVariables>(TwitterAnalyticsDocument, variables, options);
