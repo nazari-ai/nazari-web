@@ -18,7 +18,6 @@ const Home: NextPage = () => {
     const { selectedAsa } = useStore();
     const { data, isFetching, error, status } = useRedditAnalyticsQuery({
         asaID: selectedAsa.assetId,
-        startDate: "2020-01-01",
     });
 
     const router = useRouter();

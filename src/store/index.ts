@@ -33,7 +33,7 @@ interface dateRangeType {
 
 const defaultDateRange = {
     startDate: "2022-10-01",
-    endDate: null,
+    endDate: format(new Date(), "yyyy-MM-dd"),
     activeTimeFrame: null,
 };
 
