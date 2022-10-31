@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-import { XAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from "recharts";
+import { XAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Cell, ReferenceLine } from "recharts";
 import randomColor from "randomcolor";
 import { CustomTooltip } from "../CustomTooltip";
 
@@ -31,10 +31,11 @@ export function SentimentBarChart(props: Props) {
             <ResponsiveContainer height={300}>
                 <BarChart width={150} height={40} barCategoryGap="1%" data={props.data}>
                     <Bar dataKey="data" fill="#6FD791" radius={[5, 5, 0, 0]}>
-                        {props.data.map((entry, index) => {
-                            return <Cell key={`cell-${index}`} fill={colors[index]} />;
+                        {props.data.map((datum, entry, index) => {
+                            return <Cell key={`cell-${index}`} fill={datum.data > 0 ? "#6FD791" : "#ff0033"} />;
                         })}
                     </Bar>
+                    <ReferenceLine y={0} stroke="rgb(102, 102, 102)" />
                     <XAxis
                         dataKey="name"
                         tickLine={false}

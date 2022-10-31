@@ -38,5 +38,47 @@ export const useTwitterHook = () => {
         refetch();
     }, [dateRange, analysisType]);
 
-    return { data, results, list, setList, formattedTime };
+    let likeAnalyticsList = [] as Array<any>;
+    let retweetAnalyticsList = [] as Array<any>;
+    let sentimentAnalyticsList = [] as Array<any>;
+
+    const [analyticsList, setAnalyticsList] = useState<{
+        likes: Array<any>;
+        retweets: Array<any>;
+        sentiments: Array<any>;
+    }>({ likes: [], retweets: [], sentiments: [] });
+
+    useEffect(() => {
+        if (data) {
+            results?.forEach((item) => {
+                likeAnalyticsList.push({
+                    data: item.likes,
+                    name: analysisType.weekdays ? item.weekday : item.hour,
+                });
+                retweetAnalyticsList.push({
+                    data: item.retweets,
+                    name: analysisType.weekdays ? item.weekday : item.hour,
+                });
+                sentimentAnalyticsList.push({
+                    data: item.sentiment,
+                    name: analysisType.weekdays ? item.weekday : item.hour,
+                });
+            });
+        }
+
+        setAnalyticsList({
+            likes: likeAnalyticsList,
+            retweets: retweetAnalyticsList,
+            sentiments: sentimentAnalyticsList,
+        });
+    }, [data]);
+
+    return {
+        data,
+        results,
+        list,
+        setList,
+        formattedTime,
+        analyticsList,
+    };
 };
