@@ -8,10 +8,10 @@
 }
 
 .chartContainer {
-    overflow: auto;
     display: flex;
+    flex-direction: column;
     width: 100%;
-    gap: 1em;
+    gap: 2em;
 }
 
 .summaryHeader {
@@ -20,7 +20,4 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .chartContainer {
-        overflow-y: scroll;
-    }
 }

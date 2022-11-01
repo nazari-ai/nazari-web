@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { PrimaryEmptyState } from "src/components/PrimaryEmptyState";
-import { SelectInput } from "src/components/SelectInput";
 import { SummaryLineChart } from "src/components/SummaryLineChart";
 import { useGithubAnalyticsPerTimeQuery } from "src/generated/graphql";
 import { useStore } from "src/store";
@@ -19,11 +18,6 @@ export function GithubSummary() {
         endDate: dateRange.endDate,
     });
 
-    const [analysisTypeState, setAnalysisTypeState] = useState({
-        commits: true,
-        stars: false,
-        watches: false,
-    });
 
     const [commitAnalyticsInState, setcommitAnalyticsInState] = useState([] as any);
     const [starAnalyticsInState, setstarAnalyticsInState] = useState([] as any);
@@ -56,33 +50,8 @@ export function GithubSummary() {
         setwatchAnalyticsInState(watchAnalytics);
     }, [data]);
 
-    const selectOptions = ["commits", "stars", "watches"];
 
-    const handleChangeAnalysisType: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-        let newAnalysisType;
-
-        if (e.target.value === "commits") {
-            newAnalysisType = {
-                commits: true,
-                stars: false,
-                watches: false,
-            };
-        } else if (e.target.value === "stars") {
-            newAnalysisType = {
-                commits: false,
-                stars: true,
-                watches: false,
-            };
-        } else {
-            newAnalysisType = {
-                commits: false,
-                stars: false,
-                watches: true,
-            };
-        }
-
-        setAnalysisTypeState(newAnalysisType);
-    };
+   
 
     return (
         <div className={styles.summaryContainer}>
@@ -90,7 +59,6 @@ export function GithubSummary() {
 
             <div className={TSStyles.selectInput}>
                 <label htmlFor="analysis_type">Analysis Type</label>
-                <SelectInput options={selectOptions} handleChange={handleChangeAnalysisType} />
             </div>
 
             {isFetching ? (
@@ -105,9 +73,9 @@ export function GithubSummary() {
                 />
             ) : data && data?.githubAnalyticsPertime.repo.length > 0 ? (
                 <div className={styles.chartContainer}>
-                    {analysisTypeState.commits && <SummaryLineChart title="Commits" data={commitAnalyticsInState} />}
-                    {analysisTypeState.stars && <SummaryLineChart title="Stars" data={starAnalyticsInState} />}
-                    {analysisTypeState.watches && <SummaryLineChart title="Watches" data={watchAnalyticsInState} />}
+                    { <SummaryLineChart title="Commits" data={commitAnalyticsInState} />}
+                    {<SummaryLineChart title="Stars" data={starAnalyticsInState} />}
+                    { <SummaryLineChart title="Watches" data={watchAnalyticsInState} />}
                 </div>
             ) : (
                 <PrimaryEmptyState text="No data for this section" />
