@@ -43,6 +43,7 @@ export function SummaryBarChart(props: Props) {
                         dataKey="name"
                         tickLine={false}
                         axisLine={false}
+                        minTickGap={-5}
                         tick={{ color: "#333333", strokeWidth: 0.1, fontWeight: 300, fontSize: ".6em" }}
                     />
                     <Tooltip content={<CustomTooltip />} />

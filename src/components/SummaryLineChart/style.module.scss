@@ -20,6 +20,10 @@
     // margin: 1em;
 }
 
+.recharts-xAxis {
+    display: none !important;
+}
+
 @media only screen and (max-width: 1024px) {
     .chartContainer {
         min-width: 100%;
