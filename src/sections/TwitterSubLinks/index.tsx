@@ -14,19 +14,19 @@ export function TwitterSubLinks() {
         },
         {
             id: 2,
-            path: `/${selectedAsa.assetId || "null"}/twitter/likes`,
-            title: `Likes`,
+            path: `/${selectedAsa.assetId || "null"}/twitter/analytics`,
+            title: `Analytics`,
         },
-        {
-            id: 3,
-            path: `/${selectedAsa.assetId || "null"}/twitter/retweets`,
-            title: `Retweets`,
-        },
-        {
-            id: 4,
-            path: `/${selectedAsa.assetId || "null"}/twitter/sentiments`,
-            title: `Sentiments`,
-        },
+        // {
+        //     id: 3,
+        //     path: `/${selectedAsa.assetId || "null"}/twitter/retweets`,
+        //     title: `Retweets`,
+        // },
+        // {
+        //     id: 4,
+        //     path: `/${selectedAsa.assetId || "null"}/twitter/sentiments`,
+        //     title: `Sentiments`,
+        // },
     ];
 
     return (

@@ -13,7 +13,6 @@ import styles from "../../../styles/dashboard.module.scss";
 import { removeDuplicate, getMostDoneInWeekDay } from "src/utils";
 import { sortByWeekdayTwitter } from "src/utils/sortFunctions";
 import { ThemeContext } from "@pages/_app";
-import { SentimentBarChart } from "src/components/SentimentBarChart";
 import { useTwitterHook } from "src/hooks/useTwitterHook";
 import { AnalysisBar } from "src/sections/AnalysisBar";
 
@@ -67,7 +66,7 @@ const Home: NextPage = () => {
             <DashboardAssetSocial />
             <div className={styles.dashboardContainer}>
                 <AnalysisBar socialType={"twitter"} />
-                {/* <TwitterSubLinks /> */}
+                <TwitterSubLinks />
                 <TwitterAnalysisSummary />
 
                 {isFetching ? (
@@ -102,26 +101,6 @@ const Home: NextPage = () => {
                         )}
                     </div>
                 )}
-
-                <div className={styles.combinedChartContainer}>
-                    {results?.length > 0 ? (
-                        <SentimentBarChart title={`Likes (${formattedTime})`} data={analyticsList.likes} />
-                    ) : (
-                        <PrimaryEmptyState text="No data for this section" />
-                    )}
-
-                    {results?.length > 0 ? (
-                        <SentimentBarChart title={`Retweets (${formattedTime})`} data={analyticsList.retweets} />
-                    ) : (
-                        <PrimaryEmptyState text="No data for this section" />
-                    )}
-
-                    {results?.length > 0 ? (
-                        <SentimentBarChart title={`Sentiments (${formattedTime})`} data={analyticsList.sentiments} />
-                    ) : (
-                        <PrimaryEmptyState text="No data for this section" />
-                    )}
-                </div>
             </div>
         </DashboardLayout>
     );
