@@ -32,14 +32,12 @@ const Home: NextPage = () => {
             return "-ve";
         }
         if (score === 0) {
-            return "neutral"
+            return "neutral";
         }
         if (score > 0) {
             return "+ve";
-        }
-     
-        else {
-            return "negative"
+        } else {
+            return "negative";
         }
     };
 

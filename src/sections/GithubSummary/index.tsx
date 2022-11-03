@@ -18,7 +18,6 @@ export function GithubSummary() {
         endDate: dateRange.endDate,
     });
 
-
     const [commitAnalyticsInState, setcommitAnalyticsInState] = useState([] as any);
     const [starAnalyticsInState, setstarAnalyticsInState] = useState([] as any);
     const [watchAnalyticsInState, setwatchAnalyticsInState] = useState([] as any);
@@ -50,9 +49,6 @@ export function GithubSummary() {
         setwatchAnalyticsInState(watchAnalytics);
     }, [data]);
 
-
-   
-
     return (
         <div className={styles.summaryContainer}>
             <h1 className={styles.summaryHeader}>Github Summary</h1>
@@ -73,9 +69,9 @@ export function GithubSummary() {
                 />
             ) : data && data?.githubAnalyticsPertime.repo.length > 0 ? (
                 <div className={styles.chartContainer}>
-                    { <SummaryLineChart title="Commits" data={commitAnalyticsInState} />}
+                    {<SummaryLineChart title="Commits" data={commitAnalyticsInState} />}
                     {<SummaryLineChart title="Stars" data={starAnalyticsInState} />}
-                    { <SummaryLineChart title="Watches" data={watchAnalyticsInState} />}
+                    {<SummaryLineChart title="Watches" data={watchAnalyticsInState} />}
                 </div>
             ) : (
                 <PrimaryEmptyState text="No data for this section" />
