@@ -28,20 +28,19 @@ const Home: NextPage = () => {
     let sentimentAnalytics = [] as Array<any>;
 
     const getEmoji = (score: number): string => {
-        if (score < 20) {
-            return "😝";
+        if (score < 0) {
+            return "-ve";
         }
-        if (score >= 20 && score < 40) {
-            return "😎";
+        if (score === 0) {
+            return "neutral"
         }
-        if (score >= 40 && score < 60) {
-            return "😂";
+        if (score > 0) {
+            return "+ve";
         }
-        if (score >= 60 && score < 80) {
-            return "😇";
+     
+        else {
+            return "negative"
         }
-
-        return "😍";
     };
 
     useEffect(() => {
@@ -114,7 +113,7 @@ const Home: NextPage = () => {
                 </div>
                 <div className={styles.sentimentChartContainer}>
                     {data?.redditAnalytics?.length ? (
-                        <SentimentBarChart title="😡Aggressive" data={issueAnalyticsStateInState} />
+                        <SentimentBarChart title="Sentiment Score" data={issueAnalyticsStateInState} />
                     ) : (
                         <PrimaryEmptyState text="No data for this section" />
                     )}

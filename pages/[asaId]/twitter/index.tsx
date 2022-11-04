@@ -13,9 +13,13 @@ import styles from "../../../styles/dashboard.module.scss";
 import { removeDuplicate, getMostDoneInWeekDay } from "src/utils";
 import { sortByWeekdayTwitter } from "src/utils/sortFunctions";
 import { ThemeContext } from "@pages/_app";
+import { useTwitterHook } from "src/hooks/useTwitterHook";
+import { AnalysisBar } from "src/sections/AnalysisBar";
 
 const Home: NextPage = () => {
     const { selectedAsa } = useStore();
+    const { results, formattedTime, analyticsList } = useTwitterHook();
+
     const theme = useContext(ThemeContext);
     const { status, data, error, isFetching } = useTwitterAnalyticsQuery({
         asaID: selectedAsa.assetId,
@@ -61,6 +65,7 @@ const Home: NextPage = () => {
         <DashboardLayout>
             <DashboardAssetSocial />
             <div className={styles.dashboardContainer}>
+                <AnalysisBar socialType={"twitter"} />
                 <TwitterSubLinks />
                 <TwitterAnalysisSummary />
 

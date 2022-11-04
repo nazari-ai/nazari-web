@@ -23,7 +23,6 @@ const Assets: NextPage = () => {
         {
             getNextPageParam(lastPage, allPages) {
                 const totalLocal = (allPages.length ?? 0) * 50;
-                const totalAssets = lastPage.asalist.result?.length ?? 0;
                 if (totalLocal < 160) {
                     return {
                         endIndex: totalLocal + 50,

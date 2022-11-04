@@ -26,8 +26,8 @@ function AssetsCard(props: Props) {
             </div>
 
             <p className={styles.card_text}>{props.assets.name}</p>
-            <Link href={`${props.assets.assetId}`} target={"_blank"}>
-                <div className={cardStatusStyle}>Analyze Asa</div>
+            <Link href={`${props.assets.assetId}`} target={"_blank"} passHref legacyBehavior>
+                <a className={cardStatusStyle}>Analyze Asa</a>
             </Link>
         </div>
     );
