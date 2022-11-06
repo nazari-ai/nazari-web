@@ -53,9 +53,37 @@ export type AsaData = {
     usdValue?: Maybe<Scalars["String"]>;
 };
 
+export type AsaDataPagination = {
+    __typename?: "AsaDataPagination";
+    URL?: Maybe<Scalars["String"]>;
+    assetId: Scalars["String"];
+    assetTotal: Scalars["Int"];
+    available: Scalars["Boolean"];
+    category?: Maybe<Scalars["String"]>;
+    circSupply?: Maybe<Scalars["String"]>;
+    creator?: Maybe<Scalars["String"]>;
+    description?: Maybe<Scalars["String"]>;
+    discord?: Maybe<Scalars["String"]>;
+    fractionDecimals?: Maybe<Scalars["Int"]>;
+    github?: Maybe<Scalars["String"]>;
+    logo?: Maybe<Scalars["String"]>;
+    medium?: Maybe<Scalars["String"]>;
+    name: Scalars["String"];
+    reddit?: Maybe<Scalars["String"]>;
+    reputation_Algoexplorer: Scalars["String"];
+    reputation_Pera: Scalars["String"];
+    score_Algoexplorer: Scalars["Int"];
+    telegram?: Maybe<Scalars["String"]>;
+    totalSupply?: Maybe<Scalars["String"]>;
+    twitter?: Maybe<Scalars["String"]>;
+    unitname1?: Maybe<Scalars["String"]>;
+    unitname2?: Maybe<Scalars["String"]>;
+    usdValue?: Maybe<Scalars["String"]>;
+};
+
 export type AsaList = {
     __typename?: "AsaList";
-    result: Array<AsaData>;
+    result: Array<AsaDataPagination>;
 };
 
 export type AsaResponse = {
@@ -114,6 +142,7 @@ export type Query = {
     __typename?: "Query";
     asaData: AsaResponse;
     asalist: AsaList;
+    asanameSearch: AsaResponse;
     githubAnalyticsPerepo: PerRepo;
     githubAnalyticsPertime: PerTime;
     githubOverview: GithubOverview;
@@ -129,6 +158,10 @@ export type QueryAsaDataArgs = {
 export type QueryAsalistArgs = {
     endIndex?: Scalars["Int"];
     startIndex?: Scalars["Int"];
+};
+
+export type QueryAsanameSearchArgs = {
+    nameSearch: Scalars["String"];
 };
 
 export type QueryGithubAnalyticsPerepoArgs = {
@@ -324,6 +357,25 @@ export type AsaListQuery = {
     __typename?: "Query";
     asalist: {
         __typename?: "AsaList";
+        result: Array<{
+            __typename?: "AsaDataPagination";
+            assetId: string;
+            available: boolean;
+            logo?: string | null;
+            name: string;
+            unitname1?: string | null;
+        }>;
+    };
+};
+
+export type AsanameSearchQueryVariables = Exact<{
+    nameSearch: Scalars["String"];
+}>;
+
+export type AsanameSearchQuery = {
+    __typename?: "Query";
+    asanameSearch: {
+        __typename?: "AsaResponse";
         result: Array<{
             __typename?: "AsaData";
             assetId: string;
@@ -692,6 +744,51 @@ useInfiniteAsaListQuery.getKey = (variables?: AsaListQueryVariables) =>
     variables === undefined ? ["asaList.infinite"] : ["asaList.infinite", variables];
 useAsaListQuery.fetcher = (variables?: AsaListQueryVariables, options?: RequestInit["headers"]) =>
     fetchData<AsaListQuery, AsaListQueryVariables>(AsaListDocument, variables, options);
+export const AsanameSearchDocument = `
+    query asanameSearch($nameSearch: String!) {
+  asanameSearch(nameSearch: $nameSearch) {
+    result {
+      assetId
+      available
+      logo
+      name
+      unitname1
+    }
+  }
+}
+    `;
+export const useAsanameSearchQuery = <TData = AsanameSearchQuery, TError = unknown>(
+    variables: AsanameSearchQueryVariables,
+    options?: UseQueryOptions<AsanameSearchQuery, TError, TData>,
+) =>
+    useQuery<AsanameSearchQuery, TError, TData>(
+        ["asanameSearch", variables],
+        fetchData<AsanameSearchQuery, AsanameSearchQueryVariables>(AsanameSearchDocument, variables),
+        options,
+    );
+
+useAsanameSearchQuery.getKey = (variables: AsanameSearchQueryVariables) => ["asanameSearch", variables];
+export const useInfiniteAsanameSearchQuery = <TData = AsanameSearchQuery, TError = unknown>(
+    variables: AsanameSearchQueryVariables,
+    options?: UseInfiniteQueryOptions<AsanameSearchQuery, TError, TData>,
+) => {
+    return useInfiniteQuery<AsanameSearchQuery, TError, TData>(
+        ["asanameSearch.infinite", variables],
+        (metaData) =>
+            fetchData<AsanameSearchQuery, AsanameSearchQueryVariables>(AsanameSearchDocument, {
+                ...variables,
+                ...(metaData.pageParam ?? {}),
+            })(),
+        options,
+    );
+};
+
+useInfiniteAsanameSearchQuery.getKey = (variables: AsanameSearchQueryVariables) => [
+    "asanameSearch.infinite",
+    variables,
+];
+useAsanameSearchQuery.fetcher = (variables: AsanameSearchQueryVariables, options?: RequestInit["headers"]) =>
+    fetchData<AsanameSearchQuery, AsanameSearchQueryVariables>(AsanameSearchDocument, variables, options);
 export const AsaDataMinimumDocument = `
     query asaDataMinimum($asaID: String!) {
   asaData(asaID: $asaID) {

@@ -7,8 +7,6 @@ interface State {
     openAnalyzeModal: () => void;
     setSelectedAsa: (asa: asset) => void;
     selectedAsa: asset;
-    setPickedAsa: (asa: asset) => void;
-    pickedAsa: asset;
     dateRange: dateRangeType;
     setDateRange: (range: dateRangeType) => void;
     analysisType: AnalysisTypeType;
@@ -17,7 +15,7 @@ interface State {
     setTimeFrame: (time: string) => void;
 }
 
-export const defaultAsa = {
+export const defaultAsa: asset = {
     assetId: "",
     available: false,
     logo: null,
@@ -50,8 +48,6 @@ export const useStore = create<State>((set) => ({
     dateRange: defaultDateRange,
     analysisType: defaultAnalysisType,
     timeFrame: "",
-    pickedAsa: defaultAsa,
-    setPickedAsa: (asa: asset) => set((state) => ({ pickedAsa: asa })),
     setSelectedAsa: (asa: asset) => set((state) => ({ selectedAsa: asa })),
     openAnalyzeModal: () => set((state) => ({ analyzeModal: !state.analyzeModal })),
     setDateRange: (dateRange: dateRangeType) => set((state) => ({ dateRange })),
