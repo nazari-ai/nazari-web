@@ -364,6 +364,7 @@ export type AsaListQuery = {
             logo?: string | null;
             name: string;
             unitname1?: string | null;
+            assetTotal: number;
         }>;
     };
 };
@@ -709,6 +710,7 @@ export const AsaListDocument = `
       logo
       name
       unitname1
+      assetTotal
     }
   }
 }

@@ -37,6 +37,7 @@ query asaList($endIndex: Int! = 50, $startIndex: Int! = 0) {
             logo
             name
             unitname1
+            assetTotal
         }
     }
 }
