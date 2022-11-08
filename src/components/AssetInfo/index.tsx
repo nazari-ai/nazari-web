@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-import { useStore } from "src/store";
 import { asset } from "src/types";
 
 import styles from "./style.module.scss";
@@ -13,7 +11,6 @@ type Props = {
 };
 
 export function AssetInfo(props: Props) {
-    const { setPickedAsa } = useStore();
     return (
         <div
             className={`${styles.asset} ${styles[props.className]}`}

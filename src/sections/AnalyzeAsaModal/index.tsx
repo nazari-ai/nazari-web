@@ -1,90 +1,58 @@
-import Image from "next/image";
-import Link from "next/link";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { PrimaryInput } from "../../components/PrimaryInput";
 import styles from "./style.module.scss";
-import { useFormik } from "formik";
 import { useSpring, animated } from "react-spring";
-import { useContext, useEffect, useRef, useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { useContext, useEffect, useState } from "react";
 import { defaultAsa, useStore } from "src/store";
-import { useAsaListQuery } from "src/generated/graphql";
+import { useAsanameSearchQuery } from "src/generated/graphql";
 import { AssetInfo } from "src/components/AssetInfo";
 import { SearchInput } from "src/components/SearchInput";
 import { asset, dateRangeType } from "src/types";
 import { useRouter } from "next/router";
 import CloseIcon from "src/components/Icons/CloseIcon";
+import Skeleton from "react-loading-skeleton";
 import { ThemeContext } from "@pages/_app";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import dateRangeStyles from "src/components/DateRangePicker/style.module.scss";
 // @ts-ignore
 import { DateRange } from "react-date-range";
-import { addDays, addMonths, addYears, format, subMonths } from "date-fns";
-
-const validate = (values: any) => {
-    const errors = {} as any;
-    if (!values.first_name) {
-        errors.first_name = "Required";
-    }
-
-    return errors;
-};
+import { format, subMonths } from "date-fns";
 
 export function AnalyzeAsaModal() {
     const router = useRouter();
     const theme = useContext(ThemeContext);
 
-    const { openAnalyzeModal, selectedAsa, setSelectedAsa, pickedAsa, setPickedAsa, setDateRange } = useStore(
-        (state: any) => ({
-            openAnalyzeModal: state.openAnalyzeModal,
-            selectedAsa: state.selectedAsa,
-            setSelectedAsa: state.setSelectedAsa,
-            pickedAsa: state.pickedAsa,
-            setPickedAsa: state.setPickedAsa,
-            setDateRange: state.setDateRange,
-        }),
-    );
+    const { openAnalyzeModal, setSelectedAsa, setDateRange } = useStore((state: any) => ({
+        openAnalyzeModal: state.openAnalyzeModal,
+        setSelectedAsa: state.setSelectedAsa,
+        setDateRange: state.setDateRange,
+    }));
 
-    const { status, data, error, isFetching } = useAsaListQuery();
-    const [filteredResults, setFilteredResults] = useState([] as asset[]);
     const [searchInput, setSearchInput] = useState("");
-    const [removeAsaList, setRemoveAsaList] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [searchVariable, setSearchVariable] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const [asa, setAsa] = useState(defaultAsa);
 
-    useEffect(() => {
-        setSearchInput(selectedAsa?.name as any);
-        setRemoveAsaList(false);
-    }, [selectedAsa]);
+    const { data, isLoading } = useAsanameSearchQuery({
+        nameSearch: searchInput,
+    });
 
-    const searchItems = (searchValue: string) => {
-        setSearchInput(searchValue);
-        if (searchInput !== "") {
-            const filteredData = data?.asalist?.result.filter((item) => {
-                return Object.values(item).join("").toLowerCase().includes(searchInput?.toLowerCase());
-            });
-            setFilteredResults(filteredData as any);
-            setRemoveAsaList(true);
-        } else {
-            setFilteredResults([]);
-        }
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(e.target.value);
+        setSearchVariable(e.target.value);
     };
 
     const handleRemoveAsaList = (asa: asset) => {
-        setSearchInput(asa.name);
-        setRemoveAsaList(false);
-        setPickedAsa(asa);
+        setSearchVariable(asa.name);
+        setSearchInput("");
+        setAsa(asa);
     };
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
         openAnalyzeModal();
-        setSelectedAsa(pickedAsa);
-        setPickedAsa(defaultAsa);
-
-        router.push(`/${pickedAsa.assetId}`);
+        setSelectedAsa(asa);
+        router.push(`/${asa.assetId}`);
     };
 
     //Animation and Transitions
@@ -155,9 +123,9 @@ export function AnalyzeAsaModal() {
                         name="asa_id"
                         id="asa_id"
                         label="Algorand Standard Asset"
-                        onChange={(e) => searchItems(e.target.value)}
-                        value={searchInput}
-                        error={!pickedAsa.assetId ? "No ASA Selected" : ""}
+                        onChange={handleSearchChange}
+                        value={searchVariable}
+                        error={!asa.assetId ? "No ASA Selected" : ""}
                     />
 
                     <PrimaryInput
@@ -189,11 +157,11 @@ export function AnalyzeAsaModal() {
                         </div>
                     )}
 
-                    {searchInput && removeAsaList && (
+                    {searchInput.length > 3 && (
                         <div>
-                            {filteredResults?.length > 0 ? (
+                            {data && data?.asanameSearch?.result?.length > 0 ? (
                                 <div className={styles.assetList}>
-                                    {filteredResults?.slice(0, 3)?.map((asset) => (
+                                    {data.asanameSearch.result?.slice(0, 3)?.map((asset) => (
                                         <AssetInfo
                                             asset={asset}
                                             key={asset.assetId}
@@ -203,7 +171,7 @@ export function AnalyzeAsaModal() {
                                     ))}
                                 </div>
                             ) : (
-                                <div className={styles.assetList}>No result found</div>
+                                <div className={styles.assetList}>{isLoading ? "Fetching..." : "No result found"}</div>
                             )}
                         </div>
                     )}
@@ -214,7 +182,7 @@ export function AnalyzeAsaModal() {
                         disabled={true}
                         name="twitter_keyword"
                         label="Twitter"
-                        value={searchInput}
+                        value={searchVariable}
                     />
                     <PrimaryInput
                         placeholder="Github Keyword"
@@ -223,7 +191,7 @@ export function AnalyzeAsaModal() {
                         disabled={true}
                         name="github_keyword"
                         label="Github"
-                        value={searchInput}
+                        value={searchVariable}
                     />
                     <PrimaryInput
                         placeholder="Reddit Keyword"
@@ -232,14 +200,14 @@ export function AnalyzeAsaModal() {
                         disabled={true}
                         name="reddit_keyword"
                         label="Reddit"
-                        value={searchInput}
+                        value={searchVariable}
                     />
                     <PrimaryButton
                         isLoading={isLoading}
                         type="submit"
                         text="Analyze Asset"
                         className="primaryButton"
-                        disabled={!pickedAsa?.assetId}
+                        disabled={!asa?.assetId}
                     />
                 </form>
             </animated.div>

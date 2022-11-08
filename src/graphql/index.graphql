@@ -37,6 +37,19 @@ query asaList($endIndex: Int! = 50, $startIndex: Int! = 0) {
             logo
             name
             unitname1
+            assetTotal
+        }
+    }
+}
+
+query asanameSearch($nameSearch: String!) {
+    asanameSearch(nameSearch: $nameSearch) {
+        result {
+            assetId
+            available
+            logo
+            name
+            unitname1
         }
     }
 }

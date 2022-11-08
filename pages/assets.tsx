@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import styles from "../styles/assets.module.scss";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AssetsPageHero } from "src/sections/AssetsPageHero";
 import AssetsWrapper from "src/sections/AssetsWrapper";
 import AssetsCard from "src/components/AssetsCard";
@@ -22,8 +22,9 @@ const Assets: NextPage = () => {
         },
         {
             getNextPageParam(lastPage, allPages) {
+                const assetTotal = lastPage.asalist.result[0].assetTotal;
                 const totalLocal = (allPages.length ?? 0) * 50;
-                if (totalLocal < 160) {
+                if (totalLocal < assetTotal) {
                     return {
                         endIndex: totalLocal + 50,
                         startIndex: totalLocal,

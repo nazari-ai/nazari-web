@@ -1,10 +1,10 @@
 export interface asset {
-    __typename?: "Asa" | undefined;
+    __typename?: "AsaData" | undefined;
     assetId: string;
     available: boolean;
     logo?: string | null | undefined;
     name: string;
-    unitname1: string;
+    unitname1?: string | null | undefined;
 }
 
 export interface dateRangeType {
