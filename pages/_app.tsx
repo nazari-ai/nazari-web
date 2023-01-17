@@ -9,6 +9,7 @@ import { queryClient } from "src/utils/gateway";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { AnimatePresence } from "framer-motion";
 import { createContext, useState } from "react";
+import Script from "next/script";
 
 interface contextType {
     theme: boolean;
@@ -71,6 +72,24 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <Toaster position="top-center" reverseOrder={false} />
                 <AnimatePresence exitBeforeEnter initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
                     <ThemeContext.Provider value={{ theme, toggleTheme }}>
+                        <Script
+                            strategy="afterInteractive"
+                            src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+                        />
+                        <Script
+                            id="google-analytics"
+                            strategy="afterInteractive"
+                            dangerouslySetInnerHTML={{
+                                __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                     gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                        });
+                            `,
+                            }}
+                        />
                         <Component {...pageProps} />
                     </ThemeContext.Provider>
                 </AnimatePresence>

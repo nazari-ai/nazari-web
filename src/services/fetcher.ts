@@ -1,6 +1,8 @@
+import { GATEWAY_API } from "src/utils/gateway";
+
 export const fetchData = <TData, TVariables>(query: string, variables?: TVariables): (() => Promise<TData>) => {
     return async (): Promise<TData> => {
-        const res = await fetch(`https://asalytics-backend-lhnwbn4frq-uc.a.run.app/analytics`, {
+        const res = await fetch(GATEWAY_API || "", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
