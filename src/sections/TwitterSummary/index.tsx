@@ -17,7 +17,6 @@ export function TwitterSummary() {
         endDate: dateRange.endDate,
     });
 
-
     const [sentimentAnalyticsInState, setsentimentAnalyticsInState] = useState([] as any);
     const [retweetAnalyticsInState, setretweetAnalyticsInState] = useState([] as any);
     const [likeAnalyticsInState, setlikeAnalyticsInState] = useState([] as any);
@@ -49,8 +48,6 @@ export function TwitterSummary() {
         setlikeAnalyticsInState(likeAnalytics);
     }, [data]);
 
-
-
     return (
         <div className={styles.summaryContainer}>
             <h1 className={styles.summaryHeader}>Twitter Summary</h1>
@@ -71,11 +68,9 @@ export function TwitterSummary() {
                 />
             ) : data && data?.twitterAnalytics?.results?.length > 0 ? (
                 <div className={styles.chartContainer}>
-                    { <SummaryLineChart title="Likes" data={likeAnalyticsInState} />}
-                    { <SummaryLineChart title="Retweet" data={retweetAnalyticsInState} />}
-                    {
-                        <SummaryLineChart title="Sentiments" data={sentimentAnalyticsInState} />
-                    }
+                    {<SummaryLineChart title="Likes" data={likeAnalyticsInState} />}
+                    {<SummaryLineChart title="Retweet" data={retweetAnalyticsInState} />}
+                    {<SummaryLineChart title="Sentiments" data={sentimentAnalyticsInState} />}
                 </div>
             ) : (
                 <PrimaryEmptyState text="No data for this section" />
